@@ -84,8 +84,26 @@ void setup()
 
     I2CSCAN::clearBus(PIN_IMU_SDA, PIN_IMU_SCL); // Make sure the bus isn't suck when reseting ESP without powering it down
 
+    Haptics::Discovery();
+
+    while (true)
+    {
+        int8_t MuxID = 0;
+            for (uint8_t Motor = 0; Motor < 8; Motor++)
+            {
+                Serial.print("Setting Motor : ");
+                Serial.println(Motor);
+                for (uint8_t Level = 0; Level < 255; Level++)
+                {
+                    Haptics::SetLevel(MuxID, 0, Motor, Level);
+                }
+                Haptics::SetLevel(MuxID, 0, Motor, 0);
+            }
+    }
+
     UI::Setup();
     UI::DrawSplash();
+    
     delay(1500);
     UI::MainUIFrame();
     UI::SetMessage(1);
@@ -148,9 +166,9 @@ void loop()
     //     Serial.println(INT_Bank);
     // }
 
-    if (micros() - last_rssi_sample >= 2000)
+    if (millis() - last_rssi_sample >= 2000)
     {
-        last_rssi_sample = micros();
+        last_rssi_sample = millis();
         uint8_t signalStrength = WiFi.RSSI();
         Network::sendSignalStrength(signalStrength);
     }
