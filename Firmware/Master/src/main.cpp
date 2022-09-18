@@ -52,23 +52,23 @@ unsigned long last_Haptic_Heartbeat = millis() + 5000;
 bool secondImuActive = false;
 BatteryMonitor battery;
 
-// MCP23017 myMCP = MCP23017(0x20, INT_RESET);
+MCP23017 myMCP = MCP23017(0x20, INT_RESET);
 
-// IRAM_ATTR void IntBank_A(void)
-// {
-//     INT_Triggered_Bank_A = true;
-//     INT_Bank = A;
-//     INT_Caller = log(myMCP.getIntFlag(A)) / log(2);
-//     //  sensors.IMU_Int_Triggered(Int_Caller);
-// }
+IRAM_ATTR void IntBank_A(void)
+{
+    INT_Triggered_Bank_A = true;
+    INT_Bank = A;
+    INT_Caller = log(myMCP.getIntFlag(A)) / log(2);
+    //  sensors.IMU_Int_Triggered(Int_Caller);
+}
 
-// IRAM_ATTR void IntBank_B(void)
-// {
-//     INT_Triggered_Bank_B = true;
-//     INT_Bank = B;
-//     INT_Caller = (log(myMCP.getIntFlag(B)) / log(2));
-//     //   sensors.IMU_Int_Triggered(Int_Caller + 8);
-// }
+IRAM_ATTR void IntBank_B(void)
+{
+    INT_Triggered_Bank_B = true;
+    INT_Bank = B;
+    INT_Caller = (log(myMCP.getIntFlag(B)) / log(2));
+    //   sensors.IMU_Int_Triggered(Int_Caller + 8);
+}
 
 SlimeVR::Configuration::Configuration configuration; //for MPU9250/MPU6000+QMC calibration
 
@@ -107,15 +107,15 @@ void setup()
 
     Haptics::Discovery();
 
-    // myMCP.Init();
-    // myMCP.setPortMode(0b00000000, A);
-    // myMCP.setPortMode(0b00000000, B);
-    // myMCP.setInterruptPinPol(LOW);                 // set INTA and INTB active-high
-    // myMCP.setInterruptOnChangePort(0b11111111, A); // set all B pins as interrrupt Pins
-    // myMCP.setInterruptOnChangePort(0b11111111, B); // set all B pins as interrrupt Pins
+    myMCP.Init();
+    myMCP.setPortMode(0b00000000, A);
+    myMCP.setPortMode(0b00000000, B);
+    myMCP.setInterruptPinPol(LOW);                 // set INTA and INTB active-high
+    myMCP.setInterruptOnChangePort(0b11111111, A); // set all B pins as interrrupt Pins
+    myMCP.setInterruptOnChangePort(0b11111111, B); // set all B pins as interrrupt Pins
 
-    // pinMode(INT_PIN1, INPUT_PULLUP);
-    // pinMode(INT_PIN2, INPUT_PULLUP);
+    pinMode(INT_PIN1, INPUT_PULLUP);
+    pinMode(INT_PIN2, INPUT_PULLUP);
 
     getConfigPtr();
 
@@ -131,10 +131,10 @@ void setup()
     battery.Setup();
     loopTime = micros();
 
-    // attachInterrupt(digitalPinToInterrupt(INT_PIN1), IntBank_A, FALLING); // Set up a falling interrupt
-    // attachInterrupt(digitalPinToInterrupt(INT_PIN2), IntBank_B, FALLING); // Set up a falling interrupt
-    // myMCP.getIntCap(B);                                                   // ensures that existing interrupts are cleared
-    // myMCP.getIntCap(A);                                                   // ensures that existing interrupts are cleared
+    attachInterrupt(digitalPinToInterrupt(INT_PIN1), IntBank_A, FALLING); // Set up a falling interrupt
+    attachInterrupt(digitalPinToInterrupt(INT_PIN2), IntBank_B, FALLING); // Set up a falling interrupt
+    myMCP.getIntCap(B);                                                   // ensures that existing interrupts are cleared
+    myMCP.getIntCap(A);                                                   // ensures that existing interrupts are cleared
 
     ServerConnection::resetConnection();
 

@@ -30,6 +30,7 @@ public:
     ~BNO080Sensor(){};
     void motionSetup() override final;
     void motionLoop() override final;
+    void setupSensor(uint8_t sensorId)  override final;
     void sendData() override final;
     void startCalibration(int calibrationType) override final;
     uint8_t getSensorState() override final;

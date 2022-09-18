@@ -46,7 +46,7 @@ public:
     virtual void sendData();
     virtual void startCalibration(int calibrationType){};
     virtual uint8_t getSensorState();
-
+    virtual void Int_Fired();
 
     bool isWorking()
     {

@@ -31,6 +31,16 @@ SensorFactory::SensorFactory()
 {
 }
 
+void SensorFactory::IMU_Int_Triggered(uint8_t IMU_ID)
+{
+    Serial.print(F("Int Triggerd : "));
+    Serial.println(IMU_ID);
+    if (this->IMUs[IMU_ID]->getSensorType() == BNO_080_t)
+    {
+        this->IMUs[IMU_ID]->Int_Fired();
+    }
+}
+
 SensorFactory::~SensorFactory()
 {
     for (int BankCount = 0; BankCount < 2; BankCount++)
