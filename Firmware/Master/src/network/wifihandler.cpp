@@ -57,7 +57,7 @@ IPAddress WiFiNetwork::getAddress() {
 }
 
 void WiFiNetwork::setUp() {
-    Serial.println("[NOTICE] WiFi: Setting up WiFi");
+    Serial.println(F("[NOTICE] WiFi: Setting up WiFi"));
     WiFi.persistent(true);
     WiFi.mode(WIFI_STA);
     WiFi.hostname("OctoSlime FBT-H");

@@ -223,7 +223,7 @@ int8_t I2Cdev::readWord(uint8_t devAddr, uint8_t regAddr, uint16_t* data, uint16
 int8_t I2Cdev::readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t* data, uint16_t timeout)
 {
 #ifdef I2CDEV_SERIAL_DEBUG
-    Serial.print("I2C (0x");
+    Serial.print(F("I2C (0x"));
     Serial.print(devAddr, HEX);
     Serial.print(") reading ");
     Serial.print(length, DEC);

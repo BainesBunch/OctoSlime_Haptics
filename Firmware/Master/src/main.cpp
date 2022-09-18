@@ -81,12 +81,12 @@ void setup()
     Serial.println();
     Serial.println();
 
-    Serial.println("System Startup");
+    Serial.println(F("System Startup"));
 
 
     Wire.begin(PIN_IMU_SDA, PIN_IMU_SCL);
 
-    Serial.println("Startup I2C");
+    Serial.println(F("Startup I2C"));
 
     Wire.setClockStretchLimit(150000L); // Default stretch limit 150mS
     Wire.setClock(I2C_SPEED);
@@ -95,7 +95,7 @@ void setup()
 
 
 
-    Serial.println("Startup UI");
+    Serial.println(F("Startup UI"));
 
     UI::Setup();
     UI::DrawSplash();
@@ -140,7 +140,7 @@ void setup()
 
     last_Haptic_Heartbeat = millis() + 5000;
 
-    Serial.println("Startup Complete , Entering Loop");
+    Serial.println(F("Startup Complete , Entering Loop"));
 
 }
 

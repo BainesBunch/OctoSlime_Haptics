@@ -31,14 +31,7 @@
 #include "configuration\Configuration.h"
 #include "logging\Logger.h"
 
-// MUX paramaters
-#define IMUCount 8
-//#define MUX_Reset_Pin D0
 
-
-#ifndef BATTERY_MONITOR
-#define BATTERY_MONITOR BAT_INTERNAL
-#endif
 
 extern SlimeVR::Configuration::Configuration configuration;
 

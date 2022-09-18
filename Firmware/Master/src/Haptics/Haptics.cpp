@@ -49,11 +49,11 @@ namespace Haptics
 
     void Discovery()
     {
-        Serial.println("Haptics Begin Scan");
+        Serial.println(F("Haptics Begin Scan"));
         for (uint8_t MuxID = 0; MuxID < 7; MuxID++)
         {
 
-            Serial.print("Setting Mux : ");
+            Serial.print(F("Setting Mux : "));
             Serial.println(MuxID);
 
             I2Cdev::SetIMU(MuxID);
@@ -83,7 +83,7 @@ namespace Haptics
                 if (Wire.endTransmission() == 0)
                 {
                     SetHapticDeviceType(MuxID, ControlerID, PWM);
-                    Serial.print("Found PWM at address : ");
+                    Serial.print(F("Found PWM at address : "));
                     Serial.println(PWM_Base_Address + ControlerID, HEX);
                 }
 
@@ -92,14 +92,14 @@ namespace Haptics
                 if (Wire.endTransmission() == 0)
                 {
                     SetHapticDeviceType(MuxID, ControlerID, OnOff);
-                    Serial.print("Found OnOff at address : ");
+                    Serial.print(F("Found OnOff at address : "));
                     Serial.println(OnOff_Base_Address + ControlerID, HEX);
                 }
 
                 SetHapticControlerID(MuxID, ControlerID);
             }
         }
-        Serial.println("Haptics End Scan");
+        Serial.println(F("Haptics End Scan"));
     }
 
     void SetHapticDeviceType(uint8_t MuxID, uint8_t ControlerID, Haptic_DeviceType_e DeviceType)

@@ -449,7 +449,7 @@ void Network::sendHapticsHandshake()
     }
     else
     {
-        Serial.print("Haptics Server begin packet Error : ");
+        Serial.print(F("Haptics Server begin packet Error : "));
         Serial.println(DataTransfer::getHapticWriteError());
     }
 }
@@ -460,11 +460,11 @@ void Network::sendHandshake()
     {
         DataTransfer::sendPacketType(PACKET_HANDSHAKE);
         DataTransfer::sendLong(0); // Packet number is always 0 for handshake
-        DataTransfer::sendInt(BOARD);
+        DataTransfer::sendInt(0);
         // This is kept for backwards compatibility,
         // but the latest SlimeVR server will not initialize trackers
         // with firmware build > 8 until it recieves sensor info packet
-        DataTransfer::sendInt(IMU);
+        DataTransfer::sendInt(0);
         DataTransfer::sendInt(HARDWARE_MCU);
         DataTransfer::sendInt(0);
         DataTransfer::sendInt(0);
@@ -476,13 +476,13 @@ void Network::sendHandshake()
         DataTransfer::sendBytes(mac, 6); // MAC address string
         if (DataTransfer::endPacket())
         {
-            Serial.print("Handshake write error: ");
+            Serial.print(F("Handshake write error: "));
             Serial.println(Udp.getWriteError());
         }
     }
     else
     {
-        Serial.print("Handshake write error: ");
+        Serial.print(F("Handshake write error: "));
         Serial.println(Udp.getWriteError());
     }
 }
@@ -603,7 +603,7 @@ void ServerConnection::Hapticsconnect()
     if (lastHapticsConnectionAttemptMs + 1000 < now)
     {
         lastHapticsConnectionAttemptMs = now;
-        Serial.println("Looking for the Haptic server...");
+        Serial.println(F("Looking for the Haptic server..."));
         Network::sendHapticsHandshake();
     }
 }
@@ -619,7 +619,7 @@ void ServerConnection::Slimeconnect()
             // receive incoming UDP packets
             Serial.printf("[Handshake] Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
             int len = Udp.read(incomingPacket, sizeof(incomingPacket));
-            Serial.print("[Handshake] UDP packet contents: ");
+            Serial.print(F("[Handshake] UDP packet contents: "));
             for (int i = 0; i < len; ++i)
                 Serial.print((byte)incomingPacket[i]);
             Serial.println();
@@ -650,7 +650,7 @@ void ServerConnection::Slimeconnect()
     if (lastConnectionAttemptMs + 1000 < now)
     {
         lastConnectionAttemptMs = now;
-        Serial.println("Looking for the Slime server...");
+        Serial.println(F("Looking for the Slime server..."));
         UI::SetMessage(4);
         Network::sendHandshake();
     }
@@ -772,7 +772,7 @@ void ServerConnection::update(Sensor *Sensors[])
 
             case PACKET_RECEIVE_HANDSHAKE:
                 // Assume handshake successful
-                Serial.println("Handshake received again, ignoring");
+                Serial.println(F("Handshake received again, ignoring"));
                 break;
 
             case PACKET_RECEIVE_COMMAND:
@@ -788,7 +788,7 @@ void ServerConnection::update(Sensor *Sensors[])
             case PACKET_SENSOR_INFO:
                 if (len < 6)
                 {
-                    Serial.println("Wrong sensor info packet");
+                    Serial.println(F("Wrong sensor info packet"));
                     break;
                 }
 
@@ -816,7 +816,7 @@ void ServerConnection::update(Sensor *Sensors[])
                 }
             }
 
-            Serial.println("Connection to server timed out");
+            Serial.println(F("Connection to server timed out"));
             UI::SetMessage(5);
         }
 

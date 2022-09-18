@@ -120,11 +120,11 @@ namespace UI
     {
         oled.roundRect(0, 51, 127, 63, OLED_CLEAR);
         oled.setCursorXY(4, 50);
-        oled.print("Bat");
+        oled.print(F("Bat"));
         oled.setCursorXY(23, 50);
         oled.print(uint8_t (level * 100));
         oled.setCursorXY(43, 50);
-        oled.print("%");
+        oled.print(F("%"));
         oled.rect(52, 50, 122, 57, OLED_STROKE);
         oled.rect(52, 50, (level * 72) + 50, 57, OLED_FILL || OLED_STROKE);
         DrawFrame();
@@ -163,11 +163,11 @@ namespace UI
 
         oled.setCursorXY(18, 25);
         oled.setScale(2);
-        oled.print("Octo");
+        oled.print(F("Octo"));
 
         oled.setCursorXY(75, 33);
         oled.setScale(1);
-        oled.print("Slime");
+        oled.print(F("Slime"));
 
         DrawFrame();
     }
@@ -216,32 +216,32 @@ namespace UI
         {
         case 1:
             oled.setCursorXY(17, 51);
-            oled.print("Scanning For Sensors");
+            oled.print(F("Scanning For Sensors"));
             break;
 
         case 2:
             oled.setCursorXY(10, 51);
-            oled.print("Connecting To WIFI");
+            oled.print(F("Connecting To WIFI"));
             break;
 
         case 3:
             oled.setCursorXY(15, 51);
-            oled.print("WIFI Connect FAILED");
+            oled.print(F("WIFI Connect FAILED"));
             break;
 
         case 4:
             oled.setCursorXY(5, 51);
-            oled.print("Connecting To Server");
+            oled.print(F("Connecting To Server"));
             break;
 
         case 5:
             oled.setCursorXY(38, 51);
-            oled.print("Server lost");
+            oled.print(F("Server lost"));
             break;
 
         case 6:
             oled.setCursorXY(17, 51);
-            oled.print("Scanning For Haptics");
+            oled.print(F("Scanning For Haptics"));
             break;
         }
 

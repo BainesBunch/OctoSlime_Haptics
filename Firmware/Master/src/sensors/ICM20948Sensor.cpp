@@ -141,7 +141,7 @@ void ICM20948Sensor::motionLoop()
 void ICM20948Sensor::startCalibration(int calibrationType)
 {
 #ifdef IMU_MPU6050_RUNTIME_CALIBRATION
-    Serial.println("MPU is using automatic runtime calibration. Place down the device and it should automatically calibrate after a few seconds");
+    Serial.println(F("MPU is using automatic runtime calibration. Place down the device and it should automatically calibrate after a few seconds"));
 
     // Lie to the server and say we've calibrated
     switch (calibrationType)

@@ -25,7 +25,7 @@
 #include "mpu6050sensor.h"
 #include "ICM20948Sensor.h"
 #include "mpu9250sensor.h"
-//#include "bno080sensor.h"
+#include "bno080sensor.h"
 
 SensorFactory::SensorFactory()
 {
@@ -42,7 +42,6 @@ SensorFactory::~SensorFactory()
         }
     }
 }
-
 
 void SensorFactory::SetIMU(uint8_t bus)
 {
@@ -66,52 +65,49 @@ void SensorFactory::create()
             ESP.wdtFeed();
 
             Serial.print("Found Device Type ID :");
-            Serial.print(DeviceParams.DeviceID,HEX);
+            Serial.print(DeviceParams.DeviceID, HEX);
             Serial.print(" On address  :");
-            Serial.print(DeviceParams.DeviceAddress,HEX);
+            Serial.print(DeviceParams.DeviceAddress, HEX);
 
             switch (DeviceParams.DeviceID)
             {
             case MPU6050_t:
                 // Both have the same ID so magnetometer has to be checked
                 Serial.println("MPU6050 detected, checking for magnetometer");
-                if(this->getMagnetometerDeviceID(DeviceParams.DeviceAddress) != 0xFF){
+                if (this->getMagnetometerDeviceID(DeviceParams.DeviceAddress) != 0xFF)
+                {
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new MPU6050Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050");
-                } else {
+                }
+                else
+                {
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new MPU9250Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050 + QMC5883L");
                 }
                 break;
-             case ICM_20948_t:
-                 this->IMUs[SensorCount + (BankCount * IMUCount)] = new ICM20948Sensor(DeviceParams.DeviceAddress);
-                 this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
-                 Serial.println("Found ICM20948");
-                 break;
-
-            // case BNO_080_t:
-            //     this->IMUs[SensorCount + (BankCount * IMUCount)] = new BNO080Sensor(DeviceParams.DeviceAddress);
-            //     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
-            //     Serial.println("Found BNO080");
-            //     break;
+            case ICM_20948_t:
+                this->IMUs[SensorCount + (BankCount * IMUCount)] = new ICM20948Sensor(DeviceParams.DeviceAddress);
+                this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
+                Serial.println("Found ICM20948");
+                break;
 
             default:
-                // if (DeviceParams.DeviceAddress == 0x4A || DeviceParams.DeviceAddress == 0x4B) // fallback for the BNO IMU
-                // {
-                //     // RPB this->IMUs[SensorCount + (BankCount * IMUCount)] = new BNO080Sensor(DeviceParams.DeviceAddress);
-                //     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
-                //     Serial.println("Found BNO080");
-                // }
-                // else
-                // {
+                if (DeviceParams.DeviceAddress == 0x4A || DeviceParams.DeviceAddress == 0x4B) // fallback for the BNO IMU
+                {
+                    this->IMUs[SensorCount + (BankCount * IMUCount)] = new BNO080Sensor(DeviceParams.DeviceAddress);
+                    this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
+                    Serial.println("Found BNO080");
+                }
+                else
+                {
 
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new EmptySensor();
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = false;
                     Serial.println("Nothing Found");
-                // }
-                 break;
+                }
+                break;
             }
         }
     }
@@ -231,7 +227,7 @@ void SensorFactory::startCalibration(int sensorId, int calibrationType)
     }
 }
 
-uint8_t SensorFactory::getMagnetometerDeviceID(uint8_t addr) //check lib\mpu9250\MPU9250.cpp for reference
+uint8_t SensorFactory::getMagnetometerDeviceID(uint8_t addr) // check lib\mpu9250\MPU9250.cpp for reference
 {
     uint8_t buffer[14];
 

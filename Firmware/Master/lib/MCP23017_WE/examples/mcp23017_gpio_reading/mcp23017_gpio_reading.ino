@@ -33,7 +33,7 @@ void setup(){
   Serial.begin(9600);
   Wire.begin();
   if(!myMCP.Init()){
-    Serial.println("Not connected!");
+    Serial.println(F("Not connected!"));
     while(1){} 
   }  
   myMCP.setPortMode(0b11111111, A);  // Port A: all pins are OUTPUT

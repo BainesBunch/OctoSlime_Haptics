@@ -35,7 +35,7 @@ void WiFiNetwork::upkeepProvisioning() {
 void WiFiNetwork::startProvisioning() {
     if(WiFi.beginSmartConfig()) {
         provisioning = true;
-        Serial.println("[NOTICE] WiFi: SmartConfig started");
+        Serial.println(F("[NOTICE] WiFi: SmartConfig started"));
     }
 }
 

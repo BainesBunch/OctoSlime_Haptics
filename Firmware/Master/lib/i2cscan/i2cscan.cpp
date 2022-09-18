@@ -34,7 +34,8 @@ namespace I2CSCAN
         }
     };
 
-    IMU Sensors[]{
+    IMU Sensors[]
+    {
         // IMU_TypeID,First Address, Second Address, WhoAmI return Value, WhoAmI register
         IMU("MPU6050", 0x68, 0x69, 0x68, 0x75),
         IMU("ICM-20948", 0x68, 0x69, 0x40, 0x00),
@@ -76,7 +77,7 @@ namespace I2CSCAN
                 break;
 
             default:
-                Serial.println("Invalid Bank");
+                Serial.println(F("Invalid Bank"));
                 Retval.DeviceAddress = 0;
                 Retval.DeviceID = 0;
                 return Retval;

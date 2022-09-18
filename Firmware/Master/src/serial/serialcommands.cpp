@@ -48,7 +48,7 @@ namespace SerialCommands {
         if(parser->getParamCount() != 1 && parser->equalCmdParam(1, "INFO")  ) {
             Serial.print("[OK] SlimeVR Tracker, ");
             Serial.print("board: ");
-            Serial.print(BOARD);
+            Serial.print(0);
             Serial.print(", hardware: ");
             Serial.print(HARDWARE_MCU);
             Serial.print(", build: ");
