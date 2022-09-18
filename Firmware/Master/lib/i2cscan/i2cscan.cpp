@@ -12,7 +12,6 @@ String portMap[] = {"4", "13", "14", "15", "16", "17", "18", "19", "21", "22", "
 namespace I2CSCAN
 {
 
-    uint8_t Registers[]{0x75, 0x00};
     uint8_t buffer[1] = {0};
 
     struct IMU
@@ -35,10 +34,11 @@ namespace I2CSCAN
         }
     };
 
-    IMU IMUs[]{
-        // Invensense
+    IMU Sensors[]{
+        // IMU_TypeID,First Address, Second Address, WhoAmI return Value, WhoAmI register
         IMU("MPU6050", 0x68, 0x69, 0x68, 0x75),
-        IMU("ICM-20948", 0x68, 0x69, 0xEA, 0x00),
+        IMU("ICM-20948", 0x68, 0x69, 0x40, 0x00),
+        IMU("BNO055", 0x4A, 0x4B, 0x14, 0x00),
 
     };
 
@@ -49,27 +49,44 @@ namespace I2CSCAN
         return buffer[0];
     }
 
-    uint8_t pickDevice(uint8_t addr1)
+    DeviceParams pickDevice(uint8_t AddressBank)
     {
-        if (I2CSCAN::isI2CExist(addr1))
+
+        DeviceParams Retval;
+        for (uint8_t i = 0; i < sizeof(Sensors) / sizeof(Sensors[0]); i++)
         {
-            for (uint8_t r = 0; r < sizeof(Registers) / sizeof(Registers[0]); r++)
+            auto imu = Sensors[i];
+            switch (AddressBank)
             {
-
-                auto reg = Registers[r];
-                auto regval = ReadReg(addr1, reg);
-
-                for (uint8_t i = 0; i < sizeof(IMUs) / sizeof(IMUs[0]); i++)
+            case 0:
+                if (I2CSCAN::isI2CExist(imu.Address))
                 {
-                    auto imu = IMUs[i];
-                    if ((imu.Address == addr1 || imu.AltAddress == addr1) && imu.WhoAmIRegister == reg && imu.WhoAmI == regval)
-                    {
-                        return imu.WhoAmI;
-                    }
+                    Retval.DeviceAddress = imu.Address;
+                    Retval.DeviceID = ReadReg(imu.Address, imu.WhoAmIRegister);
+                    return Retval;
                 }
+                break;
+            case 1:
+                if (I2CSCAN::isI2CExist(imu.AltAddress))
+                {
+                    Retval.DeviceAddress = imu.AltAddress;
+                    Retval.DeviceID = ReadReg(imu.AltAddress, imu.WhoAmIRegister);
+                    return Retval;
+                }
+                break;
+
+            default:
+                Serial.println("Invalid Bank");
+                Retval.DeviceAddress = 0;
+                Retval.DeviceID = 0;
+                return Retval;
+                break;
             }
         }
-        return 0;
+
+        Retval.DeviceAddress = 0;
+        Retval.DeviceID = 0;
+        return Retval;
     };
 
     bool isI2CExist(uint8_t addr)

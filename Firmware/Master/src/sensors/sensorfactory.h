@@ -29,7 +29,8 @@
 class SensorFactory
 {
 
-
+private:
+    uint8_t getMagnetometerDeviceID(uint8_t addr);
 
 public:
     SensorFactory();

@@ -70,4 +70,6 @@
   #define HARDWARE_MCU 0
 #endif
 
+#define CURRENT_CONFIGURATION_VERSION 1
+
 #endif // SLIMEVR_CONSTS_H_

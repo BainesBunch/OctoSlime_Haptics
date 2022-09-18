@@ -35,17 +35,12 @@
 #include "calibration.h"
 #include "configuration.h"
 
-void MPU6050Sensor::setupSensor(uint8_t sensorId, uint8_t addr)
-{
-    this->addr = addr;
-    this->sensorId = sensorId;
-    this->working = false;
-    this->sensorType = IMU_MPU6050;
-}
-
-void MPU6050Sensor::Int_Fired()
-{
-    Serial.println(F("MPU Int"));
+void MPU6050Sensor::setupSensor(uint8_t sensorId){
+    this-> sensorId = sensorId;
+    this -> sensorType = IMU_MPU6050;
+    this -> sensorOffset = {Quat(Vector3(0,0,1), IMU_ROTATION)};
+    this -> working = false;
+    this -> configured = false;
 }
 
 void MPU6050Sensor::motionSetup()

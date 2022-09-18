@@ -23,6 +23,13 @@
 
 #include "helper_3dmath.h"
 
+float invSqrt(float x)
+{
+    union { float f; uint32_t u; } y = {x};
+    y.u = 0x5F1FFF77ul - (y.u >> 1);
+    return 0.703974056f * y.f * (2.38919526f - x * y.f * y.f);
+}
+
 float vector_dot(float a[3], float b[3])
 {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];

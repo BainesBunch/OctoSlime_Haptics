@@ -27,19 +27,34 @@
 #define TIMEOUT 3000UL
 
 WiFiUDP Udp;
+WiFiUDP Haptics_Udp;
+
 unsigned char incomingPacket[128]; // buffer for incoming packets
 uint64_t packetNumber = 0;
 unsigned char handshake[12] = {0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0};
 
 int port = 6969;
+int Haptics_port = 2022;
+
 IPAddress host = IPAddress(255, 255, 255, 255);
+IPAddress Haptics_host = IPAddress(255, 255, 255, 255);
+
 unsigned long lastConnectionAttemptMs;
 unsigned long lastPacketMs;
 
+unsigned long lastHapticsConnectionAttemptMs;
+unsigned long lastHapticsPacketMs;
+
 bool connected = false;
+bool Haptics_connected = false;
 
 uint8_t sensorStateNotifieds[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 unsigned long lastSensorInfoPacket = 0;
+
+unsigned long lastHapticSensorInfoPacket = 0;
+
+unsigned long LastIncommingMessageTime = 0;
+unsigned long LastIncommingHapticMessageTime = 0;
 
 uint8_t serialBuffer[128];
 size_t serialLength = 0;
@@ -90,6 +105,16 @@ namespace DataTransfer
         return r > 0;
     }
 
+    bool beginHapticPacket()
+    {
+        int r = Haptics_Udp.beginPacket(Haptics_host, Haptics_port);
+        if (r == 0)
+        {
+            // Print error
+        }
+        return r > 0;
+    }
+
     bool endPacket()
     {
         int r = Udp.endPacket();
@@ -100,12 +125,31 @@ namespace DataTransfer
         return r > 0;
     }
 
+    bool endHapticPacket()
+    {
+        int r = Haptics_Udp.endPacket();
+        if (r == 0)
+        {
+            // Print error
+        }
+        LastIncommingMessageTime = millis();
+        return r > 0;
+    }
+
     void sendPacketType(uint8_t type)
     {
         Udp.write(0);
         Udp.write(0);
         Udp.write(0);
         Udp.write(type);
+    }
+
+    void sendHapticPacketType(uint8_t type)
+    {
+        Haptics_Udp.write(0);
+        Haptics_Udp.write(0);
+        Haptics_Udp.write(0);
+        Haptics_Udp.write(type);
     }
 
     void sendPacketNumber()
@@ -124,6 +168,11 @@ namespace DataTransfer
         Udp.write(&c, 1);
     }
 
+    void sendHapticByte(uint8_t c)
+    {
+        Haptics_Udp.write(&c, 1);
+    }
+
     void sendInt(int i)
     {
         Udp.write(convert_to_chars(i, buf), sizeof(i));
@@ -137,6 +186,11 @@ namespace DataTransfer
     void sendBytes(const uint8_t *c, size_t length)
     {
         Udp.write(c, length);
+    }
+
+    void sendHapticBytes(const uint8_t *c, size_t length)
+    {
+        Haptics_Udp.write(c, length);
     }
 
     void sendShortString(const char *str)
@@ -157,6 +211,11 @@ namespace DataTransfer
     {
         return Udp.getWriteError();
     }
+
+    int getHapticWriteError()
+    {
+        return Haptics_Udp.getWriteError();
+    }
 }
 
 // PACKET_HEARTBEAT 0
@@ -167,6 +226,15 @@ void Network::sendHeartbeat()
         DataTransfer::sendPacketType(PACKET_HEARTBEAT);
         DataTransfer::sendPacketNumber();
         DataTransfer::endPacket();
+    }
+}
+
+void Network::sendHapticHeartbeat()
+{
+    if (DataTransfer::beginHapticPacket())
+    {
+        DataTransfer::sendHapticPacketType(PACKET_OCTOSLIME_HAPTICS_HEARTBEAT);
+        DataTransfer::endHapticPacket();
     }
 }
 
@@ -282,19 +350,17 @@ void Network::sendSensorInfo(Sensor *sensor)
 }
 
 // PACKET_OCTOSLIME_HAPTICS_INFO 0x71
-void Network::sendHapticsInfo(Haptics::Haptics_Controler_State_t Device,uint8_t MuxID)
+void Network::sendHapticsInfo(uint8_t MuxID, uint8_t ControlerID, uint8_t DeviceTypeID)
 {
-    if (DataTransfer::beginPacket())
+    if (DataTransfer::beginHapticPacket())
     {
-        DataTransfer::sendPacketType(PACKET_OCTOSLIME_HAPTICS_INFO);
-        DataTransfer::sendPacketNumber();
-        DataTransfer::sendByte(Device.Haptic_DeviceType);
-        DataTransfer::sendByte(MuxID);
-        DataTransfer::sendByte(Device.DeviceID);
-        DataTransfer::endPacket();
+        DataTransfer::sendHapticPacketType(PACKET_OCTOSLIME_HAPTICS_INFO);
+        DataTransfer::sendHapticByte(MuxID);
+        DataTransfer::sendHapticByte(ControlerID);
+        DataTransfer::sendHapticByte(DeviceTypeID);
+        DataTransfer::endHapticPacket();
     }
 }
-
 
 // PACKET_ROTATION_DATA 17
 void Network::sendRotationData(Quat *const quaternion, uint8_t dataType, uint8_t accuracyInfo, uint8_t sensorId)
@@ -371,6 +437,23 @@ void Network::sendTemperature(float temperature, uint8_t sensorId)
     }
 }
 
+void Network::sendHapticsHandshake()
+{
+    if (DataTransfer::beginHapticPacket())
+    {
+        DataTransfer::sendHapticPacketType(PACKET_OCTOSLIME_HAPTICS_HANDSHAKE);
+        uint8_t mac[6];
+        WiFi.macAddress(mac);
+        DataTransfer::sendHapticBytes(mac, 6); // MAC address string
+        DataTransfer::endHapticPacket();
+    }
+    else
+    {
+        Serial.print("Haptics Server begin packet Error : ");
+        Serial.println(DataTransfer::getHapticWriteError());
+    }
+}
+
 void Network::sendHandshake()
 {
     if (DataTransfer::beginPacket())
@@ -423,44 +506,109 @@ void updateSensorState(Sensor *Sensors[])
             for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
             {
                 uint8_t SensorID = SensorCount + (BankCount * IMUCount);
-
-                if (Sensors[SensorID]->isWorking() && sensorStateNotifieds[SensorID] == 0)
+                if (Sensors[SensorID]->Connected)
                 {
-                    Serial.print("Sending Sensor Register Info for Sensor ID : ");
-                    Serial.println(SensorID);
-                    Network::sendSensorInfo(Sensors[SensorID]);
+                    if (Sensors[SensorID]->isWorking() && sensorStateNotifieds[SensorID] == 0)
+                    {
+                        Serial.print("Sending Sensor Register Info for Sensor ID : ");
+                        Serial.println(SensorID);
+                        Network::sendSensorInfo(Sensors[SensorID]);
+                    }
                 }
             }
         }
     }
 }
-
 
 void updateOctoSlimeHapticState()
 {
-    if (millis() - lastSensorInfoPacket > 1000)
+    if (millis() - lastHapticSensorInfoPacket > 1000)
     {
-        lastSensorInfoPacket = millis();
-        for (uint8_t MuxID = 0; MuxID < 7; MuxID++)
+        lastHapticSensorInfoPacket = millis();
+        bool SentDiscoPacket = false;
+        for (uint8_t MuxID = 0; MuxID < 8; MuxID++)
         {
             for (int ControlerID = 0; ControlerID < 8; ControlerID++)
             {
-                uint8_t SensorID = ControlerID + (MuxID * 8);
-
-                if ((Haptics::Haptics_Branches[MuxID].Controler_State[ControlerID].Haptic_DeviceType != Haptics::None) &&  Haptics::Haptics_Server_Registered[SensorID] == 0)
+                //uint8_t SensorID = ControlerID + (MuxID * 8);
+                if ((Haptics::GetHapticDeviceType(MuxID, ControlerID) != Haptics::None) && Haptics::GetRegisteredState(MuxID, ControlerID) == 0)
                 {
-                    Serial.print("Sending Haptics Register Info for Sensor ID : ");
-                    Serial.println(SensorID);
-                    Network::sendHapticsInfo(Haptics::Haptics_Branches[MuxID].Controler_State[ControlerID],MuxID);
+
+                    // Serial.println("Sending Haptics Register Info for");
+                    // Serial.print(" Sensor ID : ");
+                    // Serial.print(SensorID);
+                    // Serial.print(" Device Type : ");
+                    // Serial.print(Haptics::GetHapticDeviceType(MuxID, ControlerID));
+                    // Serial.print(" Registered : ");
+                    // Serial.println(Haptics::GetRegisteredState(MuxID, ControlerID));
+                    Network::sendHapticsInfo(MuxID, ControlerID, Haptics::GetHapticDeviceType(MuxID, ControlerID));
+                    SentDiscoPacket = true;
                 }
             }
+        }
+        if (SentDiscoPacket == false)
+        {
+           // Serial.println(F("Sending Heartbeat Token"));
+            Network::sendHapticHeartbeat();
         }
     }
 }
 
+int ServerConnection::DataReady()
+{
 
+    return Haptics_Udp.parsePacket();
+}
 
-void ServerConnection::connect()
+void ServerConnection::Hapticsconnect()
+{
+    unsigned long now = millis();
+    while (true)
+    {
+        int packetSize = Haptics_Udp.parsePacket();
+        if (packetSize)
+        {
+            LastIncommingMessageTime = millis();
+            // receive incoming UDP packets
+            // Serial.printf("[Haptic Handshake] Received %d bytes from %s, port %d\n", packetSize, Haptics_Udp.remoteIP().toString().c_str(), Haptics_Udp.remotePort());
+            int len = Haptics_Udp.read(incomingPacket, sizeof(incomingPacket));
+            // Serial.print("[Haptic Handshake] UDP packet contents: ");
+            // for (int i = 0; i < len; ++i)
+            //     Serial.print((byte)incomingPacket[i]);
+            // Serial.println();
+            // Handshake is different, it has 3 in the first byte, not the 4th, and data starts right after
+            switch (incomingPacket[0])
+            {
+            case PACKET_OCTOSLIME_HAPTICS_RECEIVE_HANDSHAKE:
+                // Assume handshake successful, don't check it
+                // But proper handshake should contain "Hey OVR =D 5" ASCII string right after the packet number
+                // Starting on 14th byte (packet number, 12 bytes greetings, null-terminator) we can transfer SlimeVR handshake data
+                Haptics_host = Haptics_Udp.remoteIP();
+                Haptics_port = Haptics_Udp.remotePort();
+                lastPacketMs = now;
+                Haptics_connected = true;
+
+                Serial.printf("[Haptic Handshake] Handshake successful, Haptic server is %s:%d\n", Haptics_Udp.remoteIP().toString().c_str(), Haptics_Udp.remotePort());
+                // UI::SetMessage(6);
+                return;
+            default:
+                continue;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+    if (lastHapticsConnectionAttemptMs + 1000 < now)
+    {
+        lastHapticsConnectionAttemptMs = now;
+        Serial.println("Looking for the Haptic server...");
+        Network::sendHapticsHandshake();
+    }
+}
+
+void ServerConnection::Slimeconnect()
 {
     unsigned long now = millis();
     while (true)
@@ -486,10 +634,8 @@ void ServerConnection::connect()
                 port = Udp.remotePort();
                 lastPacketMs = now;
                 connected = true;
-#ifndef SEND_UPDATES_UNCONNECTED
-                LEDManager::off(LOADING_LED);
-#endif
-                Serial.printf("[Handshake] Handshake successful, server is %s:%d\n", Udp.remoteIP().toString().c_str(), +Udp.remotePort());
+
+                Serial.printf("[Handshake] Handshake successful, Slime server is %s:%d\n", Udp.remoteIP().toString().c_str(), +Udp.remotePort());
                 // UI::SetMessage(6);
                 return;
             default:
@@ -504,25 +650,106 @@ void ServerConnection::connect()
     if (lastConnectionAttemptMs + 1000 < now)
     {
         lastConnectionAttemptMs = now;
-        Serial.println("Looking for the server...");
+        Serial.println("Looking for the Slime server...");
         UI::SetMessage(4);
         Network::sendHandshake();
-#ifndef SEND_UPDATES_UNCONNECTED
-        LEDManager::on(LOADING_LED);
-#endif
     }
-#ifndef SEND_UPDATES_UNCONNECTED
-    else if (lastConnectionAttemptMs + 20 < now)
-    {
-        LEDManager::off(LOADING_LED);
-    }
-#endif
 }
 
 void ServerConnection::resetConnection()
 {
     Udp.begin(port);
+    Haptics_Udp.begin(Haptics_port);
     connected = false;
+    Haptics_connected = false;
+}
+
+void ServerConnection::Haptics_update()
+{
+    if (Haptics_connected)
+    {
+        if (Haptics_Udp.parsePacket())
+        {
+            int packetSize = Haptics_Udp.read(incomingPacket, sizeof(incomingPacket));
+            if (packetSize)
+            {
+
+                // Serial.printf("Received %d bytes from %s, port %d : ", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
+                // for (int pointer = 0; pointer < packetSize; pointer++)
+                // {
+                //     if (pointer > 0)
+                //         Serial.print(",");
+                //     Serial.print(incomingPacket[pointer], HEX);
+                // }
+                // Serial.println();
+
+                switch (incomingPacket[0])
+                {
+
+                case PACKET_OCTOSLIME_HAPTICS_HEARTBEAT:
+                   // Serial.println("Haptics Server Heartbeat received");
+                    break;
+
+                case PACKET_OCTOSLIME_HAPTICS_SET:
+                    // Octoslime Haptics call
+                    Serial.printf("Haptics Setting Device MUX : %d Controller : %d Motor : %d Level : %d",incomingPacket[1], incomingPacket[2], incomingPacket[3], incomingPacket[4]);
+                    Haptics::SetLevel(incomingPacket[1], incomingPacket[2], incomingPacket[3], incomingPacket[4]);
+                    break;
+
+                case PACKET_OCTOSLIME_HAPTICS_RECEIVE_HANDSHAKE:
+                   // Serial.println("Haptics Handshake received again, ignoring");
+                    break;
+
+                case PACKET_OCTOSLIME_HAPTICS_RECIEVE_INFO:
+                    //Serial.println("Haptics Device Registration Recieved");
+
+                    // Serial.print("Mux ID : ");
+                    // Serial.print(incomingPacket[1], HEX);
+                    // Serial.print("Controler ID : ");
+                    // Serial.print(incomingPacket[2], HEX);
+                    // Serial.print("Value : ");
+                    // Serial.println(incomingPacket[3], HEX);
+
+                    Haptics::SetRegisteredState(incomingPacket[1], incomingPacket[2], incomingPacket[3]);
+                    break;
+                }
+
+                LastIncommingHapticMessageTime = millis();
+            }
+        }
+
+        if (LastIncommingHapticMessageTime + TIMEOUT < millis())
+        {
+            Haptics_connected = false;
+            LastIncommingHapticMessageTime = millis();
+          //  Serial.println("Haptic Server Timeout");
+        }
+
+        updateOctoSlimeHapticState();
+    }
+    else
+    {
+        for (uint8_t MuxID = 0; MuxID < 8; MuxID++)
+        {
+            for (int ControlerID = 0; ControlerID < 8; ControlerID++)
+            {
+                Haptics::SetRegisteredState(MuxID, ControlerID, 0);
+            }
+        }
+        Hapticsconnect();
+    }
+}
+
+bool ServerConnection::IsHapticServerConnected()
+{
+
+    return Haptics_connected;
+}
+
+bool ServerConnection::IsSlimeServerConnected()
+{
+
+    return connected;
 }
 
 void ServerConnection::update(Sensor *Sensors[])
@@ -534,15 +761,6 @@ void ServerConnection::update(Sensor *Sensors[])
         {
             lastPacketMs = millis();
             int len = Udp.read(incomingPacket, sizeof(incomingPacket));
-// receive incoming UDP packets
-#if serialDebug == true
-            Serial.printf("Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
-            Serial.print("UDP packet contents: ");
-            for (int i = 0; i < len; ++i)
-                Serial.print((byte)incomingPacket[i]);
-            Serial.println();
-#endif
-
             switch (convert_chars<int>(incomingPacket))
             {
             case PACKET_RECEIVE_HEARTBEAT:
@@ -552,15 +770,11 @@ void ServerConnection::update(Sensor *Sensors[])
 
                 break;
 
-            case PACKET_OCTOSLIME_HAPTICS_SET:
-                // Octoslime Haptics call
-                Haptics::SetLevel(incomingPacket[1], incomingPacket[2], incomingPacket[3], incomingPacket[4]);
-                break;
-
             case PACKET_RECEIVE_HANDSHAKE:
                 // Assume handshake successful
                 Serial.println("Handshake received again, ignoring");
                 break;
+
             case PACKET_RECEIVE_COMMAND:
 
                 break;
@@ -569,10 +783,6 @@ void ServerConnection::update(Sensor *Sensors[])
                 break;
             case PACKET_PING_PONG:
                 returnLastPacket(len);
-                break;
-
-            case PACKET_OCTOSLIME_HAPTICS_INFO:
-                Haptics::Haptics_Server_Registered[incomingPacket[4]] = incomingPacket[5];
                 break;
 
             case PACKET_SENSOR_INFO:
@@ -597,6 +807,7 @@ void ServerConnection::update(Sensor *Sensors[])
         if (lastPacketMs + TIMEOUT < millis())
         {
             connected = false;
+
             for (int BankCount = 0; BankCount < 2; BankCount++)
             {
                 for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
@@ -608,14 +819,11 @@ void ServerConnection::update(Sensor *Sensors[])
             Serial.println("Connection to server timed out");
             UI::SetMessage(5);
         }
-    }
 
-    if (!connected)
-    {
-        connect();
+        updateSensorState(Sensors);
     }
     else
     {
-        updateSensorState(Sensors);
+        Slimeconnect();
     }
 }

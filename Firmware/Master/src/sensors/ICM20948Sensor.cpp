@@ -9,9 +9,8 @@
 
 icm_20948_DMP_data_t data;
 
-void ICM20948Sensor::setupSensor(uint8_t sensorId, uint8_t addr)
+void ICM20948Sensor::setupSensor(uint8_t sensorId)
 {
-    this->addr = addr;
     this->sensorId = sensorId;
     this->sensorType = IMU_ICM20948;
     this->sensorOffset = {Quat(Vector3(0, 0, 1), IMU_ROTATION)};
@@ -25,7 +24,9 @@ void ICM20948Sensor::motionSetup()
     Serial.print(F("Initialising ICM20948 on MUX Channel : "));
     Serial.print(sensorId % 8);
     Serial.print(F(" Bank : "));
-    Serial.println(sensorId < 8 ? "A" : "B");
+    Serial.print(sensorId < 8 ? "A" : "B");
+    Serial.print(F(" At Address : "));
+    Serial.print(addr,HEX);
 
     imu.begin(Wire, addr);
 
@@ -135,12 +136,7 @@ void ICM20948Sensor::motionLoop()
     }
 }
 
-void ICM20948Sensor::Int_Fired()
-{
-    Serial.println(F("ICM Int"));
-    motionLoop();
-    imu.clearInterrupts();
-}
+
 
 void ICM20948Sensor::startCalibration(int calibrationType)
 {

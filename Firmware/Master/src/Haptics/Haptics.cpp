@@ -6,28 +6,28 @@ namespace Haptics
 
     uint8_t PWM_Base_Address = 0x30;
     uint8_t OnOff_Base_Address = 0x60;
-
-
-    void SetLevel(uint8_t MuxID, uint8_t ControlerID, uint8_t OutputID, uint8_t Level)
+    
+     void SetLevel(uint8_t MuxID, uint8_t ControlerID, uint8_t OutputID, uint8_t Level)
     {
         I2Cdev::SetIMU(MuxID);
 
-        if (Haptics_Branches[MuxID].Controler_State[ControlerID].Haptic_DeviceType == PWM)
+        if (GetHapticDeviceType(MuxID,ControlerID) == PWM)
         {
 
-            if (Haptics_Branches[MuxID].Controler_State[ControlerID].CurrentPWMValue[OutputID] != Level)
+            if (GetHapticPWM(MuxID,ControlerID,OutputID) != Level)
             {
                 Wire.beginTransmission(uint8_t(PWM_Base_Address + ControlerID));
+                Wire.write(0x88);
                 Wire.write(OutputID);
                 Wire.write(Level);
                 Wire.endTransmission();
-                Haptics_Branches[MuxID].Controler_State[ControlerID].CurrentPWMValue[OutputID] = Level;
+                SetHapticPWM(MuxID,ControlerID,OutputID,Level);
             }
         }
-        
-        if (Haptics_Branches[MuxID].Controler_State[ControlerID].Haptic_DeviceType == OnOff)
+
+        if (GetHapticDeviceType(MuxID,ControlerID) == OnOff)
         {
-            uint8_t TempMask = Haptics_Branches[MuxID].Controler_State[ControlerID].CurrentBitmaskValue;
+            uint8_t TempMask = GetHapticBitmask(MuxID,ControlerID);
 
             if (Level > 0)
             {
@@ -38,78 +38,135 @@ namespace Haptics
                 TempMask &= ~(0x01 << OutputID);
             }
 
-
-            // Serial.print("Bitmask : ");
-
-            // for (uint8_t i = 0; i < 8; i++)  
-            // {
-            //     Serial.print(((TempMask >> i) & 1) == 1 ? "1" : "0");
-            // }
-            // Serial.println();
-            
             Wire.beginTransmission(uint8_t(OnOff_Base_Address + ControlerID));
             Wire.write(0x44);
             Wire.write(TempMask);
             Wire.endTransmission();
 
-            Haptics_Branches[MuxID].Controler_State[ControlerID].CurrentBitmaskValue = TempMask;
+            SetHapticBitmask(MuxID,ControlerID,TempMask);
         }
     }
 
-
-
-
     void Discovery()
     {
-//        Serial.println("Haptics Begin Scan");
+        Serial.println("Haptics Begin Scan");
         for (uint8_t MuxID = 0; MuxID < 7; MuxID++)
         {
-            //Serial.print("Setting Mux : ");
-            //Serial.println(MuxID);
+
+            Serial.print("Setting Mux : ");
+            Serial.println(MuxID);
 
             I2Cdev::SetIMU(MuxID);
 
             for (uint8_t ControlerID = 0; ControlerID < 8; ControlerID++)
             {
 
-             //   Serial.println("Setting Register Byte");
-                Haptics_Server_Registered[(MuxID * 8) + ControlerID] = 0;
+                //   Serial.println("Setting Register Byte");
+                SetRegisteredState(MuxID, ControlerID, 0);
 
-              //  Serial.println("Setting Mux Byte");
+                //  Serial.println("Setting Mux Byte");
                 Haptics_Branches[MuxID].MuxID = MuxID;
-             //  Serial.println("Setting Controler Type to None");
-                Haptics_Branches[MuxID].Controler_State[ControlerID].Haptic_DeviceType = None;
-             //   Serial.println("Setting Bitmask to zero");
-                Haptics_Branches[MuxID].Controler_State[ControlerID].CurrentBitmaskValue = 0;
+                //  Serial.println("Setting Controler Type to None");
+                SetHapticDeviceType(MuxID, ControlerID, None);
+                //   Serial.println("Setting Bitmask to zero");
+                SetHapticBitmask(MuxID, ControlerID, 0);
 
-             //   Serial.println("Setting PWM Bytes to zero");
-                for (uint8_t ValueID = 0; ValueID < 7; ValueID++)
+                //   Serial.println("Setting PWM Bytes to zero");
+                for (uint8_t MotorID = 0; MotorID < 8; MotorID++)
                 {
-                    Haptics_Branches[MuxID].Controler_State[ControlerID].CurrentPWMValue[ValueID] = 0;
+                    SetHapticPWM(MuxID, ControlerID, MotorID, 0);
                 }
+
                 // test for PWM devices first
-              //  Serial.print("Scanning at address : ");
-              //
-              
-                Serial.println(PWM_Base_Address + ControlerID,HEX);
+
                 Wire.beginTransmission(PWM_Base_Address + ControlerID);
                 if (Wire.endTransmission() == 0)
                 {
-                    Haptics_Branches[MuxID].Controler_State[ControlerID].Haptic_DeviceType = PWM;
-                    Serial.println("Found PWM");
+                    SetHapticDeviceType(MuxID, ControlerID, PWM);
+                    Serial.print("Found PWM at address : ");
+                    Serial.println(PWM_Base_Address + ControlerID, HEX);
                 }
+
                 // test for OnOff devices Next
-             //   Serial.print("Scanning at address : ");
-             //   Serial.println(OnOff_Base_Address + ControlerID,HEX);
                 Wire.beginTransmission(OnOff_Base_Address + ControlerID);
                 if (Wire.endTransmission() == 0)
                 {
-                    Haptics_Branches[MuxID].Controler_State[ControlerID].Haptic_DeviceType = OnOff;
-                    Serial.println("Found OnOff");
+                    SetHapticDeviceType(MuxID, ControlerID, OnOff);
+                    Serial.print("Found OnOff at address : ");
+                    Serial.println(OnOff_Base_Address + ControlerID, HEX);
                 }
-            Haptics_Branches[MuxID].Controler_State[ControlerID].Address = ControlerID;
+
+                SetHapticControlerID(MuxID, ControlerID);
             }
         }
-        //Serial.println("Haptics End Scan");
+        Serial.println("Haptics End Scan");
     }
+
+    void SetHapticDeviceType(uint8_t MuxID, uint8_t ControlerID, Haptic_DeviceType_e DeviceType)
+    {
+        Haptics_Mux_Branch_Devices_t Branch = Haptics_Branches[MuxID];
+        Haptics_Controler_State_t Controler = Branch.Controler_State[ControlerID];
+        Controler.Haptic_DeviceType = DeviceType;
+        Branch.Controler_State[ControlerID] = Controler;
+        Haptics_Branches[MuxID] = Branch;
+    }
+
+    uint8_t GetHapticDeviceType(uint8_t MuxID, uint8_t ControlerID)
+    {
+        Haptics_Mux_Branch_Devices_t Branch = Haptics_Branches[MuxID];
+        Haptics_Controler_State_t Controler = Branch.Controler_State[ControlerID];
+        return Controler.Haptic_DeviceType;
+    }
+
+    void SetHapticControlerID(uint8_t MuxID, uint8_t ControlerID)
+    {
+        Haptics_Mux_Branch_Devices_t Branch = Haptics_Branches[MuxID];
+        Haptics_Controler_State_t Controler = Branch.Controler_State[ControlerID];
+        Controler.Address = ControlerID;
+        Branch.Controler_State[ControlerID] = Controler;
+        Haptics_Branches[MuxID] = Branch;
+    }
+
+    void SetHapticPWM(uint8_t MuxID, uint8_t ControlerID, uint8_t Motor, uint8_t Level)
+    {
+        Haptics_Mux_Branch_Devices_t Branch = Haptics_Branches[MuxID];
+        Haptics_Controler_State_t Controler = Branch.Controler_State[ControlerID];
+        Controler.CurrentPWMValue[Motor] = Level;
+        Branch.Controler_State[ControlerID] = Controler;
+        Haptics_Branches[MuxID] = Branch;
+    }
+
+    uint8_t GetHapticPWM(uint8_t MuxID, uint8_t ControlerID, uint8_t Motor)
+    {
+        Haptics_Mux_Branch_Devices_t Branch = Haptics_Branches[MuxID];
+        Haptics_Controler_State_t Controler = Branch.Controler_State[ControlerID];
+        return Controler.CurrentPWMValue[Motor];
+    }
+
+    void SetHapticBitmask(uint8_t MuxID, uint8_t ControlerID, uint8_t Level)
+    {
+        Haptics_Mux_Branch_Devices_t Branch = Haptics_Branches[MuxID];
+        Haptics_Controler_State_t Controler = Branch.Controler_State[ControlerID];
+        Controler.CurrentBitmaskValue = Level;
+        Branch.Controler_State[ControlerID] = Controler;
+        Haptics_Branches[MuxID] = Branch;
+    }
+
+    uint8_t GetHapticBitmask(uint8_t MuxID, uint8_t ControlerID)
+    {
+        Haptics_Mux_Branch_Devices_t Branch = Haptics_Branches[MuxID];
+        Haptics_Controler_State_t Controler = Branch.Controler_State[ControlerID];
+        return Controler.CurrentBitmaskValue;
+    }
+
+    void SetRegisteredState(uint8_t MuxID, uint8_t ControlerID, uint8_t State)
+    {
+        Haptics_Server_Registered[(MuxID * 8) + ControlerID] = State;
+    }
+
+    uint8_t GetRegisteredState(uint8_t MuxID, uint8_t ControlerID)
+    {
+        return Haptics_Server_Registered[(MuxID * 8) + ControlerID];
+    }
+
 }

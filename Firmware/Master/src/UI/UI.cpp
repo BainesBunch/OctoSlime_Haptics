@@ -138,12 +138,15 @@ namespace UI
 
         for (uint8 Y = 1; Y < 32; Y += 4)
         {
+            ESP.wdtFeed();
             oled.roundRect((Y * 2), Y, 128 - (Y * 2), 64 - Y, OLED_STROKE);
             oled.update();
         }
 
         oled.clear();
+            ESP.wdtFeed();
         oled.drawBitmap(0, 0, octopus, 128, 64, BITMAP_NORMAL, BUF_ADD);
+            ESP.wdtFeed();
         oled.update();
     }
 
@@ -213,7 +216,7 @@ namespace UI
         {
         case 1:
             oled.setCursorXY(17, 51);
-            oled.print("Scanning Sensors");
+            oled.print("Scanning For Sensors");
             break;
 
         case 2:
@@ -237,8 +240,8 @@ namespace UI
             break;
 
         case 6:
-            //  oled.setCursorXY(30, 51);
-            //  oled.print("Sending Data");
+            oled.setCursorXY(17, 51);
+            oled.print("Scanning For Haptics");
             break;
         }
 

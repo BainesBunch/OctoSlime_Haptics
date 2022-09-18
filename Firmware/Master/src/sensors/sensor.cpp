@@ -39,10 +39,6 @@ void Sensor::sendData() {
 }
 
 
-void Sensor::Int_Fired() 
-{
-}
-
 
 const char * getIMUNameByType(int imuType) {
     switch(imuType) {
@@ -61,5 +57,5 @@ const char * getIMUNameByType(int imuType) {
         case IMU_BNO086:
             return "BNO086";
     }
-    return "Unknown";
+      return "Unknown";
 }

@@ -34,8 +34,8 @@
 #include "UI\UI.h"
 #include <MCP23017.h>
 
-#define INT_PIN1 D6 // Make sure to connect this pin on your uC to the "INT" pin on the ICM-20948 breakout
-#define INT_PIN2 D5 // Make sure to connect this pin on your uC to the "INT" pin on the ICM-20948 breakout
+#define INT_PIN1 D6 
+#define INT_PIN2 D5 
 #define INT_RESET D7
 
 SensorFactory sensors{};
@@ -47,6 +47,8 @@ volatile uint8_t INT_Caller = 0;
 unsigned long blinkStart = 0;
 unsigned long loopTime = 0;
 unsigned long last_rssi_sample = 0;
+unsigned long last_Haptic_Heartbeat = millis() + 5000;
+
 bool secondImuActive = false;
 BatteryMonitor battery;
 
@@ -68,6 +70,8 @@ BatteryMonitor battery;
 //     //   sensors.IMU_Int_Triggered(Int_Caller + 8);
 // }
 
+SlimeVR::Configuration::Configuration configuration; //for MPU9250/MPU6000+QMC calibration
+
 void setup()
 {
 
@@ -77,36 +81,31 @@ void setup()
     Serial.println();
     Serial.println();
 
+    Serial.println("System Startup");
+
+
     Wire.begin(PIN_IMU_SDA, PIN_IMU_SCL);
+
+    Serial.println("Startup I2C");
 
     Wire.setClockStretchLimit(150000L); // Default stretch limit 150mS
     Wire.setClock(I2C_SPEED);
 
     I2CSCAN::clearBus(PIN_IMU_SDA, PIN_IMU_SCL); // Make sure the bus isn't suck when reseting ESP without powering it down
 
-    Haptics::Discovery();
 
-    while (true)
-    {
-        int8_t MuxID = 0;
-            for (uint8_t Motor = 0; Motor < 8; Motor++)
-            {
-                Serial.print("Setting Motor : ");
-                Serial.println(Motor);
-                for (uint8_t Level = 0; Level < 255; Level++)
-                {
-                    Haptics::SetLevel(MuxID, 0, Motor, Level);
-                }
-                Haptics::SetLevel(MuxID, 0, Motor, 0);
-            }
-    }
+
+    Serial.println("Startup UI");
 
     UI::Setup();
     UI::DrawSplash();
-    
+
     delay(1500);
+
     UI::MainUIFrame();
-    UI::SetMessage(1);
+    UI::SetMessage(6);
+
+    Haptics::Discovery();
 
     // myMCP.Init();
     // myMCP.setPortMode(0b00000000, A);
@@ -122,6 +121,8 @@ void setup()
 
     delay(500);
 
+    UI::SetMessage(1);
+    
     sensors.create();
     sensors.init();
     sensors.motionSetup();
@@ -134,16 +135,28 @@ void setup()
     // attachInterrupt(digitalPinToInterrupt(INT_PIN2), IntBank_B, FALLING); // Set up a falling interrupt
     // myMCP.getIntCap(B);                                                   // ensures that existing interrupts are cleared
     // myMCP.getIntCap(A);                                                   // ensures that existing interrupts are cleared
+
+    ServerConnection::resetConnection();
+
+    last_Haptic_Heartbeat = millis() + 5000;
+
+    Serial.println("Startup Complete , Entering Loop");
+
 }
 
 void loop()
 {
-
+    // Serial.println("Serial update");
     SerialCommands::update();
+    // Serial.println("network update");
     Network::update(sensors.IMUs);
+    // Serial.println("motionloop");
     sensors.motionLoop();
+    // Serial.println("send sensor data");
     sensors.sendData();
+    // Serial.println("battery loop");
     battery.Loop();
+
 
     // if (INT_Triggered_Bank_A || INT_Triggered_Bank_B)
     // {
@@ -166,10 +179,14 @@ void loop()
     //     Serial.println(INT_Bank);
     // }
 
+
     if (millis() - last_rssi_sample >= 2000)
     {
         last_rssi_sample = millis();
         uint8_t signalStrength = WiFi.RSSI();
+        // Serial.println("Send signal strength");
         Network::sendSignalStrength(signalStrength);
     }
+
+
 }

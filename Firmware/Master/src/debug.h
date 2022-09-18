@@ -27,6 +27,8 @@
 #define IMU_MPU6050_RUNTIME_CALIBRATION // Comment to revert to startup/traditional-calibration
 #define BNO_USE_ARVR_STABILIZATION // Comment to not use stabilization for BNO085+ IMUs
 
+#define LOG_LEVEL LOG_LEVEL_DEBUG
+
 //Debug information
 //#define FULL_DEBUG
 #define serialDebug false // Set to true to get Serial output for debugging

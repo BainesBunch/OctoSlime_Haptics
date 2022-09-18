@@ -31,11 +31,18 @@
 #include "wifihandler.h"
 #include "globals.h"
 
-namespace ServerConnection {
-    void connect();
-    void update(Sensor *Sensors[]) ;
+namespace ServerConnection
+{
+    void Slimeconnect();
+    void Hapticsconnect();
+    void update(Sensor *Sensors[]);
+    void Haptics_update();
     void resetConnection();
     bool isConnected();
+    int DataReady();
+    bool IsHapticServerConnected();
+    bool IsSlimeServerConnected();
+
 }
 
 #endif // SLIMEVR_UDP_CLIENT_H_

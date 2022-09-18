@@ -28,6 +28,8 @@
 #include "debug.h"
 #include "defines.h"
 #include "UI\UI.h"
+#include "configuration\Configuration.h"
+#include "logging\Logger.h"
 
 // MUX paramaters
 #define IMUCount 8
@@ -38,5 +40,6 @@
 #define BATTERY_MONITOR BAT_INTERNAL
 #endif
 
+extern SlimeVR::Configuration::Configuration configuration;
 
 #endif // SLIMEVR_GLOBALS_H_

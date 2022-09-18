@@ -54,16 +54,27 @@
 #define PACKET_RECEIVE_HANDSHAKE 3
 #define PACKET_RECEIVE_COMMAND 4
 
-#define PACKET_OCTOSLIME_HAPTICS_SET 0x70
-#define PACKET_OCTOSLIME_HAPTICS_INFO 0x71
+#define PACKET_OCTOSLIME_HAPTICS_INFO 0x70
+#define PACKET_OCTOSLIME_HAPTICS_RECIEVE_INFO 0x71
+#define PACKET_OCTOSLIME_HAPTICS_HANDSHAKE 0x72
+#define PACKET_OCTOSLIME_HAPTICS_RECEIVE_HANDSHAKE 0x73
+#define PACKET_OCTOSLIME_HAPTICS_SET 0x74
+#define PACKET_OCTOSLIME_HAPTICS_RECEIVE_SET 0x75
+#define PACKET_OCTOSLIME_HAPTICS_HEARTBEAT 0x76
+#define PACKET_OCTOSLIME_HAPTICS_RECEIVE_HEARTBEAT 0x77
 
 
 namespace Network {
     // PACKET_HEARTBEAT 0
     void sendHeartbeat();
-
+    
+    // PACKET_HEARTBEAT 0
+    void sendHapticHeartbeat();
+    
     // PACKET_HANDSHAKE 3
     void sendHandshake();
+
+    void sendHapticsHandshake();
 
     // PACKET_ACCEL 4
     void sendAccel(float* vector, uint8_t sensorId);
@@ -99,7 +110,7 @@ namespace Network {
     // PACKET_TEMPERATURE 20
     void sendTemperature(float temperature, uint8_t sensorId);
 
-    void sendHapticsInfo(Haptics::Haptics_Controler_State_t Device,uint8_t MuxID);
+    void sendHapticsInfo(uint8_t MuxID,uint8_t ControlerID, uint8_t DeviceTypeID);
 }
 
 namespace DataTransfer {
@@ -115,7 +126,6 @@ namespace DataTransfer {
     void sendBytes(const uint8_t * c, size_t length);
     void sendShortString(const char * str);
     void sendLongString(const char * str);
-
     int getWriteError();
 }
 

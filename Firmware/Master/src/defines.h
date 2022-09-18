@@ -32,9 +32,8 @@
 #define PACKET_ROTATION_DATA 17
 
 #define MPU6050_t  0x68
-#define ICM_20948_t  0xEA
-
-
+#define ICM_20948_t  0x40
+#define BNO_080_t  0x14
 // Battery monitoring options (comment to disable):
 // BAT_EXTERNAL for ADC pin, BAT_INTERNAL for internal - can detect only low battery, BAT_MCP3021 for external ADC
 #define BATTERY_MONITOR BAT_EXTERNAL

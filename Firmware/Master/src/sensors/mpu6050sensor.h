@@ -27,14 +27,14 @@
 class MPU6050Sensor : public Sensor
 {
 public:
-    MPU6050Sensor(){};
+    MPU6050Sensor(uint8_t address){Connected = false;addr=address;};
     ~MPU6050Sensor(){};
 
     void motionSetup() override final;
-    void setupSensor(uint8_t sensorId, uint8_t addr)  override final;
+    void setupSensor(uint8_t sensorId) override final;
     void motionLoop() override final;
     void startCalibration(int calibrationType) override final;
-    void Int_Fired();
+
 
 private:
     MPU6050 imu{};

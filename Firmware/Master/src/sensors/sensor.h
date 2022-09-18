@@ -36,16 +36,17 @@
 class Sensor
 {
 public:
-    Sensor(){Connected = true;};
+    Sensor(uint8_t address) : m_Logger(SlimeVR::Logging::Logger("")) {Connected = false;addr=address;};
+    Sensor() : m_Logger(SlimeVR::Logging::Logger("")) {Connected = false;};
     virtual ~Sensor(){};
 
     virtual void motionSetup(){};
-    virtual void setupSensor(uint8_t sensorId, uint8_t addr){}; 
+    virtual void setupSensor(uint8_t sensorId){}; 
     virtual void motionLoop(){};
     virtual void sendData();
     virtual void startCalibration(int calibrationType){};
     virtual uint8_t getSensorState();
-    virtual void Int_Fired();
+
 
     bool isWorking()
     {
@@ -73,6 +74,9 @@ protected:
 
     Quat quaternion{};
     Quat lastQuatSent{};
+
+    SlimeVR::Logging::Logger m_Logger;
+    
 };
 
 class EmptySensor : public Sensor
