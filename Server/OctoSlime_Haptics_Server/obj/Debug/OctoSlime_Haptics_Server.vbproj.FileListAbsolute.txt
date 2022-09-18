@@ -1,0 +1,13 @@
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.Resources.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.vbproj.GenerateResource.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.vbproj.CoreCompileInputs.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\bin\Debug\OctoSlime_Haptics_Server.exe.config
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\bin\Debug\OctoSlime_Haptics_Server.exe
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\bin\Debug\OctoSlime_Haptics_Server.pdb
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\bin\Debug\OctoSlime_Haptics_Server.xml
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.exe
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.xml
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.pdb
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.exe.licenses
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.OctoSlimeHapticsServer.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\OctoSlime_Haptics_Server\obj\Debug\OctoSlime_Haptics_Server.vbproj.AssemblyReference.cache
