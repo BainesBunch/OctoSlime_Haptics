@@ -94,6 +94,8 @@ void setup()
 
     Serial.println(F("Startup UI"));
 
+    configuration.setup();
+
     UI::Setup();
 
     //  UI::DrawCalibrationScreen(9);
