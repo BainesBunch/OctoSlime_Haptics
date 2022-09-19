@@ -476,14 +476,14 @@ void Network::sendHandshake()
         DataTransfer::sendBytes(mac, 6); // MAC address string
         if (DataTransfer::endPacket())
         {
-            Serial.print(F("Handshake write error: "));
-            Serial.println(Udp.getWriteError());
+           // Serial.print(F("Handshake write error: "));
+           // Serial.println(Udp.getWriteError());
         }
     }
     else
     {
-        Serial.print(F("Handshake write error: "));
-        Serial.println(Udp.getWriteError());
+       // Serial.print(F("Handshake write error: "));
+       // Serial.println(Udp.getWriteError());
     }
 }
 
