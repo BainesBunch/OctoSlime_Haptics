@@ -303,7 +303,7 @@ void MPU9250Sensor::startCalibration(int calibrationType)
 #if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
     // with DMP, we just need mag data
     constexpr int calibrationSamples = 100; // KEEP THIS AT 150 AS IS KNOWN TO CAUSE OOM ERRORS
-    constexpr int calibrationBatches = 3; // to get 300 samples
+    constexpr int calibrationBatches = 5; // to get 500 samples
     UI::DrawCalibrationInstructions();
 
     // Blink calibrating led before user should rotate the sensor
@@ -323,17 +323,17 @@ void MPU9250Sensor::startCalibration(int calibrationType)
             // ledManager.off();
             Serial.printf(".");
             ESP.wdtFeed();
-            delay(20);
+            delay(5);
         }
         Serial.println("");
 
-        m_Logger.debug("Calculating calibration data, batch %d...", batch);
+        m_Logger.debug("Calculating calibration data, batch %d...", batch + 1);
 
         float M_BAinv[4][3];
         CalculateCalibration(calibrationDataMag, calibrationSamples, M_BAinv);
         free(calibrationDataMag);
 
-        m_Logger.debug("[INFO] Magnetometer calibration matrix batch %d:", batch);
+        m_Logger.debug("[INFO] Magnetometer calibration matrix batch %d:", batch + 1);
         m_Logger.debug("{");
         if (batch == 0) {
             for (int i = 0; i < 3; i++) {
@@ -352,8 +352,8 @@ void MPU9250Sensor::startCalibration(int calibrationType)
                 m_Logger.debug("  %f, %f, %f, %f", M_BAinv[0][i], M_BAinv[1][i], M_BAinv[2][i], M_BAinv[3][i]);
             }
         }
+        m_Logger.debug("}");
     }
-    m_Logger.debug("}");
     UI::DrawCalibrationScreen(sensorId);
     UI::DrawCalibrationComplete();
 
@@ -437,7 +437,9 @@ void MPU9250Sensor::startCalibration(int calibrationType)
         m_Calibration.M_Ainv[2][i] = M_BAinv[3][i];
         m_Logger.debug("  %f, %f, %f, %f", M_BAinv[0][i], M_BAinv[1][i], M_BAinv[2][i], M_BAinv[3][i]);
     }
+
     m_Logger.debug("}");
+
 #endif
 
     m_Logger.debug("Saving the calibration data");
