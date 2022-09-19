@@ -86,6 +86,7 @@ boolean MPU9250Sensor::motionSetup()
     // TODO: Move calibration invoke after calibrate button on slimeVR server available
     imu.getAcceleration(&ax, &ay, &az);
     float g_az = (float)az / TYPICAL_ACCEL_SENSITIVITY; // For 2G sensitivity
+    // g_az = -1.f;
     if (g_az < -0.75f) {
         UI::DrawCalibrationScreen(sensorId);
         for (uint8_t CountDown = 10; CountDown > 0; CountDown--) {
@@ -96,6 +97,7 @@ boolean MPU9250Sensor::motionSetup()
 
         imu.getAcceleration(&ax, &ay, &az);
         g_az = (float)az / TYPICAL_ACCEL_SENSITIVITY;
+        // g_az = 1.f;
         if (g_az > 0.75f) {
             RetVal = true;
             m_Logger.debug("Starting calibration...");
@@ -301,7 +303,7 @@ void MPU9250Sensor::startCalibration(int calibrationType)
 #if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
     // with DMP, we just need mag data
     constexpr int calibrationSamples = 100; // KEEP THIS AT 150 AS IS KNOWN TO CAUSE OOM ERRORS
-    constexpr int calibrationBatches = 3;   // to get 300 samples
+    constexpr int calibrationBatches = 3; // to get 300 samples
     UI::DrawCalibrationInstructions();
 
     // Blink calibrating led before user should rotate the sensor
@@ -321,7 +323,7 @@ void MPU9250Sensor::startCalibration(int calibrationType)
             // ledManager.off();
             Serial.printf(".");
             ESP.wdtFeed();
-            delay(250);
+            delay(20);
         }
         Serial.println("");
 
