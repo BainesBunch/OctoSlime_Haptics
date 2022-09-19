@@ -2,7 +2,7 @@
 namespace UI
 {
 
-    GyverOLED<SSH1106_128x64> oled;
+    GyverOLED<SSD1306_128x64> oled;
 
     const unsigned char octopus[] PROGMEM = {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
