@@ -96,30 +96,6 @@ void setup()
 
     UI::Setup();
 
-    //  UI::DrawCalibrationScreen(9);
-    //  for (uint8_t CountDown = 10; CountDown > 0; CountDown --)
-    //  {
-    //      UI::DrawCalibrationContdown(CountDown);
-    //      delay(1000);
-    //  }
-
-    // UI::DrawCalibrationScreen(9);
-    // UI::DrawCalibrationAborted();
-
-    // delay(1500);
-
-    // UI::DrawCalibrationInstructions();
-
-    //  for (uint8_t CountDown = 1; CountDown < 150; CountDown ++)
-    //  {
-    //      ESP.wdtFeed();
-    //      UI::DrawCalibrationProgress(150,CountDown);
-    //      delay(250);
-    //  }
-
-    // UI::DrawCalibrationScreen(9);
-
-    // UI::DrawCalibrationComplete();
     configuration.setup();
 
     UI::DrawSplash();
