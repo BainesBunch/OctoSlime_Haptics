@@ -26,6 +26,9 @@
 #include "ICM20948Sensor.h"
 #include "mpu9250sensor.h"
 #include "bno080sensor.h"
+#include "sensor.h"
+
+boolean Sensor_Calibrated = false;
 
 SensorFactory::SensorFactory()
 {
@@ -39,6 +42,11 @@ void SensorFactory::IMU_Int_Triggered(uint8_t IMU_ID)
     {
         this->IMUs[IMU_ID]->Int_Fired();
     }
+}
+
+boolean SensorFactory::GetSensorOnline(uint8_t IMU_ID)
+{
+    return (this->IMUs[IMU_ID]->getSensorState() == SENSOR_OK);
 }
 
 SensorFactory::~SensorFactory()
@@ -151,6 +159,11 @@ void SensorFactory::init()
     }
 }
 
+boolean SensorFactory::CalibrationEvent()
+{
+    return Sensor_Calibrated;
+}
+
 void SensorFactory::motionSetup()
 {
     Serial.println("Setting up Motion Engines");
@@ -169,7 +182,7 @@ void SensorFactory::motionSetup()
             if (IMUs[IMUID]->Connected)
             {
                 ESP.wdtDisable();
-                IMUs[IMUID]->motionSetup();
+               Sensor_Calibrated |= IMUs[IMUID]->motionSetup();
                 ESP.wdtEnable(WDTO_500MS);
                 UI::SetIMUStatus(IMUID, IMUs[IMUID]->isWorking() ? true : false);
                 Serial.println(" Complete");

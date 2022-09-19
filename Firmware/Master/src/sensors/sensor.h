@@ -40,7 +40,7 @@ public:
     Sensor() : m_Logger(SlimeVR::Logging::Logger("")) {Connected = false;};
     virtual ~Sensor(){};
 
-    virtual void motionSetup(){};
+    virtual boolean motionSetup(){return false;};
     virtual void setupSensor(uint8_t sensorId){}; 
     virtual void motionLoop(){};
     virtual void sendData();
@@ -84,7 +84,7 @@ class EmptySensor : public Sensor
 public:
     EmptySensor(){Connected = false;};
     ~EmptySensor(){};
-    void motionSetup() override final{};
+    boolean motionSetup() override final{return false;};
     void motionLoop() override final{};
     void sendData() override final{};
     void startCalibration(int calibrationType) override final{};

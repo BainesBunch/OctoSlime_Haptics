@@ -37,7 +37,7 @@ public:
     MPU9250Sensor(uint8_t address){Connected = false;addr=address;};
     ~MPU9250Sensor(){};
 
-    void motionSetup() override final;
+    boolean motionSetup() override final;
     void setupSensor(uint8_t sensorID) override final;
     void motionLoop() override final;
     void startCalibration(int calibrationType) override final;

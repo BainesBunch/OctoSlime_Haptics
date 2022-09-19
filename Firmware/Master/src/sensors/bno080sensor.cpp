@@ -34,7 +34,7 @@ void BNO080Sensor::setupSensor(uint8_t sensorId)
     this->configured = false;
 }
 
-void BNO080Sensor::motionSetup()
+boolean BNO080Sensor::motionSetup()
 {
 #ifdef FULL_DEBUG
     imu.enableDebugging(Serial);
@@ -42,7 +42,7 @@ void BNO080Sensor::motionSetup()
     if(!imu.begin(addr, Wire, intPin)) {
         Serial.print("[ERR] IMU BNO08X: Can't connect to ");
         Serial.println(getIMUNameByType(sensorType));
-        return;
+        return false;
     }
     Serial.print("[NOTICE] IMU BNO08X: Connected to ");
     Serial.print(getIMUNameByType(sensorType));
@@ -84,6 +84,7 @@ void BNO080Sensor::motionSetup()
     lastData = millis();
     working = true;
     configured = true;
+    return false;
 }
 
 void BNO080Sensor::motionLoop()

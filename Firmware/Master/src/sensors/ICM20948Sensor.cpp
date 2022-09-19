@@ -18,7 +18,7 @@ void ICM20948Sensor::setupSensor(uint8_t sensorId)
     this->configured = false;
 }
 
-void ICM20948Sensor::motionSetup()
+boolean ICM20948Sensor::motionSetup()
 {
 
     Serial.print(F("Initialising ICM20948 on MUX Channel : "));
@@ -34,7 +34,7 @@ void ICM20948Sensor::motionSetup()
     {
         Serial.print(F("[ERR] ICM20948: Can't communicate with MPU, response "));
         Serial.println(imu.getWhoAmI(), HEX);
-        return;
+        return false;
     }
 
     imu.swReset();
@@ -42,7 +42,7 @@ void ICM20948Sensor::motionSetup()
     {
         Serial.print(F("Software Reset returned: "));
         Serial.println(imu.statusString());
-        return;
+        return false;
     }
 
     delay(250);
@@ -85,7 +85,7 @@ void ICM20948Sensor::motionSetup()
     else
     {
         Serial.println(F("Enable DMP failed!"));
-        return;
+        return false;
     }
     imu.cfgIntActiveLow(true);       // Active low to be compatible with the breakout board's pullup resistor
     imu.cfgIntOpenDrain(true);       // Push-pull, though open-drain would also work thanks to the pull-up resistors on the breakout
@@ -94,6 +94,7 @@ void ICM20948Sensor::motionSetup()
 
     working = true;
     configured = true;
+    return false;
 }
 
 void ICM20948Sensor::motionLoop()

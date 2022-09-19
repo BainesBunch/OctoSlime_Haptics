@@ -122,7 +122,7 @@ namespace UI
         oled.setCursorXY(4, 50);
         oled.print(F("Bat"));
         oled.setCursorXY(23, 50);
-        oled.print(uint8_t (level * 100));
+        oled.print(uint8_t(level * 100));
         oled.setCursorXY(43, 50);
         oled.print(F("%"));
         oled.rect(52, 50, 122, 57, OLED_STROKE);
@@ -144,9 +144,95 @@ namespace UI
         }
 
         oled.clear();
-            ESP.wdtFeed();
+        ESP.wdtFeed();
         oled.drawBitmap(0, 0, octopus, 128, 64, BITMAP_NORMAL, BUF_ADD);
-            ESP.wdtFeed();
+        ESP.wdtFeed();
+        oled.update();
+    }
+
+    void DrawCalibrationScreen(uint8_t IMUID)
+    {
+        uint8_t Node = IMUID % 8;
+        char Bank = (IMUID < 8) ? 'A' : 'B';
+
+        oled.clear();
+        oled.setScale(1);
+        oled.update();
+        oled.roundRect(0, 0, 127, 63, OLED_STROKE);
+        oled.setCursorXY(4, 4);
+        oled.print(F("IMU Calibration Mode"));
+        oled.setCursorXY(11, 16);
+        oled.printf("Sensor %c on Node %u ", Bank, Node);
+        oled.roundRect(0, 0, 127, 63, OLED_STROKE);
+        oled.update();
+    }
+
+    void DrawCalibrationContdown(uint8_t Count)
+    {
+        oled.setScale(1);
+        oled.update();
+        oled.setCursorXY(12, 28);
+        oled.print(F("Please flip Sensor"));
+        oled.setCursorXY(30, 40);
+        oled.print(F("In"));
+        oled.roundRect(50, 40, 65, 46, OLED_CLEAR);
+        oled.setCursorXY(50, 40);
+        oled.print(Count);
+        oled.setCursorXY(70, 40);
+        oled.print(F("Seconds"));
+        oled.setCursorXY(4, 53);
+        oled.print(F("To Begin Calibration"));
+        oled.roundRect(0, 0, 127, 63, OLED_STROKE);
+        oled.update();
+    }
+
+    void DrawCalibrationProgress(float TotalSampleCount, float SampleCount)
+    {
+        float level = (SampleCount / TotalSampleCount);
+        oled.roundRect(4, 50, 122, 57, OLED_CLEAR);
+        oled.rect(4, 50, 122, 57, OLED_STROKE);
+        oled.rect(4, 50, (level * 118) + 4, 57, OLED_FILL || OLED_STROKE);
+        oled.update();
+    }
+
+    void DrawCalibrationInstructions()
+    {
+        oled.clear();
+        oled.setScale(1);
+
+        oled.setCursorXY(11, 6);
+        oled.print(F("Gently Rotate the"));
+
+        oled.setCursorXY(6, 20);
+        oled.print(F("IMU While Octoslime"));
+
+        oled.setCursorXY(30, 34);
+        oled.print(F("Takes Samples"));
+
+        oled.roundRect(0, 0, 127, 63, OLED_STROKE);
+        oled.update();
+    }
+
+
+    void DrawCalibrationComplete()
+    {
+        oled.setScale(1);
+        oled.setCursorXY(30, 33);
+        oled.print(F("Calibration"));
+        oled.setCursorXY(42, 46);
+        oled.print(F("Complete"));
+
+        oled.roundRect(0, 0, 127, 63, OLED_STROKE);
+        oled.update();
+    }
+
+    void DrawCalibrationAborted()
+    {
+        oled.setScale(2);
+        oled.update();
+        oled.setCursorXY(18, 35);
+        oled.print(F("Canceled"));
+        // oled.roundRect(0, 0, 127, 63, OLED_STROKE);
         oled.update();
     }
 
@@ -192,7 +278,7 @@ namespace UI
         oled.roundRect(0, 0, 127, 63, OLED_STROKE);
         oled.line(1, 45, 126, 45, OLED_STROKE);
         oled.line(1, 20, 126, 20, OLED_STROKE);
-        oled.update(); // обновить. Только для режима с буфером! OLED_BUFFER
+        oled.update();
     }
 
     void SetImuCount(uint8 IMUs)
@@ -215,7 +301,7 @@ namespace UI
         switch (MessageID)
         {
         case 1:
-            oled.setCursorXY(17, 51);
+            oled.setCursorXY(4, 51);
             oled.print(F("Scanning For Sensors"));
             break;
 
@@ -240,7 +326,7 @@ namespace UI
             break;
 
         case 6:
-            oled.setCursorXY(17, 51);
+            oled.setCursorXY(4, 51);
             oled.print(F("Scanning For Haptics"));
             break;
         }

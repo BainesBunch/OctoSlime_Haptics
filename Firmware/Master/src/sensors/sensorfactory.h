@@ -31,7 +31,7 @@ class SensorFactory
 
 private:
     uint8_t getMagnetometerDeviceID(uint8_t addr);
-
+    
 public:
     SensorFactory();
     ~SensorFactory();
@@ -43,7 +43,9 @@ public:
     void startCalibration(int sensorId, int calibrationType);
     void SetIMU(uint8_t bus);
     void IMU_Int_Triggered(uint8_t IMU_ID);
+    boolean GetSensorOnline(uint8_t IMU_ID);
     Sensor *IMUs[16];
+    boolean CalibrationEvent();
 };
 
 #endif // SLIMEVR_SENSORFACTORY_H_

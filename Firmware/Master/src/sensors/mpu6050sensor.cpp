@@ -43,7 +43,7 @@ void MPU6050Sensor::setupSensor(uint8_t sensorId){
     this -> configured = false;
 }
 
-void MPU6050Sensor::motionSetup()
+boolean MPU6050Sensor::motionSetup()
 {
     Serial.print(F("Initialising MPU6050 on MUX Channel : "));
     Serial.print(sensorId % 8);
@@ -55,7 +55,7 @@ void MPU6050Sensor::motionSetup()
     {
         Serial.print(F("[ERR] MPU6050: Can't communicate with MPU, response "));
         Serial.println(imu.getDeviceID(), HEX);
-        return;
+        return false;
     }
 
     Serial.println(F("Enabling DMP"));
@@ -85,6 +85,7 @@ void MPU6050Sensor::motionSetup()
         Serial.print(devStatus);
         Serial.println(F(")"));
     }
+    return false;
 }
 
 void MPU6050Sensor::motionLoop()

@@ -28,7 +28,7 @@ class BNO080Sensor : public Sensor
 public:
     BNO080Sensor(uint8_t address){Connected = false;addr=address;};
     ~BNO080Sensor(){};
-    void motionSetup() override final;
+    boolean motionSetup() override final;
     void motionLoop() override final;
     void setupSensor(uint8_t sensorId)  override final;
     void sendData() override final;
