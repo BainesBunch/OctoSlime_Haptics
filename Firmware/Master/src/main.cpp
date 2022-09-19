@@ -120,6 +120,7 @@ void setup()
     // UI::DrawCalibrationScreen(9);
 
     // UI::DrawCalibrationComplete();
+    configuration.setup();
 
     UI::DrawSplash();
 
