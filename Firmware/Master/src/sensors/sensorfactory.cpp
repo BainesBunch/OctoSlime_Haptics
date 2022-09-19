@@ -254,27 +254,26 @@ uint8_t SensorFactory::getMagnetometerDeviceID(uint8_t addr) // check lib\mpu925
 {
     uint8_t buffer[14];
 
-    // Set master mode to true
-    I2Cdev::writeBit(addr, 0x6A, 5, true);
-    delay(50);
+    // set up MPU 6050
+    I2Cdev::writeBits(addr, MPU9250_RA_PWR_MGMT_1, MPU9250_PWR1_CLKSEL_BIT, MPU9250_PWR1_CLKSEL_LENGTH, MPU9250_CLOCK_PLL_XGYRO);
+    I2Cdev::writeBit(addr, MPU9250_RA_PWR_MGMT_1, MPU9250_PWR1_SLEEP_BIT, false);
 
-    // Set up magnetometer as slave 0 for reading
-    I2Cdev::writeByte(addr, 0x25, 0x0D | 0x80);
-    delay(10);
-    // Start reading from WHO_AM_I register
-    I2Cdev::writeByte(addr, 0x26, 0x0D);
-    I2Cdev::writeByte(addr, 0x27, 0x81);
-    delay(10);
-    I2Cdev::readByte(addr, 0x49, buffer);
-    // return reading from HXL register
-    I2Cdev::writeByte(addr, 0x26, 0x00);
-    delay(10);
-    // Read 7 bytes (until ST2 register), group LSB and MSB
-    I2Cdev::writeByte(addr, 0x26, 0x96);
-    delay(50);
+    delay(100);
 
-    // Set master mode to false
-    I2Cdev::writeBit(addr, 0x6A, 5, false);
-
+    // disable master mode
+    I2Cdev::writeBit(addr, MPU9250_RA_USER_CTRL, MPU9250_USERCTRL_I2C_MST_EN_BIT, false);
+    delay(100);
+    // enable bypass mode
+    I2Cdev::writeBit(addr, MPU9250_RA_INT_PIN_CFG, MPU9250_INTCFG_I2C_BYPASS_EN_BIT, true);
+    delay(100);
+    // read nothing
+    I2Cdev::readByte(0x0D, 0x00, buffer);
+    delay(10);
+    // read whoami
+    I2Cdev::readByte(0x0D, 0x0D, buffer);
+    delay(100);
+    // disable bypass mode
+    I2Cdev::writeBit(addr, MPU9250_RA_INT_PIN_CFG, MPU9250_INTCFG_I2C_BYPASS_EN_BIT, false);
+    delay(100);
     return buffer[0];
 }
