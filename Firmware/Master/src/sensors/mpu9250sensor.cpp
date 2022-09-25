@@ -63,6 +63,13 @@ void MPU9250Sensor::setupSensor(uint8_t sensorId)
 
 boolean MPU9250Sensor::motionSetup()
 {
+
+    {
+        if (configuration.getCalibration(sensorId).type != SlimeVR::Configuration::CalibrationConfigType::MPU9250) {
+            UI::DrawCalibrationAdvice(this->sensorId);
+        }
+    }
+
     boolean RetVal = false;
     // initialize device
     imu.initialize(addr);
@@ -125,6 +132,7 @@ boolean MPU9250Sensor::motionSetup()
         default:
             m_Logger.warn("Incompatible calibration data found for sensor %d, ignoring...", sensorId);
             m_Logger.info("Calibration is advised");
+            break;
         }
     }
 
@@ -299,6 +307,11 @@ void MPU9250Sensor::getMPUScaled()
 
 void MPU9250Sensor::startCalibration(int calibrationType)
 {
+    {
+        SlimeVR::Configuration::CalibrationConfig config = configuration.getCalibration(sensorId);
+        config.type = SlimeVR::Configuration::CalibrationConfigType::NONE;
+        configuration.setCalibration(sensorId, config);
+    }
     // ledManager.on();
 #if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
     // with DMP, we just need mag data

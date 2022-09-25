@@ -103,6 +103,7 @@ void SensorFactory::create()
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new MPU9250Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050 + QMC5883L");
+                    
                 }
                 break;
             case ICM_20948_t:

@@ -72,7 +72,7 @@ private:
     OneEuroFilter f_mag_z{mag_frequency, mincutoff, beta, d_cutoff};
 
     SlimeVR::Configuration::MPU9250CalibrationConfig m_Calibration;
-
+    
 };
 
 #endif
