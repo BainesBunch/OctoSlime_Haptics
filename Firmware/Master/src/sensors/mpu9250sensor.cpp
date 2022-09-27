@@ -63,13 +63,6 @@ void MPU9250Sensor::setupSensor(uint8_t sensorId)
 
 boolean MPU9250Sensor::motionSetup()
 {
-
-    {
-        if (configuration.getCalibration(sensorId).type != SlimeVR::Configuration::CalibrationConfigType::MPU9250) {
-            UI::DrawCalibrationAdvice(this->sensorId);
-        }
-    }
-
     boolean RetVal = false;
     // initialize device
     imu.initialize(addr);
@@ -315,7 +308,7 @@ void MPU9250Sensor::startCalibration(int calibrationType)
     // ledManager.on();
 #if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
     // with DMP, we just need mag data
-    constexpr int calibrationSamples = 100; // KEEP THIS AT 150 AS IS KNOWN TO CAUSE OOM ERRORS
+    constexpr int calibrationSamples = 100; // KEEP THIS AT 100 AS IS KNOWN TO CAUSE OOM ERRORS
     constexpr int calibrationBatches = 5; // to get 500 samples
     UI::DrawCalibrationInstructions();
 
