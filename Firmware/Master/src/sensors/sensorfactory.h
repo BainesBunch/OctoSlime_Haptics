@@ -46,6 +46,7 @@ public:
     boolean GetSensorOnline(uint8_t IMU_ID);
     Sensor *IMUs[16];
     boolean CalibrationEvent();
+    void clearCalibrations();
 };
 
 #endif // SLIMEVR_SENSORFACTORY_H_

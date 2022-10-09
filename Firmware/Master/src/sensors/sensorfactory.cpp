@@ -27,6 +27,7 @@
 #include "mpu9250sensor.h"
 #include "sensor.h"
 #include <i2cscan.h>
+#include "EEPROM_I2C/EEPROM_I2C.h"
 
 boolean Sensor_Calibrated = false;
 
@@ -95,9 +96,14 @@ void SensorFactory::create()
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050 + QMC5883L");
 
-                    if (configuration.getCalibration(SensorCount + (BankCount + IMUCount)).type != SlimeVR::Configuration::CalibrationConfigType::MPU9250) {
-                        UI::DrawCalibrationAdvice(SensorCount + (BankCount + IMUCount));
+                    // if (configuration.getCalibration(SensorCount + (BankCount + IMUCount)).type != SlimeVR::Configuration::CalibrationConfigType::MPU9250) {
+                    //     UI::DrawCalibrationAdvice(SensorCount + (BankCount + IMUCount));
+                    // }
+
+                    if(EEPROM_I2C::checkForCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB)){
+                        UI::DrawCalibrationAdvice(SensorCount + (BankCount * IMUCount));
                     }
+
                 }
                 break;
             case ICM_20948_t:
@@ -150,6 +156,15 @@ void SensorFactory::init()
 boolean SensorFactory::CalibrationEvent()
 {
     return Sensor_Calibrated;
+}
+
+void SensorFactory::clearCalibrations(){
+    for(int BankCount = 0; BankCount < 2; BankCount++){
+        for(int SensorCount = 0; SensorCount < IMUCount; SensorCount++){
+            SetIMU(SensorCount + (BankCount * IMUCount));
+            EEPROM_I2C::clearCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB);
+        }
+    }
 }
 
 void SensorFactory::motionSetup()
