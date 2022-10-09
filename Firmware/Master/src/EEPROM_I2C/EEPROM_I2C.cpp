@@ -54,29 +54,21 @@ namespace EEPROM_I2C
         // Writing UNIX time of calibration
         write(devAddr, calDateAddress, (byte *)ServerConnection::getUnixTime(), 4);
 
-        switch (calibration.type)
+        // Offset write
+        for (int i = 0; i < 3; i++)
         {
-        case SlimeVR::Configuration::CalibrationConfigType::MPU9250:
+            // Float has 4 bytes so address needs to increase by 4 for each float
+            writeFloat(devAddr, magOffsAddress + (i * 4), calibration.data.mpu9250.M_B[i]);
+        }
 
-            // Offset write
-            for (int i = 0; i < 3; i++)
+        // Calibration matrix write
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
             {
                 // Float has 4 bytes so address needs to increase by 4 for each float
-                writeFloat(devAddr, magOffsAddress + (i * 4), calibration.data.mpu9250.M_B[i]);
+                writeFloat(devAddr, magOffsAddress + (i * j * 4), calibration.data.mpu9250.M_Ainv[i][j]);
             }
-
-            // Calibration matrix write
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    // Float has 4 bytes so address needs to increase by 4 for each float
-                    writeFloat(devAddr, magOffsAddress + (i * j * 4), calibration.data.mpu9250.M_Ainv[i][j]);
-                }
-            }
-            break;
-        default:
-            break;
         }
     }
 
@@ -88,32 +80,23 @@ namespace EEPROM_I2C
         read(devAddr, calDateAddress, buff, 4);
         calibration->data.mpu9250.date = (uint32_t)buff;
 
-        switch (calibration->type)
+        float read;
+
+        // Offset read
+        for (int i = 0; i < 3; i++)
         {
-        case SlimeVR::Configuration::CalibrationConfigType::MPU9250:
-            float read;
+            readFloat(devAddr, magOffsAddress + (i * 4), &read);
+            calibration->data.mpu9250.M_B[i] = read;
+        }
 
-            // Offset read
-            for (int i = 0; i < 3; i++)
+        // Calibration matrix read
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
             {
-                readFloat(devAddr, magOffsAddress + (i * 4), &read);
-                calibration->data.mpu9250.M_B[i] = read;
+                readFloat(devAddr, magCorrAddress + (i * j * 4), &read);
+                calibration->data.mpu9250.M_Ainv[i][j] = read;
             }
-
-            // Calibration matrix read
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    readFloat(devAddr, magCorrAddress + (i * j * 4), &read);
-                    calibration->data.mpu9250.M_Ainv[i][j] = read;
-                }
-            }
-
-            break;
-        default:
-            calibration->type = SlimeVR::Configuration::CalibrationConfigType::NONE;
-            break;
         }
     }
 
