@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include "Wire.h"
 #include "EEPROM_I2C.h"
+#include "network/network.h"
 
 namespace EEPROM_I2C
 {
@@ -47,11 +48,11 @@ namespace EEPROM_I2C
 
     void writeCalibration(int devAddr, SlimeVR::Configuration::CalibrationConfig calibration)
     {
-        write(devAddr, signatureAddress, (byte *) signatureValue, 2);
+        // Writing OctoSlime signature
+        write(devAddr, signatureAddress, (byte *)signatureValue, 2);
 
-        // TODO: Add function for time and date in form of uint32
-        //  leaving calibration date for now
-        
+        // Writing UNIX time of calibration
+        write(devAddr, calDateAddress, (byte *)ServerConnection::getUnixTime(), 4);
 
         switch (calibration.type)
         {
@@ -81,8 +82,11 @@ namespace EEPROM_I2C
 
     void readCalibration(int devAddr, SlimeVR::Configuration::CalibrationConfig *calibration)
     {
-        // TODO: Add function for time and date in form of uint32
-        //  leaving calibration date for now
+
+        // Reading UNIX time of calibration
+        byte buff[4];
+        read(devAddr, calDateAddress, buff, 4);
+        calibration->data.mpu9250.date = (uint32_t)buff;
 
         switch (calibration->type)
         {
@@ -122,7 +126,7 @@ namespace EEPROM_I2C
     {
         byte buff[2];
         read(devAddr, signatureAddress, buff, 2);
-        return ((char*)buff) == signatureValue;
+        return ((char *)buff) == signatureValue;
     }
 
 }

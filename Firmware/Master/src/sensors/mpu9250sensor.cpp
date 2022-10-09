@@ -60,7 +60,12 @@ void MPU9250Sensor::setupSensor(uint8_t sensorId)
     this->sensorOffset = {Quat(Vector3(0, 0, 1), IMU_ROTATION)};
     this->working = false;
     this->configured = false;
-    this->eepromaddr = sensorId < 8 ? eepromBankAddressA : eepromBankAddressB;
+    this->eepromAddr = sensorId < 8 ? eepromBankAddressA : eepromBankAddressB;
+
+    if (!EEPROM_I2C::checkForCalibration(this->eepromAddr))
+    {
+        UI::DrawCalibrationAdvice(sensorId);
+    }
 }
 
 boolean MPU9250Sensor::motionSetup()
@@ -124,7 +129,7 @@ boolean MPU9250Sensor::motionSetup()
         // SlimeVR::Configuration::CalibrationConfig sensorCalibration = configuration.getCalibration(sensorId);
         SlimeVR::Configuration::CalibrationConfig sensorCalibration;
         sensorCalibration.type = SlimeVR::Configuration::CalibrationConfigType::MPU9250;
-        EEPROM_I2C::readCalibration(eepromaddr, &sensorCalibration);
+        EEPROM_I2C::readCalibration(eepromAddr, &sensorCalibration);
         // If no compatible calibration data is found, the calibration data will just be zero-ed out
         switch (sensorCalibration.type)
         {
@@ -331,7 +336,7 @@ void MPU9250Sensor::startCalibration(int calibrationType)
         // SlimeVR::Configuration::CalibrationConfig config = configuration.getCalibration(sensorId);
         // config.type = SlimeVR::Configuration::CalibrationConfigType::NONE;
         // configuration.setCalibration(sensorId, config);
-        EEPROM_I2C::clearCalibration(eepromaddr);
+        EEPROM_I2C::clearCalibration(eepromAddr);
     }
     // ledManager.on();
 #if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
@@ -496,7 +501,7 @@ void MPU9250Sensor::startCalibration(int calibrationType)
     // configuration.save();
 
     // Experimental EEPROM
-    EEPROM_I2C::writeCalibration(eepromaddr, calibration);
+    EEPROM_I2C::writeCalibration(eepromAddr, calibration);
 
     // ledManager.off();
     Network::sendCalibrationFinished(CALIBRATION_TYPE_EXTERNAL_ALL, 0);

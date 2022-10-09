@@ -23,11 +23,14 @@
 
 #include "udpclient.h"
 #include "packets.h"
+#include <NTPClient.h>
 
 #define TIMEOUT 3000UL
 
 WiFiUDP Udp;
 WiFiUDP Haptics_Udp;
+
+NTPClient timeClient(Udp, "pool.ntp.org");
 
 unsigned char incomingPacket[128]; // buffer for incoming packets
 uint64_t packetNumber = 0;
@@ -656,12 +659,18 @@ void ServerConnection::Slimeconnect()
     }
 }
 
+uint32_t ServerConnection::getUnixTime(){
+    timeClient.update();
+    return (uint32_t) timeClient.getEpochTime();
+}
+
 void ServerConnection::resetConnection()
 {
     Udp.begin(port);
     Haptics_Udp.begin(Haptics_port);
     connected = false;
     Haptics_connected = false;
+    timeClient.begin();
 }
 
 void ServerConnection::Haptics_update()

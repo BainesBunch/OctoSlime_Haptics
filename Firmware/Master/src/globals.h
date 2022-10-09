@@ -28,10 +28,8 @@
 #include "debug.h"
 #include "defines.h"
 #include "UI\UI.h"
-// #include "configuration\Configuration.h"
+#include "configuration\Configuration.h"
 #include "logging\Logger.h"
-
-
 
 // extern SlimeVR::Configuration::Configuration configuration;
 

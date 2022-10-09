@@ -39,7 +39,8 @@ void SensorFactory::IMU_Int_Triggered(uint8_t IMU_ID)
 {
     Serial.print(F("Int Triggerd : "));
     Serial.println(IMU_ID);
-    if (this->IMUs[IMU_ID]->getSensorType() == BNO_080_t) {
+    if (this->IMUs[IMU_ID]->getSensorType() == BNO_080_t)
+    {
         this->IMUs[IMU_ID]->Int_Fired();
     }
 }
@@ -51,8 +52,10 @@ boolean SensorFactory::GetSensorOnline(uint8_t IMU_ID)
 
 SensorFactory::~SensorFactory()
 {
-    for (int BankCount = 0; BankCount < 2; BankCount++) {
-        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
             ESP.wdtFeed();
             delete IMUs[SensorCount + (BankCount * IMUCount)];
         }
@@ -63,7 +66,7 @@ void SensorFactory::SetIMU(uint8_t bus)
 {
 
     Wire.beginTransmission(0x70); // TCA9548A address is 0x70
-    Wire.write(1 << bus); // send byte to select bus
+    Wire.write(1 << bus);         // send byte to select bus
     Wire.endTransmission();
 }
 
@@ -71,9 +74,11 @@ void SensorFactory::create()
 {
     Serial.println("Starting Bus Scan");
 
-    for (int BankCount = 0; BankCount < 2; BankCount++) {
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
 
-        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
             this->SetIMU(SensorCount);
             I2CSCAN::DeviceParams DeviceParams = I2CSCAN::pickDevice(BankCount);
             ESP.wdtFeed();
@@ -83,15 +88,19 @@ void SensorFactory::create()
             Serial.print(" On address  :");
             Serial.print(DeviceParams.DeviceAddress, HEX);
 
-            switch (DeviceParams.DeviceID) {
+            switch (DeviceParams.DeviceID)
+            {
             case MPU6050_t:
                 // Both have the same ID so magnetometer has to be checked
                 Serial.println("MPU6050 detected, checking for magnetometer");
-                if (this->getMagnetometerDeviceID(DeviceParams.DeviceAddress) != 0xFF) {
+                if (this->getMagnetometerDeviceID(DeviceParams.DeviceAddress) != 0xFF)
+                {
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new MPU6050Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050");
-                } else {
+                }
+                else
+                {
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new MPU9250Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050 + QMC5883L");
@@ -100,10 +109,9 @@ void SensorFactory::create()
                     //     UI::DrawCalibrationAdvice(SensorCount + (BankCount + IMUCount));
                     // }
 
-                    if(EEPROM_I2C::checkForCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB)){
-                        UI::DrawCalibrationAdvice(SensorCount + (BankCount * IMUCount));
-                    }
-
+                    // if(EEPROM_I2C::checkForCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB)){
+                    // UI::DrawCalibrationAdvice(SensorCount + (BankCount * IMUCount));
+                    // }
                 }
                 break;
             case ICM_20948_t:
@@ -118,7 +126,9 @@ void SensorFactory::create()
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new BNO080Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found BNO080");
-                } else {
+                }
+                else
+                {
 
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new EmptySensor();
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = false;
@@ -134,19 +144,24 @@ void SensorFactory::init()
 {
     Serial.println("Setting up IMU Parameters");
 
-    for (int BankCount = 0; BankCount < 2; BankCount++) {
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
 
-        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
             ESP.wdtFeed();
 
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
             SetIMU(SensorCount);
             Serial.print("Setting IMU ID : ");
             Serial.print(IMUID);
-            if (IMUs[IMUID]->Connected) {
+            if (IMUs[IMUID]->Connected)
+            {
                 IMUs[IMUID]->setupSensor(SensorCount + (BankCount * IMUCount));
                 Serial.println(" Complete");
-            } else {
+            }
+            else
+            {
                 Serial.println(" No Device");
             }
         }
@@ -158,9 +173,12 @@ boolean SensorFactory::CalibrationEvent()
     return Sensor_Calibrated;
 }
 
-void SensorFactory::clearCalibrations(){
-    for(int BankCount = 0; BankCount < 2; BankCount++){
-        for(int SensorCount = 0; SensorCount < IMUCount; SensorCount++){
+void SensorFactory::clearCalibrations()
+{
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
             SetIMU(SensorCount + (BankCount * IMUCount));
             EEPROM_I2C::clearCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB);
         }
@@ -171,8 +189,10 @@ void SensorFactory::motionSetup()
 {
     Serial.println("Setting up Motion Engines");
 
-    for (int BankCount = 0; BankCount < 2; BankCount++) {
-        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
             ESP.wdtFeed();
 
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
@@ -180,13 +200,16 @@ void SensorFactory::motionSetup()
             Serial.print("Setting IMU ID : ");
             Serial.print(IMUID);
 
-            if (IMUs[IMUID]->Connected) {
+            if (IMUs[IMUID]->Connected)
+            {
                 ESP.wdtDisable();
                 Sensor_Calibrated |= IMUs[IMUID]->motionSetup();
                 ESP.wdtEnable(WDTO_500MS);
                 UI::SetIMUStatus(IMUID, IMUs[IMUID]->isWorking() ? true : false);
                 Serial.println(" Complete");
-            } else {
+            }
+            else
+            {
                 Serial.println(" No Device");
                 UI::SetIMUStatus(IMUID, false);
             }
@@ -196,15 +219,21 @@ void SensorFactory::motionSetup()
 
 void SensorFactory::motionLoop()
 {
-    for (int BankCount = 0; BankCount < 2; BankCount++) {
-        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
             ESP.wdtFeed();
             this->SetIMU(SensorCount);
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
-            if (IMUs[IMUID]->Connected && IMUs[IMUID]->isWorking()) {
-                if (IMUs[IMUID]->getSensorState() == SENSOR_OK) {
+            if (IMUs[IMUID]->Connected && IMUs[IMUID]->isWorking())
+            {
+                if (IMUs[IMUID]->getSensorState() == SENSOR_OK)
+                {
                     IMUs[IMUID]->motionLoop();
-                } else {
+                }
+                else
+                {
                     Serial.printf("Sensor ID %d Offline", IMUID);
                 }
             }
@@ -214,11 +243,15 @@ void SensorFactory::motionLoop()
 
 void SensorFactory::sendData()
 {
-    for (int BankCount = 0; BankCount < 2; BankCount++) {
-        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
-            if (IMUs[IMUID]->Connected && IMUs[IMUID]->isWorking()) {
-                if (IMUs[IMUID]->getSensorState() == SENSOR_OK && IMUs[IMUID]->newData) {
+            if (IMUs[IMUID]->Connected && IMUs[IMUID]->isWorking())
+            {
+                if (IMUs[IMUID]->getSensorState() == SENSOR_OK && IMUs[IMUID]->newData)
+                {
                     ESP.wdtFeed();
                     this->SetIMU(SensorCount);
                     IMUs[IMUID]->sendData();
@@ -231,7 +264,8 @@ void SensorFactory::sendData()
 void SensorFactory::startCalibration(int sensorId, int calibrationType)
 {
     this->SetIMU(sensorId);
-    if (IMUs[sensorId]->Connected && IMUs[sensorId]->isWorking()) {
+    if (IMUs[sensorId]->Connected && IMUs[sensorId]->isWorking())
+    {
         ESP.wdtFeed();
         IMUs[sensorId]->startCalibration(calibrationType);
     }
