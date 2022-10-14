@@ -20,13 +20,14 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#include <i2cscan.h>
 #include "sensorfactory.h"
-#include "mpu6050sensor.h"
 #include "ICM20948Sensor.h"
-#include "mpu9250sensor.h"
 #include "bno080sensor.h"
+#include "mpu6050sensor.h"
+#include "mpu9250sensor.h"
 #include "sensor.h"
+#include <i2cscan.h>
+#include "EEPROM_I2C/EEPROM_I2C.h"
 
 boolean Sensor_Calibrated = false;
 
@@ -104,6 +105,14 @@ void SensorFactory::create()
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new MPU9250Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050 + QMC5883L");
+
+                    // if (configuration.getCalibration(SensorCount + (BankCount + IMUCount)).type != SlimeVR::Configuration::CalibrationConfigType::MPU9250) {
+                    //     UI::DrawCalibrationAdvice(SensorCount + (BankCount + IMUCount));
+                    // }
+
+                    // if(EEPROM_I2C::checkForCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB)){
+                    // UI::DrawCalibrationAdvice(SensorCount + (BankCount * IMUCount));
+                    // }
                 }
                 break;
             case ICM_20948_t:
@@ -165,6 +174,18 @@ boolean SensorFactory::CalibrationEvent()
     return Sensor_Calibrated;
 }
 
+void SensorFactory::clearCalibrations()
+{
+    for (int BankCount = 0; BankCount < 2; BankCount++)
+    {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++)
+        {
+            SetIMU(SensorCount + (BankCount * IMUCount));
+            EEPROM_I2C::clearCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB);
+        }
+    }
+}
+
 void SensorFactory::motionSetup()
 {
     Serial.println("Setting up Motion Engines");
@@ -183,7 +204,7 @@ void SensorFactory::motionSetup()
             if (IMUs[IMUID]->Connected)
             {
                 ESP.wdtDisable();
-               Sensor_Calibrated |= IMUs[IMUID]->motionSetup();
+                Sensor_Calibrated |= IMUs[IMUID]->motionSetup();
                 ESP.wdtEnable(WDTO_500MS);
                 UI::SetIMUStatus(IMUID, IMUs[IMUID]->isWorking() ? true : false);
                 Serial.println(" Complete");

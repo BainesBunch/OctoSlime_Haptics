@@ -70,7 +70,7 @@ IRAM_ATTR void IntBank_B(void)
     //   sensors.IMU_Int_Triggered(Int_Caller + 8);
 }
 
-SlimeVR::Configuration::Configuration configuration; // for MPU9250/MPU6000+QMC calibration
+// SlimeVR::Configuration::Configuration configuration; // for MPU9250/MPU6000+QMC calibration
 
 void setup()
 {
@@ -106,7 +106,7 @@ void setup()
 
     UI::Setup();
 
-    configuration.setup();
+    // configuration.setup();
 
     UI::DrawSplash();
 

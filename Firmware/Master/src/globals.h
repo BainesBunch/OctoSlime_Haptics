@@ -31,8 +31,6 @@
 #include "configuration\Configuration.h"
 #include "logging\Logger.h"
 
-
-
-extern SlimeVR::Configuration::Configuration configuration;
+// extern SlimeVR::Configuration::Configuration configuration;
 
 #endif // SLIMEVR_GLOBALS_H_

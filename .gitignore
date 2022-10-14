@@ -3,5 +3,8 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+.vscode
 .ini
 Firmware/Master/.vscode/extensions.json
+Firmware/Master/platformio.ini
+Firmware/Master/platformio.ini

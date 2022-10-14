@@ -42,6 +42,7 @@ namespace ServerConnection
     int DataReady();
     bool IsHapticServerConnected();
     bool IsSlimeServerConnected();
+    uint32_t getUnixTime();
 
 }
 

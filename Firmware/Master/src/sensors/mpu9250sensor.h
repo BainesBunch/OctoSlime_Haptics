@@ -73,6 +73,8 @@ private:
 
     SlimeVR::Configuration::MPU9250CalibrationConfig m_Calibration;
 
+    int eepromAddr;
+    
 };
 
 #endif
