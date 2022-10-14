@@ -32,6 +32,7 @@ boolean Sensor_Calibrated = false;
 
 SensorFactory::SensorFactory()
 {
+
 }
 
 void SensorFactory::IMU_Int_Triggered(uint8_t IMU_ID)

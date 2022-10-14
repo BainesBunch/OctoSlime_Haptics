@@ -92,6 +92,16 @@ void setup()
 
     I2CSCAN::clearBus(PIN_IMU_SDA, PIN_IMU_SCL); // Make sure the bus isn't suck when reseting ESP without powering it down
 
+    pinMode(PIN_MUX_RESET,OUTPUT);
+    digitalWrite(PIN_MUX_RESET,HIGH);
+
+
+
+    pinMode(D4,OUTPUT);
+    digitalWrite(D4,HIGH);
+
+
+
     Serial.println(F("Startup UI"));
 
     UI::Setup();

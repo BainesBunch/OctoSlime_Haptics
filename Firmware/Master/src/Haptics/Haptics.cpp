@@ -50,7 +50,7 @@ namespace Haptics
     void Discovery()
     {
         Serial.println(F("Haptics Begin Scan"));
-        for (uint8_t MuxID = 0; MuxID < 7; MuxID++)
+        for (uint8_t MuxID = 0; MuxID < 8; MuxID++)
         {
 
             Serial.print(F("Setting Mux : "));

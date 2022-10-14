@@ -63,7 +63,7 @@
 //#define OPTIMIZE_UPDATES false
 
 
-#define I2C_SPEED 40000
+#define I2C_SPEED 80000
 
 #define FIRMWARE_BUILD_NUMBER 1
 #define FIRMWARE_VERSION "1.1.0"

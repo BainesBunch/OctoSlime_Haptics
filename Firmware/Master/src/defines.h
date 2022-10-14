@@ -41,5 +41,6 @@
   #define PIN_IMU_SCL D1
   #define PIN_IMU_INT D5
   #define PIN_IMU_INT_2 D6
+  #define PIN_MUX_RESET 16
   #define PIN_BATTERY_LEVEL A0
 
