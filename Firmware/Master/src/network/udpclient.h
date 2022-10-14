@@ -26,7 +26,6 @@
 #include <WiFiUdp.h>
 #include <Arduino.h>
 #include "quat.h"
-#include "configuration.h"
 #include "sensors/sensor.h"
 #include "wifihandler.h"
 #include "globals.h"

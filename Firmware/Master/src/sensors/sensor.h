@@ -27,7 +27,6 @@
 #include <Arduino.h>
 #include <quat.h>
 #include <vector3.h>
-#include "configuration.h"
 #include "globals.h"
 
 #define DATA_TYPE_NORMAL 1
@@ -36,8 +35,8 @@
 class Sensor
 {
 public:
-    Sensor(uint8_t address) : m_Logger(SlimeVR::Logging::Logger("")) {Connected = false;addr=address;};
-    Sensor() : m_Logger(SlimeVR::Logging::Logger("")) {Connected = false;};
+    Sensor(uint8_t address) {Connected = false;addr=address;};
+    Sensor()  {Connected = false;};
     virtual ~Sensor(){};
 
     virtual boolean motionSetup(){return false;};
@@ -65,7 +64,7 @@ public:
 protected:
     uint8_t addr = 0;
     uint8_t intPin = 255;
-    uint8_t sensorId = 0;
+    uint8_t sensorId = 1;
     uint8_t sensorType = 0;
     bool configured = false;
     bool working = false;
@@ -75,7 +74,6 @@ protected:
     Quat quaternion{};
     Quat lastQuatSent{};
 
-    SlimeVR::Logging::Logger m_Logger;
     
 };
 

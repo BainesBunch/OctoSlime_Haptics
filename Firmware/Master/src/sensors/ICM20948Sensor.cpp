@@ -5,7 +5,6 @@
 #include "network/network.h"
 #include <i2cscan.h>
 #include "calibration.h"
-#include "configuration.h"
 
 icm_20948_DMP_data_t data;
 

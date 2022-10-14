@@ -1,0 +1,11 @@
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\bin\CustomPanelControl.exe
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\bin\CustomPanelControl.pdb
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\bin\CustomPanelControl.xml
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\VBCustomPanelControl.vbproj.AssemblyReference.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\CustomPanelControl.CustomPanel.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\CustomPanelControl.Form1.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\VBCustomPanelControl.vbproj.GenerateResource.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\VBCustomPanelControl.vbproj.CoreCompileInputs.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\CustomPanelControl.exe
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\CustomPanelControl.xml
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\External Libs\custompanel_demo\CustomPanelControl\VBCustomPanelControl\obj\Debug\CustomPanelControl.pdb

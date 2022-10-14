@@ -24,25 +24,26 @@
 #ifndef SLIMEVR_CONFIG_H_
 #define SLIMEVR_CONFIG_H_
 
-struct CalibrationConfig {
-    //accel offsets and correction matrix
-    float A_B[3];
-    float A_Ainv[3][3];
-    // mag offsets and correction matrix
-    float M_B[3];
-    float M_Ainv[3][3];
-    //raw offsets, determined for gyro at rest
-    float G_off[3];
-};
+namespace Octo_SlimeVR
+{
+    namespace Configuration
+    {
 
-struct DeviceConfig {
-    CalibrationConfig calibration;
-    int deviceId;
-    int deviceMode;
-};
+        struct DeviceConfig
+        {
+            bool UseHaptics;
+            char SSID[20];
+            char Pass[20];
+        };
 
-DeviceConfig * const getConfigPtr();
-void setConfig(const DeviceConfig & config);
-void saveConfig();
+        void getConfig();
+        void setConfig(const DeviceConfig &config);
+        void saveConfig();
+        void initializeConfig();
+        void SetWIFI(const char *ssid, const char *passphrase);
+        void SetHapticsEnabled(bool Active);
+        bool GetHapticsEnabled();
 
+    }
+}
 #endif // SLIMEVR_CONFIG_H_

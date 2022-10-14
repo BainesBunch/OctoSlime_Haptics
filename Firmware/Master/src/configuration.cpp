@@ -23,41 +23,84 @@
 
 #include <EEPROM.h>
 #include "configuration.h"
-
-DeviceConfig config{};
-bool configLoaded;
-
-void initializeConfig() {
-    EEPROM.begin(sizeof(DeviceConfig) + 1);
-}
-
-bool hasConfigStored() {
-    bool hasConfigStored = false;
-    EEPROM.get(0, hasConfigStored);
-    return hasConfigStored;
-}
-
-DeviceConfig *const getConfigPtr()
+namespace Octo_SlimeVR
 {
-    if (!configLoaded)
+    namespace Configuration
     {
-        initializeConfig();
-        if (hasConfigStored())
+
+        bool configLoaded;
+        DeviceConfig Octo_Slime_Config;
+
+        void initializeConfig()
         {
-            EEPROM.get(1, config);
+            EEPROM.begin(sizeof(DeviceConfig) + 1);
         }
-        configLoaded = true;
+
+        bool hasConfigStored()
+        {
+            bool hasConfigStored = false;
+            EEPROM.get(0, hasConfigStored);
+            return hasConfigStored;
+        }
+
+        void getConfig()
+        {
+            if (!configLoaded)
+            {
+                initializeConfig();
+                if (hasConfigStored())
+                {
+                    EEPROM.get(1, Octo_Slime_Config);
+                }
+                configLoaded = true;
+            }
+        }
+
+        void setConfig(const DeviceConfig &newConfig)
+        {
+            Octo_Slime_Config = newConfig;
+            saveConfig();
+        }
+
+        void saveConfig()
+        {
+            EEPROM.put(0, true);
+            EEPROM.put(1, Octo_Slime_Config);
+            EEPROM.commit();
+        }
+
+        void SetWIFI(const char *ssid, const char *passphrase)
+        {
+
+            if (strlen(ssid) == 32)
+                memcpy(reinterpret_cast<char *>(Octo_Slime_Config.SSID), ssid, 32);
+            else
+                strcpy(reinterpret_cast<char *>(Octo_Slime_Config.SSID), ssid);
+
+            if (passphrase)
+            {
+                if (strlen(passphrase) == 64) 
+                    memcpy(reinterpret_cast<char *>(Octo_Slime_Config.Pass), passphrase, 64);
+                else
+                    strcpy(reinterpret_cast<char *>(Octo_Slime_Config.Pass), passphrase);
+            }
+            else
+            {
+                *Octo_Slime_Config.Pass = 0;
+            }
+            saveConfig();
+        }
+
+        void SetHapticsEnabled(bool Active)
+        {
+            Octo_Slime_Config.UseHaptics = Active;
+            saveConfig();
+        }
+
+        bool GetHapticsEnabled()
+        {
+            return Octo_Slime_Config.UseHaptics;
+        }
+
     }
-    return &config;
-}
-
-void setConfig(const DeviceConfig & newConfig) {
-    config = newConfig;
-    saveConfig();
-}
-
-void saveConfig() {
-    EEPROM.put(0, true);
-    EEPROM.put(1, config);
-    EEPROM.commit();
 }

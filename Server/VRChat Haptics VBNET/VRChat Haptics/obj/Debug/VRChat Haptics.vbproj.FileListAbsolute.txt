@@ -1,0 +1,65 @@
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.exe
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.pdb
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.xml
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.GenerateResource.cache
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.CoreCompileInputs.cache
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.exe
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.xml
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.pdb
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\bin\Debug\OpenTK.dll
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.CopyComplete
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbprojAssemblyReference.cache
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.Form1.resources
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.DeviceEditor.resources
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.Resources.resources
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.AvatarList.resources
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.WhiteList.resources
+C:\Users\Jenn\source\repos\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.exe.config
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.exe.config
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.exe
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.pdb
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\bin\Debug\VRChat Haptics.xml
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\bin\Debug\OpenTK.dll
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbprojAssemblyReference.cache
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.AvatarList.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.Form1.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.DeviceEditor.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.Resources.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.WhiteList.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.GenerateResource.cache
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.CoreCompileInputs.cache
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.CopyComplete
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.exe
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.xml
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChat Haptics.pdb
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics\VRChat Haptics\obj\Debug\VRChatHaptics.DeviceWifi.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.exe.config
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.exe
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.pdb
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.xml
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.DeviceWifi.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.Form1.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.DeviceEditor.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.Resources.resources
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.GenerateResource.cache
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.CoreCompileInputs.cache
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.exe
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.xml
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.pdb
+C:\Users\Jenn\Documents\VRCHaptics\VRCHaptics\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.AssemblyReference.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.exe.config
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.exe
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.pdb
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\bin\Debug\VRChat Haptics.xml
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.AssemblyReference.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.DeviceWifi.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.Form1.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.DeviceEditor.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChatHaptics.Resources.resources
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.GenerateResource.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.vbproj.CoreCompileInputs.cache
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.exe
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.xml
+C:\Users\Peter\Desktop\vSlime Trackers\Octo_Haptics\Server\VRChat Haptics VBNET\VRChat Haptics\obj\Debug\VRChat Haptics.pdb

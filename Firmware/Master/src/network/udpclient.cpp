@@ -345,7 +345,7 @@ void Network::sendSensorInfo(Sensor *sensor)
     {
         DataTransfer::sendPacketType(PACKET_SENSOR_INFO);
         DataTransfer::sendPacketNumber();
-        DataTransfer::sendByte(sensor->getSensorId());
+        DataTransfer::sendByte(sensor->getSensorId() + 1);
         DataTransfer::sendByte(sensor->getSensorState());
         DataTransfer::sendByte(sensor->getSensorType());
         DataTransfer::endPacket();
@@ -372,7 +372,7 @@ void Network::sendRotationData(Quat *const quaternion, uint8_t dataType, uint8_t
     {
         DataTransfer::sendPacketType(PACKET_ROTATION_DATA);
         DataTransfer::sendPacketNumber();
-        DataTransfer::sendByte(sensorId);
+        DataTransfer::sendByte(sensorId + 1);
         DataTransfer::sendByte(dataType);
         DataTransfer::sendFloat(quaternion->x);
         DataTransfer::sendFloat(quaternion->y);
@@ -408,7 +408,7 @@ void Network::sendMagnetometerAccuracy(float accuracyInfo, uint8_t sensorId)
     {
         DataTransfer::sendPacketType(PACKET_MAGNETOMETER_ACCURACY);
         DataTransfer::sendPacketNumber();
-        DataTransfer::sendByte(sensorId);
+        DataTransfer::sendByte(sensorId + 1);
         DataTransfer::sendFloat(accuracyInfo);
         DataTransfer::endPacket();
     }
@@ -434,7 +434,7 @@ void Network::sendTemperature(float temperature, uint8_t sensorId)
     {
         DataTransfer::sendPacketType(PACKET_TEMPERATURE);
         DataTransfer::sendPacketNumber();
-        DataTransfer::sendByte(sensorId);
+        DataTransfer::sendByte(sensorId+ 1);
         DataTransfer::sendFloat(temperature);
         DataTransfer::endPacket();
     }

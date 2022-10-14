@@ -25,8 +25,9 @@
 #define SENSORS_MPU9250SENSOR_H
 
 #include "sensor.h"
-#include "logging/Logger.h"
-#include "configuration.h"
+
+#include "sensors/CalibrationConfig.h"
+
 #include <1efilter.cc>
 
 #include <MPU9250_6Axis_MotionApps_V6_12.h>
@@ -71,7 +72,7 @@ private:
     OneEuroFilter f_mag_y{mag_frequency, mincutoff, beta, d_cutoff};
     OneEuroFilter f_mag_z{mag_frequency, mincutoff, beta, d_cutoff};
 
-    SlimeVR::Configuration::MPU9250CalibrationConfig m_Calibration;
+    Octo_SlimeVR::Configuration::MPU9250CalibrationConfig m_Calibration;
 
     int eepromAddr;
     

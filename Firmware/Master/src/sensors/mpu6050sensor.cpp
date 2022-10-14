@@ -33,7 +33,7 @@
 #include "network/network.h"
 #include <i2cscan.h>
 #include "calibration.h"
-#include "configuration.h"
+
 
 void MPU6050Sensor::setupSensor(uint8_t sensorId){
     this-> sensorId = sensorId;

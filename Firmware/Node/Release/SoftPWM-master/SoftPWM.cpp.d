@@ -1,4 +1,4 @@
-C:\Users\Peter\AppData\Local\Temp\VMBuilds\Node\nano_atmega328old\Release\SoftPWM-master\SoftPWM.cpp.o: \
+C:\Users\Peter\AppData\Local\Temp\VMBuilds\Node\pro_8MHzatmega328\Release\SoftPWM-master\SoftPWM.cpp.o: \
  C:\Users\Peter\Documents\Arduino\libraries\SoftPWM-master\SoftPWM.cpp \
  C:\Users\Peter\Documents\Arduino\libraries\SoftPWM-master\SoftPWM.h \
  C:\Users\Peter\Documents\Arduino\libraries\SoftPWM-master\SoftPWM_timer.h \

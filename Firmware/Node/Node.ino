@@ -4,8 +4,8 @@
 
 
 uint8_t Base_Address = 0x30;
-uint8_t  Registers[9] = { 0xFF,0,0,0,0,0,0,0,0 };
-uint8_t  MotorPins[8] = { 15,14,10,9,8,7,6,5 }; 
+uint8_t  Registers[8] = { 0,0,0,0,0,0,0,0 };
+uint8_t  MotorPins[8] = { 15,14,10,9,8,7,6,5 };
 
 void setup()
 {
@@ -15,9 +15,9 @@ void setup()
 	pinMode(13, INPUT_PULLUP);
 
 
-	Base_Address +=  (!digitalRead(11) ? 1 : 0);
-	Base_Address +=  (!digitalRead(12) ? 2 : 0);
-	Base_Address +=  (!digitalRead(13) ? 4 : 0);
+	Base_Address += (!digitalRead(11) ? 1 : 0);
+	Base_Address += (!digitalRead(12) ? 2 : 0);
+	Base_Address += (!digitalRead(13) ? 4 : 0);
 
 
 	Wire.setClock(80000);
@@ -33,38 +33,65 @@ void setup()
 
 	SoftPWMBegin();
 
+	for (uint8_t Pointer = 0; Pointer < 8; Pointer++)
+	{
+		Registers[Pointer] = 0;
+		SoftPWMSet(MotorPins[Pointer], 0, true);
+	}
+
 }
 
 void receiveEvent(int Count)
 {
+
+
+
+
 	byte Packet[2];
 	byte Pointer = 0;
-	if (Count == 2)
+
+	for (byte MaskPointer = 0; MaskPointer < Count; MaskPointer++)
 	{
-		for (Pointer = 0; Pointer < Count; Pointer++)
+		if (Wire.read() == 0x88)
 		{
-			Packet[Pointer] = Wire.read();
+			for (Pointer = 0; Pointer < Count; Pointer++)
+			{
+				Packet[Pointer] = Wire.read();
+			}
+
+			Serial.print(Packet[0]);
+			Serial.println(Packet[1]);
+			Registers[Packet[0]] = Packet[1];
+			SoftPWMSet(MotorPins[Packet[0]], Packet[1], true);
+
 		}
-
-		Serial.print("Packet 1 : ");
-		Serial.println(Packet[0]);
-		Serial.print("  Packet 2 : ");
-		Serial.println(Packet[1]);
-
-
-
-		Registers[Packet[0]] = Packet[1];
 	}
+
+
 }
 
 void requestEvent()
 {
+	Serial.print("Request Event : ");
+
+	while (Wire.available() > 0)
+
+	{
+		Serial.print(Wire.read(), HEX);
+	}
+
+	Serial.println();
+
 }
 
 void loop()
 {
 	for (uint8_t Pointer = 0; Pointer < 8; Pointer++)
 	{
-		SoftPWMSet(MotorPins[Pointer], Registers[Pointer], true);
+		Serial.print("Register : "); Serial.print(Pointer);
+		Serial.print("Motor Pin : "); Serial.print(MotorPins[Pointer]);
+		Serial.print("Value : :"); Serial.println(Registers[Pointer]);
 	}
+	Serial.println("==================================================================================");
+	delay(500);
 }

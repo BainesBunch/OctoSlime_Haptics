@@ -46,7 +46,7 @@ namespace EEPROM_I2C
         *data = *(float *)buffer;
     }
 
-    void writeCalibration(int devAddr, SlimeVR::Configuration::CalibrationConfig calibration)
+    void writeCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfig calibration)
     {
         // Writing OctoSlime signature
         write(devAddr, signatureAddress, (byte *)signatureValue, 2);
@@ -72,7 +72,7 @@ namespace EEPROM_I2C
         }
     }
 
-    void readCalibration(int devAddr, SlimeVR::Configuration::CalibrationConfig *calibration)
+    void readCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfig *calibration)
     {
 
         // Reading UNIX time of calibration
@@ -107,8 +107,8 @@ namespace EEPROM_I2C
 
     boolean checkForCalibration(int devAddr)
     {
-        byte buff[2];
-        read(devAddr, signatureAddress, buff, 2);
+        byte buff[10];
+        read(devAddr, signatureAddress, buff, 10);
         return ((char *)buff) == signatureValue;
     }
 
