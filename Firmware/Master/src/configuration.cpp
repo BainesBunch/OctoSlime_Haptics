@@ -69,6 +69,26 @@ namespace Octo_SlimeVR
             EEPROM.commit();
         }
 
+        void SetSSID(const char *ssid)
+        {
+            if (strlen(ssid) == 32)
+                memcpy(reinterpret_cast<char *>(Octo_Slime_Config.SSID), ssid, 32);
+            else
+                strcpy(reinterpret_cast<char *>(Octo_Slime_Config.SSID), ssid);
+
+            saveConfig();
+        }
+
+        void SetPassword(const char *passphrase)
+        {
+            if (strlen(passphrase) == 64)
+                memcpy(reinterpret_cast<char *>(Octo_Slime_Config.Pass), passphrase, 64);
+            else
+                strcpy(reinterpret_cast<char *>(Octo_Slime_Config.Pass), passphrase);
+
+            saveConfig();
+        }
+
         void SetWIFI(const char *ssid, const char *passphrase)
         {
 
@@ -79,7 +99,7 @@ namespace Octo_SlimeVR
 
             if (passphrase)
             {
-                if (strlen(passphrase) == 64) 
+                if (strlen(passphrase) == 64)
                     memcpy(reinterpret_cast<char *>(Octo_Slime_Config.Pass), passphrase, 64);
                 else
                     strcpy(reinterpret_cast<char *>(Octo_Slime_Config.Pass), passphrase);

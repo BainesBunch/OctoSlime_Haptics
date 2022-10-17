@@ -43,6 +43,8 @@ namespace Octo_SlimeVR
         void SetWIFI(const char *ssid, const char *passphrase);
         void SetHapticsEnabled(bool Active);
         bool GetHapticsEnabled();
+        void SetSSID(const char *ssid);
+        void SetPassword(const char *passphrase);
 
     }
 }

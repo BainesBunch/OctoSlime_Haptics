@@ -65,6 +65,7 @@ void MPU9250Sensor::setupSensor(uint8_t sensorId)
     if (!EEPROM_I2C::checkForCalibration(this->eepromAddr))
     {
         UI::DrawCalibrationAdvice(sensorId);
+        //EEPROM_I2C::clearCalibration(this->eepromAddr);
     }
 }
 

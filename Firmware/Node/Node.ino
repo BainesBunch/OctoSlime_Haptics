@@ -4,8 +4,10 @@
 
 
 uint8_t Base_Address = 0x30;
-uint8_t  Registers[8] = { 0,0,0,0,0,0,0,0 };
+uint8_t  Registers[8] = { 255,255,255,255,255,255,255,255 };
 uint8_t  MotorPins[8] = { 15,14,10,9,8,7,6,5 };
+uint8_t Mask = 255;
+
 
 void setup()
 {
@@ -35,8 +37,8 @@ void setup()
 
 	for (uint8_t Pointer = 0; Pointer < 8; Pointer++)
 	{
-		Registers[Pointer] = 0;
-		SoftPWMSet(MotorPins[Pointer], 0, true);
+		Registers[Pointer] = 255;
+		SoftPWMSet(MotorPins[Pointer], 255, true);
 	}
 
 }
@@ -58,11 +60,10 @@ void receiveEvent(int Count)
 			{
 				Packet[Pointer] = Wire.read();
 			}
-
 			Serial.print(Packet[0]);
 			Serial.println(Packet[1]);
-			Registers[Packet[0]] = Packet[1];
-			SoftPWMSet(MotorPins[Packet[0]], Packet[1], true);
+			Registers[Packet[0]] = Mask - Packet[1];
+			SoftPWMSet(MotorPins[Packet[0]], Registers[Packet[0]], true);
 
 		}
 	}
@@ -89,8 +90,8 @@ void loop()
 	for (uint8_t Pointer = 0; Pointer < 8; Pointer++)
 	{
 		Serial.print("Register : "); Serial.print(Pointer);
-		Serial.print("Motor Pin : "); Serial.print(MotorPins[Pointer]);
-		Serial.print("Value : :"); Serial.println(Registers[Pointer]);
+		Serial.print(" Motor Pin : "); Serial.print(MotorPins[Pointer]);
+		Serial.print(" Value : :"); Serial.println(Mask - Registers[Pointer]);
 	}
 	Serial.println("==================================================================================");
 	delay(500);
