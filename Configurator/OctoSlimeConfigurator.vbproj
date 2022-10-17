@@ -1,0 +1,1762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B2D6E310-A1B1-49BB-A5A5-06DCF0254A48}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>FloatConfigurator.My.MyApplication</StartupObject>
+    <RootNamespace>FloatConfigurator</RootNamespace>
+    <AssemblyName>FloatConfigurator</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>FloatConfigurator.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>FloatConfigurator.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomControls\CornerCurveMode.vb" />
+    <Compile Include="CustomControls\CustomPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\LinearGradientMode.vb" />
+    <Compile Include="Extentions\Extensions.vb" />
+    <Compile Include="MasterForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MasterForm.Designer.vb">
+      <DependentUpon>MasterForm.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MasterForm.resx">
+      <DependentUpon>MasterForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\ControlerNode.png" />
+    <Content Include="Icons\folder.png" />
+    <Content Include="Icons\MuxNode.png" />
+    <Content Include="Icons\network.png" />
+    <Content Include="Icons\OctoSlime.ico" />
+    <Content Include="Uploader\esptool\flasher_stub\include\miniz.h" />
+    <Content Include="Uploader\esptool\flasher_stub\include\rom_functions.h" />
+    <Content Include="Uploader\esptool\flasher_stub\include\slip.h" />
+    <Content Include="Uploader\esptool\flasher_stub\include\soc_support.h" />
+    <Content Include="Uploader\esptool\flasher_stub\include\stub_commands.h" />
+    <Content Include="Uploader\esptool\flasher_stub\include\stub_flasher.h" />
+    <Content Include="Uploader\esptool\flasher_stub\include\stub_write_flash.h" />
+    <Content Include="Uploader\esptool\flasher_stub\miniz.c" />
+    <Content Include="Uploader\esptool\flasher_stub\slip.c" />
+    <Content Include="Uploader\esptool\flasher_stub\stub_commands.c" />
+    <Content Include="Uploader\esptool\flasher_stub\stub_flasher.c" />
+    <Content Include="Uploader\esptool\flasher_stub\stub_write_flash.c" />
+    <Content Include="Uploader\libcrypto-1_1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\libssl-1_1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\pyserial\documentation\pyserial.png" />
+    <Content Include="Uploader\pyserial\LICENSE.txt" />
+    <Content Include="Uploader\pyserial\requirements.txt" />
+    <Content Include="Uploader\python.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\python3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\python3.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\python37.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\pythonw.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\sdk\include\airkiss.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_aead.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_block.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_ec.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_git.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_hash.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_hmac.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_kdf.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_pem.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_port.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_prf.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_rand.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_rsa.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_ssl.h" />
+    <Content Include="Uploader\sdk\include\bearssl\bearssl_x509.h" />
+    <Content Include="Uploader\sdk\include\c_types.h" />
+    <Content Include="Uploader\sdk\include\eagle_soc.h" />
+    <Content Include="Uploader\sdk\include\espconn.h" />
+    <Content Include="Uploader\sdk\include\espnow.h" />
+    <Content Include="Uploader\sdk\include\ets_sys.h" />
+    <Content Include="Uploader\sdk\include\gpio.h" />
+    <Content Include="Uploader\sdk\include\i2s_reg.h" />
+    <Content Include="Uploader\sdk\include\ipv4_addr.h" />
+    <Content Include="Uploader\sdk\include\ip_addr.h" />
+    <Content Include="Uploader\sdk\include\json\json.h" />
+    <Content Include="Uploader\sdk\include\json\jsonparse.h" />
+    <Content Include="Uploader\sdk\include\json\jsontree.h" />
+    <Content Include="Uploader\sdk\include\mem.h" />
+    <Content Include="Uploader\sdk\include\osapi.h" />
+    <Content Include="Uploader\sdk\include\os_type.h" />
+    <Content Include="Uploader\sdk\include\ping.h" />
+    <Content Include="Uploader\sdk\include\pwm.h" />
+    <Content Include="Uploader\sdk\include\queue.h" />
+    <Content Include="Uploader\sdk\include\simple_pair.h" />
+    <Content Include="Uploader\sdk\include\slc_register.h" />
+    <Content Include="Uploader\sdk\include\smartconfig.h" />
+    <Content Include="Uploader\sdk\include\sntp.h" />
+    <Content Include="Uploader\sdk\include\spi_flash.h" />
+    <Content Include="Uploader\sdk\include\spi_flash_geometry.h" />
+    <Content Include="Uploader\sdk\include\uart_register.h" />
+    <Content Include="Uploader\sdk\include\upgrade.h" />
+    <Content Include="Uploader\sdk\include\user_interface.h" />
+    <Content Include="Uploader\sdk\include\version.h" />
+    <Content Include="Uploader\sdk\include\wpa2_enterprise.h" />
+    <Content Include="Uploader\sdk\ld\eagle.app.v6.common.ld.h" />
+    <Content Include="Uploader\sdk\ld\eagle.app.v6.common.ld.vtables.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\alloca.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\ar.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\argz.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\assert.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\complex.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\config.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\ctype.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\dirent.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\envlock.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\envz.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\errno.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\fastmath.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\fcntl.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\fenv.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\fnmatch.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\getopt.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\glob.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\grp.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\iconv.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\ieeefp.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\inttypes.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\langinfo.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\libgen.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\limits.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\locale.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\ansi.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\endian.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\fastmath.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\ieeefp.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\malloc.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\param.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\setjmp-dj.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\setjmp.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\stdlib.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\termios.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\time.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\types.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\_default_types.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\machine\_types.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\malloc.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\math.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\newlib.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\paths.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\pthread.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\pwd.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\reent.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\regdef.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\regex.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sched.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\search.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\setjmp.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\signal.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\spawn.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\stdatomic.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\stdint.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\stdio.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\stdio_ext.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\stdlib.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\string.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\strings.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\cdefs.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\config.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\ctype.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\custom_file.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\dir.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\dirent.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\errno.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\fcntl.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\features.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\file.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\iconvnls.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\lock.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\param.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\pgmspace.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\queue.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\reent.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\resource.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\sched.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\signal.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\stat.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\stdio.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\string.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\syslimits.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\time.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\timeb.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\times.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\types.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\unistd.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\utime.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\wait.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\_default_fcntl.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\_intsup.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\sys\_types.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\tar.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\termios.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\tgmath.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\time.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\unctrl.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\unistd.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\utime.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\utmp.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\wchar.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\wctype.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\wordexp.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\xtensa\config\core-isa.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\_ansi.h" />
+    <Content Include="Uploader\sdk\libc\xtensa-lx106-elf\include\_syslist.h" />
+    <Content Include="Uploader\sdk\lib\NONOSDK22x_191122\commitlog-from-22x-191122.txt" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-esp\lwip-esp.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\arch\cc.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\arch\sys_arch.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\arduino\history\lwipopts-203.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\arduino\history\original-opts-203.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\arduino\history\original-opts-210.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\arduino\lwipopts.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\esp-dhcpserver.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\esp-millis.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\esp-millis.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\esp-ping.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\esp-time.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\espconn.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\espconn_buf.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\espconn_tcp.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\espconn_udp.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip-git.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip-git.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip-helper.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip\apps-esp\dhcpserver.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip\apps-esp\espconn.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip\apps-esp\espconn_buf.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip\apps-esp\espconn_tcp.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip\apps-esp\espconn_udp.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\lwip\apps-esp\ping.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue-lwip\open\lwipopts.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue\doprint.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue\esp-missing.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue\glue.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue\gluedebug.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue\uprint.c" />
+    <Content Include="Uploader\sdk\lwip2\builder\glue\uprint.h" />
+    <Content Include="Uploader\sdk\lwip2\builder\patches\napt.patch.txt" />
+    <Content Include="Uploader\sdk\lwip2\include\arch\cc.h" />
+    <Content Include="Uploader\sdk\lwip2\include\arch\sys_arch.h" />
+    <Content Include="Uploader\sdk\lwip2\include\dhcpserver.h" />
+    <Content Include="Uploader\sdk\lwip2\include\espconn.h" />
+    <Content Include="Uploader\sdk\lwip2\include\glue.h" />
+    <Content Include="Uploader\sdk\lwip2\include\gluedebug.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip-err-t.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip-git-hash.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwipopts.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\api.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\apps\mdns.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\apps\mdns_opts.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\apps\mdns_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\apps\sntp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\apps\sntp_opts.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\arch.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\autoip.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\debug.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\def.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\dhcp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\dhcp6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\dns.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\err.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\errno.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\etharp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ethip6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\icmp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\icmp6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\if_api.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\igmp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\inet.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\inet_chksum.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\init.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip4.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip4_addr.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip4_frag.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip6_addr.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip6_frag.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip6_zone.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\ip_addr.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\mem.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\memp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\mld6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\napt.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\nd6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\netbuf.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\netdb.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\netif.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\netifapi.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\opt.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\pbuf.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\altcp_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\api_msg.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\memp_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\memp_std.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\mem_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\nd6_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\raw_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\sockets_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\tcpip_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\priv\tcp_priv.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\autoip.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\dhcp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\dhcp6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\dns.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\etharp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\ethernet.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\iana.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\icmp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\icmp6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\ieee.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\igmp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\ip.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\ip4.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\ip6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\mld6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\nd6.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\tcp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\prot\udp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\raw.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\sio.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\snmp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\sockets.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\stats.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\sys.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\tcp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\tcpbase.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\tcpip.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\timeouts.h" />
+    <Content Include="Uploader\sdk\lwip2\include\lwip\udp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\netif\etharp.h" />
+    <Content Include="Uploader\sdk\lwip2\include\netif\ethernet.h" />
+    <Content Include="Uploader\sdk\lwip\include\arch\cc.h" />
+    <Content Include="Uploader\sdk\lwip\include\arch\perf.h" />
+    <Content Include="Uploader\sdk\lwip\include\arch\sys_arch.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwipopts.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\api.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\api_msg.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\app\dhcpserver.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\app\espconn.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\app\espconn_buf.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\app\espconn_tcp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\app\espconn_udp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\app\ping.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\app\time.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\arch.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\autoip.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\debug.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\def.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\dhcp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\dns.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\err.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\icmp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\igmp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\inet.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\inet_chksum.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\init.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\ip.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\ip_addr.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\ip_frag.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\mdns.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\mem.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\memp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\memp_std.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\netbuf.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\netdb.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\netif.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\netifapi.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\opt.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\pbuf.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\puck_def.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\raw.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\sio.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\snmp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\snmp_asn1.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\snmp_msg.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\snmp_structs.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\sntp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\sockets.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\stats.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\sys.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\tcp.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\tcpip.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\tcp_impl.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\timers.h" />
+    <Content Include="Uploader\sdk\lwip\include\lwip\udp.h" />
+    <Content Include="Uploader\sdk\lwip\include\netif\etharp.h" />
+    <Content Include="Uploader\sdk\lwip\include\netif\if_llc.h" />
+    <Content Include="Uploader\sdk\lwip\include\netif\ppp_oe.h" />
+    <Content Include="Uploader\sdk\lwip\include\netif\wlan_lwip_if.h" />
+    <Content Include="Uploader\sdk\lwip\src\api\api_lib.c" />
+    <Content Include="Uploader\sdk\lwip\src\api\api_msg.c" />
+    <Content Include="Uploader\sdk\lwip\src\api\err.c" />
+    <Content Include="Uploader\sdk\lwip\src\api\netbuf.c" />
+    <Content Include="Uploader\sdk\lwip\src\api\netdb.c" />
+    <Content Include="Uploader\sdk\lwip\src\api\netifapi.c" />
+    <Content Include="Uploader\sdk\lwip\src\api\sockets.c" />
+    <Content Include="Uploader\sdk\lwip\src\api\tcpip.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\dhcpserver.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\espconn.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\espconn_buf.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\espconn_mdns.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\espconn_tcp.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\espconn_udp.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\netio.c" />
+    <Content Include="Uploader\sdk\lwip\src\app\ping.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\def.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\dhcp.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\dns.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\init.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\autoip.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\icmp.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\igmp.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\inet.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\inet_chksum.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\ip.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\ip_addr.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\ipv4\ip_frag.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\mdns.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\mem.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\memp.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\netif.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\pbuf.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\raw.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\sntp.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\stats.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\sys.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\sys_arch.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\tcp.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\tcp_in.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\tcp_out.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\timers.c" />
+    <Content Include="Uploader\sdk\lwip\src\core\udp.c" />
+    <Content Include="Uploader\sdk\lwip\src\netif\etharp.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\conf\esp8266.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\conf\esp8266m32.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\conf\samd20.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\conf\Unix.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\conf\Unix32.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\conf\UnixClang.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\conf\Win.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_aead.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_block.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_ec.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_hash.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_hmac.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_kdf.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_pem.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_prf.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_rand.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_rsa.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_ssl.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\bearssl_x509.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\inc\pgmspace.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\LICENSE.txt" />
+    <Content Include="Uploader\sdk\ssl\bearssl\mk\Defaults.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\mk\NMake.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\mk\Rules.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\mk\SingleUnix.mk" />
+    <Content Include="Uploader\sdk\ssl\bearssl\README-esp8266.txt" />
+    <Content Include="Uploader\sdk\ssl\bearssl\README.txt" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\chain-ec+rsa.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\chain-ec.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\chain-rsa.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\client_basic.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\custom_profile.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\key-ec.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\key-rsa.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\README.txt" />
+    <Content Include="Uploader\sdk\ssl\bearssl\samples\server_basic.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\aead\ccm.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\aead\eax.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\aead\gcm.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\ccopy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\dec16be.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\dec16le.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\dec32be.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\dec32le.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\dec64be.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\dec64le.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\enc16be.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\enc16le.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\enc32be.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\enc32le.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\enc64be.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\enc64le.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\pemdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\codec\pemenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\config.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_atr.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_default_sign_asn1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_default_sign_raw.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_default_vrfy_asn1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_default_vrfy_raw.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i15_bits.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i15_sign_asn1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i15_sign_raw.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i15_vrfy_asn1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i15_vrfy_raw.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i31_bits.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i31_sign_asn1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i31_sign_raw.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i31_vrfy_asn1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_i31_vrfy_raw.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ecdsa_rta.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_all_m15.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_all_m31.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_c25519_i15.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_c25519_i31.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_c25519_m15.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_c25519_m31.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_c25519_m62.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_c25519_m64.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_curve25519.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_default.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_keygen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_p256_m15.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_p256_m31.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_p256_m62.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_p256_m64.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_prime_i15.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_prime_i31.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_pubkey.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_secp256r1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_secp384r1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ec\ec_secp521r1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\dig_oid.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\dig_size.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\ghash_ctmul.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\ghash_ctmul32.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\ghash_ctmul64.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\ghash_pclmul.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\ghash_pwr8.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\md5.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\md5sha1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\mgf1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\multihash.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\sha1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\sha2big.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\hash\sha2small.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\inner.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_add.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_bitlen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_decmod.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_decode.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_decred.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_encode.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_fmont.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_iszero.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_moddiv.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_modpow.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_modpow2.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_montmul.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_mulacc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_muladd.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_ninv15.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_reduce.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_rshift.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_sub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i15_tmont.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_add.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_bitlen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_decmod.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_decode.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_decred.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_encode.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_fmont.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_iszero.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_moddiv.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_modpow.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_modpow2.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_montmul.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_mulacc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_muladd.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_ninv31.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_reduce.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_rshift.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_sub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i31_tmont.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_add.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_bitlen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_decmod.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_decode.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_decred.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_div32.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_encode.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_fmont.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_iszero.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_modpow.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_montmul.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_mulacc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_muladd.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_ninv32.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_reduce.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_sub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i32_tmont.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\int\i62_modpow2.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\kdf\hkdf.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\kdf\shake.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\mac\hmac.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\mac\hmac_ct.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rand\aesctr_drbg.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rand\hmac_drbg.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rand\sysrng.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_keygen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_modulus.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_oaep_decrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_oaep_encrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_pkcs1_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_pkcs1_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_priv.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_privexp.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_pss_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_pss_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_pub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_default_pubexp.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_keygen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_modulus.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_oaep_decrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_oaep_encrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_pkcs1_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_pkcs1_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_priv.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_privexp.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_pss_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_pss_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_pub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i15_pubexp.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_keygen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_keygen_inner.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_modulus.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_oaep_decrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_oaep_encrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_pkcs1_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_pkcs1_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_priv.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_privexp.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_pss_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_pss_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_pub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i31_pubexp.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_oaep_decrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_oaep_encrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_pkcs1_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_pkcs1_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_priv.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_pss_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_pss_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i32_pub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_keygen.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_oaep_decrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_oaep_encrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_pkcs1_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_pkcs1_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_priv.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_pss_sign.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_pss_vrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_i62_pub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_oaep_pad.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_oaep_unpad.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_pkcs1_sig_pad.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_pkcs1_sig_unpad.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_pss_sig_pad.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_pss_sig_unpad.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\rsa\rsa_ssl_decrypt.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\settings.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\prf.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\prf_md5sha1.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\prf_sha256.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\prf_sha384.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_ccert_single_ec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_ccert_single_rsa.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_client.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_client_default_rsapub.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_client_full.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_aescbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_aesccm.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_aesgcm.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_chapol.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_descbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_ec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_ecdsa.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_engine_default_rsavrfy.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_hashes.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_hs_client.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_hs_server.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_io.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_keyexport.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_lru.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_rec_cbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_rec_ccm.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_rec_chapol.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_rec_gcm.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_scert_single_ec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_scert_single_rsa.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_full_ec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_full_rsa.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_mine2c.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_mine2g.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_minf2c.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_minf2g.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_minr2g.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_minu2g.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_server_minv2g.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_big_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_big_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_big_ctr.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_big_ctrcbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_big_dec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_big_enc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_common.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct64.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct64_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct64_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct64_ctr.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct64_ctrcbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct64_dec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct64_enc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct_ctr.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct_ctrcbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct_dec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_ct_enc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_pwr8.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_pwr8_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_pwr8_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_pwr8_ctr.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_pwr8_ctrcbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_small_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_small_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_small_ctr.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_small_ctrcbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_small_dec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_small_enc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_x86ni.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_x86ni_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_x86ni_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_x86ni_ctr.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\aes_x86ni_ctrcbc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\chacha20_ct.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\chacha20_sse2.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\des_ct.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\des_ct_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\des_ct_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\des_support.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\des_tab.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\des_tab_cbcdec.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\des_tab_cbcenc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\poly1305_ctmul.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\poly1305_ctmul32.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\poly1305_ctmulq.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\symcipher\poly1305_i15.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\asn1enc.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\encode_ec_pk8der.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\encode_ec_rawder.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\encode_rsa_pk8der.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\encode_rsa_rawder.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\pkey_decoder.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\skey_decoder.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\x509_decoder.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\x509_knownkey.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\x509_minimal.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\src\x509\x509_minimal_full.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0Comp.exe" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\BlobWriter.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\CodeElement.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\CodeElementJump.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\CodeElementUInt.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\CodeElementUIntExpr.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\CodeElementUIntInt.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\CodeElementUIntUInt.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\ConstData.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\CPU.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\Opcode.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeCall.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeConst.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeGetLocal.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeJump.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeJumpIf.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeJumpIfNot.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeJumpUncond.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodePutLocal.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\OpcodeRet.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\SType.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\T0Comp.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\TPointerBase.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\TPointerBlob.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\TPointerExpr.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\TPointerNull.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\TPointerXT.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\TValue.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\Word.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\WordBuilder.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\WordData.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\WordInterpreted.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\T0\WordNative.cs" />
+    <Content Include="Uploader\sdk\ssl\bearssl\test\test_crypto.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\test\test_math.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\test\test_speed.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\test\test_x509.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\test\x509\alltests.txt" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\brssl.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\brssl.h" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\certs.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\chain.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\client.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\errors.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\files.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\impl.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\keys.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\names.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\server.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\skey.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\sslio.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\ta.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\twrch.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\vector.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\verify.c" />
+    <Content Include="Uploader\sdk\ssl\bearssl\tools\xmem.c" />
+    <Content Include="Uploader\sdk\uzlib\bin\tgunzip.exe" />
+    <Content Include="Uploader\sdk\uzlib\examples\tgunzip\tgunzip.c" />
+    <Content Include="Uploader\sdk\uzlib\examples\tgzip\tgzip.c" />
+    <Content Include="Uploader\sdk\uzlib\src\adler32.c" />
+    <Content Include="Uploader\sdk\uzlib\src\crc32.c" />
+    <Content Include="Uploader\sdk\uzlib\src\defl_static.c" />
+    <Content Include="Uploader\sdk\uzlib\src\defl_static.h" />
+    <Content Include="Uploader\sdk\uzlib\src\genlz77.c" />
+    <Content Include="Uploader\sdk\uzlib\src\nasm\nasmlcm.inc" />
+    <Content Include="Uploader\sdk\uzlib\src\tinf.h" />
+    <Content Include="Uploader\sdk\uzlib\src\tinfgzip.c" />
+    <Content Include="Uploader\sdk\uzlib\src\tinflate.c" />
+    <Content Include="Uploader\sdk\uzlib\src\tinfzlib.c" />
+    <Content Include="Uploader\sdk\uzlib\src\tinf_compat.h" />
+    <Content Include="Uploader\sdk\uzlib\src\uzlib.h" />
+    <Content Include="Uploader\sdk\uzlib\src\uzlib_conf.h" />
+    <Content Include="Uploader\sqlite3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Uploader\vcruntime140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Firmware\I2CSAcanner.ino.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="Uploader\boards.txt.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\build.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\elf2bin.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\espota.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\esptool\.github\issue_template.md" />
+    <None Include="Uploader\esptool\.github\pull_request_template.md" />
+    <None Include="Uploader\esptool\.travis_setup_build_env.sh" />
+    <None Include="Uploader\esptool\CONTRIBUTING.md" />
+    <None Include="Uploader\esptool\ecdsa\curves.py" />
+    <None Include="Uploader\esptool\ecdsa\der.py" />
+    <None Include="Uploader\esptool\ecdsa\ecdsa.py" />
+    <None Include="Uploader\esptool\ecdsa\ellipticcurve.py" />
+    <None Include="Uploader\esptool\ecdsa\keys.py" />
+    <None Include="Uploader\esptool\ecdsa\numbertheory.py" />
+    <None Include="Uploader\esptool\ecdsa\rfc6979.py" />
+    <None Include="Uploader\esptool\ecdsa\six.py" />
+    <None Include="Uploader\esptool\ecdsa\test_pyecdsa.py" />
+    <None Include="Uploader\esptool\ecdsa\util.py" />
+    <None Include="Uploader\esptool\ecdsa\_version.py" />
+    <None Include="Uploader\esptool\ecdsa\__init__.py" />
+    <None Include="Uploader\esptool\espefuse.py" />
+    <None Include="Uploader\esptool\espsecure.py" />
+    <None Include="Uploader\esptool\esptool.py" />
+    <None Include="Uploader\esptool\flasher_stub\compare_stubs.py" />
+    <None Include="Uploader\esptool\flasher_stub\esptool_test_stub.py" />
+    <None Include="Uploader\esptool\flasher_stub\ld\rom_32.ld" />
+    <None Include="Uploader\esptool\flasher_stub\ld\rom_8266.ld" />
+    <None Include="Uploader\esptool\flasher_stub\ld\stub_32.ld" />
+    <None Include="Uploader\esptool\flasher_stub\ld\stub_8266.ld" />
+    <None Include="Uploader\esptool\flasher_stub\Makefile" />
+    <None Include="Uploader\esptool\flasher_stub\README.md" />
+    <None Include="Uploader\esptool\flasher_stub\run_tests_with_stub.sh" />
+    <None Include="Uploader\esptool\flasher_stub\wrap_stub.py" />
+    <None Include="Uploader\esptool\LICENSE" />
+    <None Include="Uploader\esptool\MANIFEST.in" />
+    <None Include="Uploader\esptool\pyaes\aes.py" />
+    <None Include="Uploader\esptool\pyaes\blockfeeder.py" />
+    <None Include="Uploader\esptool\pyaes\util.py" />
+    <None Include="Uploader\esptool\pyaes\__init__.py" />
+    <None Include="Uploader\esptool\README.md" />
+    <None Include="Uploader\esptool\setup.cfg" />
+    <None Include="Uploader\esptool\setup.py" />
+    <None Include="Uploader\esptool\test\ecdsa_secure_boot_signing_key2.pem" />
+    <None Include="Uploader\esptool\test\elf2image\esp32-app-template.elf" />
+    <None Include="Uploader\esptool\test\elf2image\esp32-bootloader.elf" />
+    <None Include="Uploader\esptool\test\elf2image\esp32-too-many-sections.elf" />
+    <None Include="Uploader\esptool\test\elf2image\esp8266-nonossdkv12-example.elf" />
+    <None Include="Uploader\esptool\test\elf2image\esp8266-nonossdkv20-at-v2.elf" />
+    <None Include="Uploader\esptool\test\elf2image\esp8266-nonosssdk20-iotdemo.elf" />
+    <None Include="Uploader\esptool\test\elf2image\esp8266-openrtos-blink-v2.elf" />
+    <None Include="Uploader\esptool\test\images\aes_key.bin" />
+    <None Include="Uploader\esptool\test\images\bootloader.bin" />
+    <None Include="Uploader\esptool\test\images\esp8266_deepsleep.bin" />
+    <None Include="Uploader\esptool\test\images\esp8266_sdk\4096_user1.bin" />
+    <None Include="Uploader\esptool\test\images\esp8266_sdk\blank.bin" />
+    <None Include="Uploader\esptool\test\images\esp8266_sdk\boot_v1.4%28b1%29.bin" />
+    <None Include="Uploader\esptool\test\images\esp8266_sdk\esp_init_data_default.bin" />
+    <None Include="Uploader\esptool\test\images\fifty_kb.bin" />
+    <None Include="Uploader\esptool\test\images\helloworld-esp32.bin" />
+    <None Include="Uploader\esptool\test\images\helloworld-esp32_edit.bin" />
+    <None Include="Uploader\esptool\test\images\helloworld-esp8266.bin" />
+    <None Include="Uploader\esptool\test\images\nodemcu-master-7-modules-2017-01-19-11-10-03-integer.bin" />
+    <None Include="Uploader\esptool\test\images\onebyte.bin" />
+    <None Include="Uploader\esptool\test\images\one_kb.bin" />
+    <None Include="Uploader\esptool\test\images\one_kb_all_ef.bin" />
+    <None Include="Uploader\esptool\test\images\one_mb.bin" />
+    <None Include="Uploader\esptool\test\images\one_mb_zeroes.bin" />
+    <None Include="Uploader\esptool\test\images\partitions_singleapp.bin" />
+    <None Include="Uploader\esptool\test\images\sector.bin" />
+    <None Include="Uploader\esptool\test\images\unaligned.bin" />
+    <None Include="Uploader\esptool\test\images\zerolength.bin" />
+    <None Include="Uploader\esptool\test\README.md" />
+    <None Include="Uploader\esptool\test\secure_images\256bit_iv.bin" />
+    <None Include="Uploader\esptool\test\secure_images\256bit_key.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader-encrypted-conf0.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader-encrypted-conf3.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader-encrypted-conf9.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader-encrypted-confc.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader-encrypted.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader_digested.bin" />
+    <None Include="Uploader\esptool\test\secure_images\bootloader_signed.bin" />
+    <None Include="Uploader\esptool\test\secure_images\digest_iv.bin" />
+    <None Include="Uploader\esptool\test\secure_images\ecdsa_secure_boot_signing_key.pem" />
+    <None Include="Uploader\esptool\test\secure_images\ecdsa_secure_boot_signing_key2.pem" />
+    <None Include="Uploader\esptool\test\secure_images\ecdsa_secure_boot_signing_pubkey.pem" />
+    <None Include="Uploader\esptool\test\secure_images\ecdsa_secure_boot_signing_pubkey2.pem" />
+    <None Include="Uploader\esptool\test\secure_images\ef-flashencryption-key.bin" />
+    <None Include="Uploader\esptool\test\secure_images\hello-world-signed-encrypted.bin" />
+    <None Include="Uploader\esptool\test\secure_images\hello-world-signed.bin" />
+    <None Include="Uploader\esptool\test\test_espefuse.py" />
+    <None Include="Uploader\esptool\test\test_espsecure.py" />
+    <None Include="Uploader\esptool\test\test_esptool.py" />
+    <None Include="Uploader\esptool\test\test_imagegen.py" />
+    <None Include="Uploader\esptool\__pycache__\esptool.cpython-37.pyc" />
+    <None Include="Uploader\get.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\makecorever.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\platformio-build.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\pyexpat.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\pyserial\CHANGES.rst" />
+    <None Include="Uploader\pyserial\documentation\appendix.rst" />
+    <None Include="Uploader\pyserial\documentation\conf.py" />
+    <None Include="Uploader\pyserial\documentation\examples.rst" />
+    <None Include="Uploader\pyserial\documentation\index.rst" />
+    <None Include="Uploader\pyserial\documentation\Makefile" />
+    <None Include="Uploader\pyserial\documentation\pyserial.rst" />
+    <None Include="Uploader\pyserial\documentation\pyserial_api.rst" />
+    <None Include="Uploader\pyserial\documentation\shortintro.rst" />
+    <None Include="Uploader\pyserial\documentation\tools.rst" />
+    <None Include="Uploader\pyserial\documentation\url_handlers.rst" />
+    <None Include="Uploader\pyserial\examples\at_protocol.py" />
+    <None Include="Uploader\pyserial\examples\port_publisher.py" />
+    <None Include="Uploader\pyserial\examples\port_publisher.sh" />
+    <None Include="Uploader\pyserial\examples\rfc2217_server.py" />
+    <None Include="Uploader\pyserial\examples\setup-miniterm-py2exe.py" />
+    <None Include="Uploader\pyserial\examples\setup-rfc2217_server-py2exe.py" />
+    <None Include="Uploader\pyserial\examples\setup-wxTerminal-py2exe.py" />
+    <None Include="Uploader\pyserial\examples\tcp_serial_redirect.py" />
+    <None Include="Uploader\pyserial\examples\wxSerialConfigDialog.py" />
+    <None Include="Uploader\pyserial\examples\wxSerialConfigDialog.wxg" />
+    <None Include="Uploader\pyserial\examples\wxTerminal.py" />
+    <None Include="Uploader\pyserial\examples\wxTerminal.wxg" />
+    <None Include="Uploader\pyserial\MANIFEST.in" />
+    <None Include="Uploader\pyserial\pylintrc" />
+    <None Include="Uploader\pyserial\README.rst" />
+    <None Include="Uploader\pyserial\serial\rfc2217.py" />
+    <None Include="Uploader\pyserial\serial\rs485.py" />
+    <None Include="Uploader\pyserial\serial\serialcli.py" />
+    <None Include="Uploader\pyserial\serial\serialjava.py" />
+    <None Include="Uploader\pyserial\serial\serialposix.py" />
+    <None Include="Uploader\pyserial\serial\serialutil.py" />
+    <None Include="Uploader\pyserial\serial\serialwin32.py" />
+    <None Include="Uploader\pyserial\serial\threaded\__init__.py" />
+    <None Include="Uploader\pyserial\serial\tools\hexlify_codec.py" />
+    <None Include="Uploader\pyserial\serial\tools\list_ports.py" />
+    <None Include="Uploader\pyserial\serial\tools\list_ports_common.py" />
+    <None Include="Uploader\pyserial\serial\tools\list_ports_linux.py" />
+    <None Include="Uploader\pyserial\serial\tools\list_ports_osx.py" />
+    <None Include="Uploader\pyserial\serial\tools\list_ports_posix.py" />
+    <None Include="Uploader\pyserial\serial\tools\list_ports_windows.py" />
+    <None Include="Uploader\pyserial\serial\tools\miniterm.py" />
+    <None Include="Uploader\pyserial\serial\tools\__init__.py" />
+    <None Include="Uploader\pyserial\serial\tools\__pycache__\list_ports.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\serial\tools\__pycache__\list_ports_common.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\serial\tools\__pycache__\list_ports_windows.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\serial\tools\__pycache__\__init__.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\serial\urlhandler\protocol_alt.py" />
+    <None Include="Uploader\pyserial\serial\urlhandler\protocol_hwgrep.py" />
+    <None Include="Uploader\pyserial\serial\urlhandler\protocol_loop.py" />
+    <None Include="Uploader\pyserial\serial\urlhandler\protocol_rfc2217.py" />
+    <None Include="Uploader\pyserial\serial\urlhandler\protocol_socket.py" />
+    <None Include="Uploader\pyserial\serial\urlhandler\protocol_spy.py" />
+    <None Include="Uploader\pyserial\serial\urlhandler\__init__.py" />
+    <None Include="Uploader\pyserial\serial\win32.py" />
+    <None Include="Uploader\pyserial\serial\__init__.py" />
+    <None Include="Uploader\pyserial\serial\__pycache__\serialutil.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\serial\__pycache__\serialwin32.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\serial\__pycache__\win32.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\serial\__pycache__\__init__.cpython-37.pyc" />
+    <None Include="Uploader\pyserial\setup.cfg" />
+    <None Include="Uploader\pyserial\setup.py" />
+    <None Include="Uploader\pyserial\test\handlers\protocol_test.py" />
+    <None Include="Uploader\pyserial\test\handlers\__init__.py" />
+    <None Include="Uploader\pyserial\test\run_all_tests.py" />
+    <None Include="Uploader\pyserial\test\test.py" />
+    <None Include="Uploader\pyserial\test\test_advanced.py" />
+    <None Include="Uploader\pyserial\test\test_asyncio.py" />
+    <None Include="Uploader\pyserial\test\test_cancel.py" />
+    <None Include="Uploader\pyserial\test\test_context.py" />
+    <None Include="Uploader\pyserial\test\test_exclusive.py" />
+    <None Include="Uploader\pyserial\test\test_high_load.py" />
+    <None Include="Uploader\pyserial\test\test_iolib.py" />
+    <None Include="Uploader\pyserial\test\test_pty.py" />
+    <None Include="Uploader\pyserial\test\test_readline.py" />
+    <None Include="Uploader\pyserial\test\test_rfc2217.py" />
+    <None Include="Uploader\pyserial\test\test_rs485.py" />
+    <None Include="Uploader\pyserial\test\test_settings_dict.py" />
+    <None Include="Uploader\pyserial\test\test_threaded.py" />
+    <None Include="Uploader\pyserial\test\test_timeout_class.py" />
+    <None Include="Uploader\pyserial\test\test_url.py" />
+    <None Include="Uploader\pyserial\test\test_util.py" />
+    <None Include="Uploader\python37.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\python37._pth">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\sdk\ld\eagle.flash.16m14m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.16m15m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m128.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m144.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m160.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m192.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m256.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m512.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.1m64.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.2m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.2m128.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.2m1m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.2m256.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.2m512.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.2m64.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.4m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.4m1m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.4m2m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.4m3m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.512k.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.512k128.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.512k32.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.512k64.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.8m6m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.flash.8m7m.ld" />
+    <None Include="Uploader\sdk\ld\eagle.rom.addr.v6.ld" />
+    <None Include="Uploader\sdk\libc\xtensa-lx106-elf\lib\crt0.o" />
+    <None Include="Uploader\sdk\libc\xtensa-lx106-elf\lib\libc.a" />
+    <None Include="Uploader\sdk\libc\xtensa-lx106-elf\lib\libg.a" />
+    <None Include="Uploader\sdk\libc\xtensa-lx106-elf\lib\libm.a" />
+    <None Include="Uploader\sdk\lib\compare\sdk-compare-includes" />
+    <None Include="Uploader\sdk\lib\compare\sdk-compare-libs" />
+    <None Include="Uploader\sdk\lib\fix_sdk_libs.sh" />
+    <None Include="Uploader\sdk\lib\libaxtls.a" />
+    <None Include="Uploader\sdk\lib\libbearssl.a" />
+    <None Include="Uploader\sdk\lib\libc_orig.a" />
+    <None Include="Uploader\sdk\lib\libgcc.a" />
+    <None Include="Uploader\sdk\lib\libhal.a" />
+    <None Include="Uploader\sdk\lib\liblwip2-1460-feat.a" />
+    <None Include="Uploader\sdk\lib\liblwip2-1460.a" />
+    <None Include="Uploader\sdk\lib\liblwip2-536-feat.a" />
+    <None Include="Uploader\sdk\lib\liblwip2-536.a" />
+    <None Include="Uploader\sdk\lib\liblwip6-1460-feat.a" />
+    <None Include="Uploader\sdk\lib\liblwip6-536-feat.a" />
+    <None Include="Uploader\sdk\lib\liblwip_gcc.a" />
+    <None Include="Uploader\sdk\lib\libstdc++-exc.a" />
+    <None Include="Uploader\sdk\lib\libstdc++.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libairkiss.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libcrypto.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libespnow.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libmain.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libnet80211.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libphy.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libpp.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libsmartconfig.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libwpa.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libwpa2.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\libwps.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK221\version" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\commitlog-from-221.txt.gz" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libairkiss.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libcrypto.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libespnow.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libmain.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libnet80211.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libphy.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libpp.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libsmartconfig.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libwpa.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libwpa2.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\libwps.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190313\version" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\commitlog-from-22x-190313.txt.gz" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libairkiss.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libcrypto.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libespnow.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libmain.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libnet80211.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libphy.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libpp.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libsmartconfig.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libwpa.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libwpa2.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\libwps.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_190703\version" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\commitlog-from-22x-190703.txt.gz" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libairkiss.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libcrypto.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libespnow.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libmain.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libnet80211.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libphy.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libpp.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libsmartconfig.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libwpa.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libwpa2.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\libwps.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191024\version" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\commitlog-from-22x-191024.txt.gz" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libairkiss.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libcrypto.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libespnow.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libmain.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libnet80211.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libphy.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libpp.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libsmartconfig.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libwpa.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libwpa2.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\libwps.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191105\version" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libairkiss.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libcrypto.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libespnow.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libmain.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libnet80211.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libphy.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libpp.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libsmartconfig.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libwpa.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libwpa2.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\libwps.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK22x_191122\version" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libairkiss.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libcrypto.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libespnow.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libmain.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libnet80211.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libphy.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libpp.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libsmartconfig.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libwpa.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libwpa2.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\libwps.a" />
+    <None Include="Uploader\sdk\lib\NONOSDK3V0\version" />
+    <None Include="Uploader\sdk\lib\README.md" />
+    <None Include="Uploader\sdk\License" />
+    <None Include="Uploader\sdk\lwip2\builder\glue-lwip\arduino\history\meld-changes-from-203-to-210" />
+    <None Include="Uploader\sdk\lwip2\builder\glue-lwip\arduino\history\meld-changes-from-diffs-203-to-210" />
+    <None Include="Uploader\sdk\lwip2\builder\glue-lwip\arduino\history\meld-edit-lwipopts" />
+    <None Include="Uploader\sdk\lwip2\builder\Makefile.arduino" />
+    <None Include="Uploader\sdk\lwip2\builder\Makefile.open" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\make-lwip-hash" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\Makefile.build-lwip2" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\Makefile.defs" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\Makefile.glue" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\Makefile.glue-esp" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\Makefile.lwip2" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\Makefile.rules" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\patch-non-local-includes" />
+    <None Include="Uploader\sdk\lwip2\builder\makefiles\patch-vendor-lwip14" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\0001-Implement-RFC4075-Receive-SNTP-servers-via-DHCPv6.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\0002-sntp-Don-t-over-write-IPv6-NTP-server-when-processin.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\0003-dhcp-dhcp6-Ensure-that-DHCP-DHCPv6-DNS-server-update.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\cyclic-timers-to-pmem.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\dhcpv6-dns-fix-v2.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\dhcpv6-dns-fix-v3.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\igmp-check-up.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\ip6-in-header.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\ipv6-udp-local_ip-anytype.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\link6-autoconfig.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\napt-against-lwIP-1.4.patch.history" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\napt-against-lwIP-2.0.3.patch.history" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\napt-h.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\napt.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\open\sdk-mem-macros.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\tcp-random-port.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\tcp6-any.patch.disabled" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\time-wait.patch" />
+    <None Include="Uploader\sdk\lwip2\builder\patches\unapply-other-patches" />
+    <None Include="Uploader\sdk\lwip2\builder\README.md" />
+    <None Include="Uploader\sdk\lwip2\include\README.md" />
+    <None Include="Uploader\sdk\lwip2\Makefile" />
+    <None Include="Uploader\sdk\lwip2\README.md" />
+    <None Include="Uploader\sdk\lwip\src\Makefile" />
+    <None Include="Uploader\sdk\ssl\bearssl\build\.do_not_remove" />
+    <None Include="Uploader\sdk\ssl\bearssl\Doxyfile" />
+    <None Include="Uploader\sdk\ssl\bearssl\Makefile" />
+    <None Include="Uploader\sdk\ssl\bearssl\mk\mkrules.sh" />
+    <None Include="Uploader\sdk\ssl\bearssl\mk\mkT0.cmd" />
+    <None Include="Uploader\sdk\ssl\bearssl\mk\mkT0.sh" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\cert-ee-ec+rsa.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\cert-ee-ec.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\cert-ee-rsa.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\cert-ica-ec.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\cert-ica-rsa.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\cert-root-ec.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\cert-root-rsa.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\key-ee-ec.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\key-ee-rsa.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\key-ica-ec.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\key-ica-rsa.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\key-root-ec.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\samples\key-root-rsa.pem" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\codec\pemdec.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_hs_client.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_hs_common.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\ssl\ssl_hs_server.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\x509\asn1.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\x509\pkey_decoder.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\x509\skey_decoder.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\x509\x509_decoder.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\src\x509\x509_minimal.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\T0\kern.t0" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\dn-ee.der" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\dn-ica1.der" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\dn-ica2.der" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\dn-root-new.der" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\dn-root.der" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-badsig1.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-badsig2.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-cp1.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-cp2.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-cp3.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-cp4.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-dates.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-md5.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-names.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-names2.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-names3.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-names4.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p256-sha1.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p256-sha224.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p256-sha256.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p256-sha384.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p256-sha512.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p256.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p384.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-p521.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-sha1.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-sha224.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-sha384.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-sha512.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee-trailing.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ee.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica1-1016.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica1-1017.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica1-4096.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica1-p256.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica1-p384.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica1-p521.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica1.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2-1016.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2-1017.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2-4096.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2-notCA.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2-p256.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2-p384.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2-p521.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\ica2.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\junk.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\names.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\root-p256.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\root-p384.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\root-p521.crt" />
+    <None Include="Uploader\sdk\ssl\bearssl\test\x509\root.crt" />
+    <None Include="Uploader\sdk\ssl\Makefile" />
+    <None Include="Uploader\sdk\ssl\README.md" />
+    <None Include="Uploader\sdk\uzlib\examples\tgunzip\makefile" />
+    <None Include="Uploader\sdk\uzlib\examples\tgunzip\makefile.b32" />
+    <None Include="Uploader\sdk\uzlib\examples\tgunzip\makefile.dj2" />
+    <None Include="Uploader\sdk\uzlib\examples\tgunzip\makefile.dmc" />
+    <None Include="Uploader\sdk\uzlib\examples\tgunzip\makefile.mgw" />
+    <None Include="Uploader\sdk\uzlib\examples\tgunzip\makefile.vc" />
+    <None Include="Uploader\sdk\uzlib\examples\tgunzip\makefile.wat" />
+    <None Include="Uploader\sdk\uzlib\examples\tgzip\makefile" />
+    <None Include="Uploader\sdk\uzlib\lib\empty.dir" />
+    <None Include="Uploader\sdk\uzlib\Makefile" />
+    <None Include="Uploader\sdk\uzlib\README.md" />
+    <None Include="Uploader\sdk\uzlib\src\makefile" />
+    <None Include="Uploader\sdk\uzlib\src\makefile.b32" />
+    <None Include="Uploader\sdk\uzlib\src\makefile.dj2" />
+    <None Include="Uploader\sdk\uzlib\src\makefile.dmc" />
+    <None Include="Uploader\sdk\uzlib\src\makefile.mgw" />
+    <None Include="Uploader\sdk\uzlib\src\makefile.vc" />
+    <None Include="Uploader\sdk\uzlib\src\makefile.wat" />
+    <None Include="Uploader\sdk\uzlib\src\nasm\crc32.nas" />
+    <None Include="Uploader\sdk\uzlib\src\nasm\tinfzlib.nas" />
+    <None Include="Uploader\sdk\uzlib\tests\clang-ubsan-build.sh" />
+    <None Include="Uploader\sdk\uzlib\tests\corpus.md5sum" />
+    <None Include="Uploader\sdk\uzlib\tests\corpus.tar.gz" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs.ref" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000000,sig_11,src_000000,op_flip1,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000001,sig_11,src_000000,op_flip1,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000002,sig_11,src_000000,op_flip1,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000003,sig_11,src_000000,op_flip1,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000004,sig_11,src_000000,op_flip1,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000005,sig_11,src_000000,op_flip1,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000006,sig_11,src_000000,op_flip1,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000007,sig_11,src_000000,op_flip2,pos_11" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000008,sig_11,src_000000,op_flip2,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000009,sig_11,src_000000,op_flip2,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000010,sig_11,src_000000,op_flip4,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000011,sig_11,src_000000,op_flip8,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000012,sig_11,src_000000,op_arith8,pos_11,val_+6" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000013,sig_11,src_000000,op_arith8,pos_12,val_-9" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000014,sig_11,src_000000,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000015,sig_11,src_000000,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000016,sig_11,src_000000,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000017,sig_11,src_000000,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000018,sig_11,src_000000,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000019,sig_11,src_000000,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000020,sig_11,src_000000,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000021,sig_11,src_000000,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000022,sig_11,src_000000,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000023,sig_06,src_000000,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000024,sig_06,src_000000,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000025,sig_06,src_000033,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000026,sig_11,src_000033,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000027,sig_11,src_000040,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000028,sig_11,src_000070,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000029,sig_11,src_000070,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000030,sig_11,src_000070,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000031,sig_11,src_000090,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000032,sig_11,src_000096,op_flip1,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000033,sig_11,src_000096,op_int16,pos_14,val_+1" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000034,sig_11,src_000104,op_int32,pos_16,val_-32768" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000035,sig_11,src_000118,op_flip1,pos_58" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000036,sig_11,src_000187,op_flip1,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000037,sig_11,src_000187,op_flip1,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\00\id_000038,sig_11,src_000187,op_flip1,pos_15" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000000,sig_11,src_000001,op_flip1,pos_3" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000001,sig_11,src_000001,op_flip1,pos_3" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000002,sig_11,src_000001,op_flip2,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000003,sig_11,src_000001,op_flip4,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000004,sig_11,src_000001,op_flip4,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000005,sig_11,src_000001,op_flip16,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000006,sig_11,src_000001,op_arith8,pos_12,val_-21" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000007,sig_11,src_000001,op_int16,pos_12,val_be_+1000" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000008,sig_11,src_000001,op_havoc,rep_32" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000009,sig_11,src_000001,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000010,sig_07,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000011,sig_11,src_000001,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000012,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000013,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000014,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000015,sig_11,src_000001,op_havoc,rep_32" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000016,sig_07,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000017,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000018,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000019,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000020,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000021,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000022,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000023,sig_06,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000024,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000025,sig_11,src_000005,op_flip1,pos_22" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000026,sig_11,src_000005,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000027,sig_11,src_000005,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000028,sig_11,src_000005,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000029,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000030,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000031,sig_11,src_000005,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000032,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000033,sig_11,src_000005,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000034,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\id_000035,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000000,sig_11,src_000001,op_flip1,pos_3" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000002,sig_11,src_000001,op_flip2,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000003,sig_11,src_000001,op_flip4,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000004,sig_11,src_000001,op_flip4,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000005,sig_11,src_000001,op_flip16,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000006,sig_11,src_000001,op_arith8,pos_12,val_-21" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000007,sig_11,src_000001,op_int16,pos_12,val_be_+1000" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000009,sig_11,src_000001,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000010,sig_07,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000011,sig_11,src_000001,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000012,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000013,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000014,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000015,sig_11,src_000001,op_havoc,rep_32" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000016,sig_07,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000017,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000018,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000019,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000020,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000021,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000022,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000023,sig_06,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000024,sig_11,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000025,sig_11,src_000005,op_flip1,pos_22" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000026,sig_11,src_000005,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000027,sig_11,src_000005,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000028,sig_11,src_000005,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000029,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000030,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000031,sig_11,src_000005,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000032,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000033,sig_11,src_000005,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000034,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\01\min_id_000035,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\02\id_000000,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\02\id_000001,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\02\id_000002,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\02\id_000003,sig_11,src_000002,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000000,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000001,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000002,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000003,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000004,sig_11,src_000002,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000005,sig_11,src_000005,op_flip1,pos_20" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000006,sig_11,src_000005,op_flip1,pos_22" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000007,sig_11,src_000005,op_flip4,pos_24" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000008,sig_11,src_000005,op_arith8,pos_3,val_+10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000009,sig_11,src_000005,op_arith8,pos_3,val_+18" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000010,sig_11,src_000005,op_int8,pos_23,val_-1" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000011,sig_11,src_000005,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000012,sig_11,src_000005,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000013,sig_11,src_000005,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000014,sig_11,src_000005,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000015,sig_11,src_000005,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000016,sig_11,src_000005,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000017,sig_11,src_000005,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000018,sig_11,src_000082,op_flip32,pos_19" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000019,sig_11,src_000082,op_int32,pos_19,val_be_+65535" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000020,sig_11,src_000155,op_flip2,pos_28" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000021,sig_11,src_000166,op_flip2,pos_10" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000022,sig_11,src_000156,op_int16,pos_26,val_-129" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000023,sig_11,src_000193,op_int16,pos_31,val_be_+32" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000024,sig_11,src_000230,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000025,sig_11,src_000230,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000026,sig_11,src_000245,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000027,sig_11,src_000254,op_flip1,pos_32" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000028,sig_11,src_000079,op_int32,pos_20,val_-128" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000029,sig_11,src_000247,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000030,sig_11,src_000257,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000031,sig_11,src_000257,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000032,sig_11,src_000248,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000033,sig_11,src_000291,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000034,sig_11,src_000301,op_havoc,rep_64" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000035,sig_11,src_000252,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000036,sig_11,src_000310,op_arith32,pos_20,val_be_-8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000037,sig_11,src_000319+000163,op_splice,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000038,sig_11,src_000320,op_flip1,pos_27" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000039,sig_11,src_000320,op_ext_AO,pos_43" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000040,sig_11,src_000326,op_havoc,rep_32" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000041,sig_11,src_000016,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000042,sig_11,src_000205+000322,op_splice,rep_64" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\03\id_000043,sig_11,src_000001+000321,op_splice,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000000,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000001,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000002,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000003,sig_11,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000004,sig_11,src_000034,op_int32,pos_44,val_+1000" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000005,sig_11,src_000063,op_int32,pos_17,val_+1000" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000006,sig_11,src_000019+000004,op_splice,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000007,sig_11,src_000047+000264,op_splice,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000008,sig_11,src_000194+000266,op_splice,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000009,sig_11,src_000134+000005,op_splice,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\04\id_000010,sig_11,src_000220+000226,op_splice,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000000,sig_06,src_000001,op_flip8,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000001,sig_06,src_000001,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000002,sig_06,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000003,sig_06,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000004,sig_06,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000005,sig_06,src_000012,op_flip1,pos_13" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000006,sig_06,src_000012,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000007,sig_06,src_000108,op_arith16,pos_14,val_-2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000008,sig_06,src_000003,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000009,sig_06,src_000140,op_flip1,pos_15" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000010,sig_06,src_000092,op_flip4,pos_3" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000011,sig_06,src_000155,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000012,sig_06,src_000163+000116,op_splice,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000013,sig_06,src_000171,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\05\id_000014,sig_06,src_000170,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\06\id_000001,sig_06,src_000001,op_havoc,rep_16" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\06\id_000002,sig_06,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\06\id_000003,sig_06,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\06\id_000004,sig_06,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\06\id_000005,sig_06,src_000001,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\06\id_000007,sig_06,src_000121,op_arith8,pos_12,val_+26" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\06\id_000008,sig_06,src_000137,op_flip1,pos_58" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\07\id_000000,sig_06,src_000001,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\07\id_000001,sig_06,src_000019,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\07\id_000002,sig_06,src_000021,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\08\id_000000,sig_06,src_000157,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000000,sig_11,src_000001,op_int16,pos_11,val_be_-128" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000001,sig_11,src_000001,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000002,sig_11,src_000023,op_flip2,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000003,sig_11,src_000023,op_arith8,pos_14,val_-28" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000004,sig_11,src_000075,op_flip4,pos_61" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000005,sig_11,src_000075,op_arith8,pos_57,val_-5" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000006,sig_11,src_000075,op_arith16,pos_62,val_+28" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000007,sig_11,src_000075,op_havoc,rep_32" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000008,sig_11,src_000133,op_arith8,pos_13,val_-34" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000009,sig_11,src_000133,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000010,sig_11,src_000133,op_havoc,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000011,sig_11,src_000151,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000012,sig_11,src_000212,op_arith8,pos_45,val_+9" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000013,sig_11,src_000212,op_int32,pos_15,val_+32767" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000014,sig_11,src_000212,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000015,sig_11,src_000087,op_arith8,pos_20,val_+11" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000016,sig_11,src_000098,op_flip1,pos_13" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000017,sig_11,src_000098,op_flip2,pos_13" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000018,sig_11,src_000098,op_flip4,pos_12" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000019,sig_11,src_000098,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000020,sig_11,src_000133,op_havoc,rep_2" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000021,sig_11,src_000134,op_int16,pos_13,val_be_-128" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000022,sig_11,src_000218,op_flip2,pos_40" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000023,sig_11,src_000218,op_int16,pos_111,val_+0" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000025,sig_11,src_000235,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000026,sig_11,src_000143,op_arith8,pos_19,val_+3" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000027,sig_11,src_000024+000141,op_splice,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000028,sig_11,src_000219,op_arith16,pos_62,val_be_-23" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000031,sig_11,src_000256,op_flip2,pos_480" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000032,sig_11,src_000256,op_flip4,pos_248" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000033,sig_11,src_000256,op_flip4,pos_364" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000034,sig_06,src_000256,op_arith8,pos_499,val_+8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000036,sig_11,src_000256+000131,op_splice,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000037,sig_11,src_000260,op_flip2,pos_264" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000038,sig_11,src_000260,op_arith16,pos_254,val_-29" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000039,sig_11,src_000260,op_int16,pos_397,val_+0" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000040,sig_11,src_000272+000023,op_splice,rep_4" />
+    <None Include="Uploader\sdk\uzlib\tests\decomp-bad-inputs\09\id_000041,sig_11,src_000253,op_havoc,rep_8" />
+    <None Include="Uploader\sdk\uzlib\tests\Makefile" />
+    <None Include="Uploader\sdk\uzlib\tests\run-decomp-bad-inputs.sh" />
+    <None Include="Uploader\select.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\signing.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\sizes.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\TZupdate.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\unicodedata.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\upload.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\winsound.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_asyncio.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_bz2.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_contextvars.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_ctypes.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_decimal.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_elementtree.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_hashlib.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_lzma.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_msi.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_multiprocessing.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_overlapped.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_queue.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_socket.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_sqlite3.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Uploader\_ssl.pyd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

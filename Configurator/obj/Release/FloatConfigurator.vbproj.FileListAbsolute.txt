@@ -1,0 +1,85 @@
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\bin\Release\FloatConfigurator.exe.config
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\bin\Release\Data\Floats.csv
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\bin\Release\FloatConfigurator.exe
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\bin\Release\FloatConfigurator.pdb
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\bin\Release\FloatConfigurator.xml
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.vbprojResolveAssemblyReference.cache
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.frmFloatConfig.resources
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.Resources.resources
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.IP_Port_Control.resources
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.vbproj.GenerateResource.Cache
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.exe
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.xml
+\\Nas\wip\Development\Live\ABTB\Software\PC\PCS\FloatConfigurator\obj\Release\FloatConfigurator.pdb
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\bin\Release\FloatConfigurator.exe.config
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.exe
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.xml
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.pdb
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\bin\Release\Data\Floats.csv
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\bin\Release\FloatConfigurator.exe
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\bin\Release\FloatConfigurator.pdb
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\bin\Release\FloatConfigurator.xml
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.vbprojResolveAssemblyReference.cache
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.frmFloatConfig.resources
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.Resources.resources
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.IP_Port_Control.resources
+\\Nas\wip\Development\Live\ABTB\UBR\Software\PC\FloatConfigurator\obj\Release\FloatConfigurator.vbproj.GenerateResource.Cache
+C:\ABTB\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.exe.config
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.exe
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.xml
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.pdb
+C:\ABTB\Software\PC\NewConfigurator\bin\Release\Data\Floats.csv
+C:\ABTB\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.exe
+C:\ABTB\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.pdb
+C:\ABTB\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.xml
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.vbprojResolveAssemblyReference.cache
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.frmFloatConfig.resources
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.Resources.resources
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.IP_Port_Control.resources
+C:\ABTB\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.vbproj.GenerateResource.Cache
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\bin\Release\Data\Floats.csv
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.exe.config
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.exe
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.pdb
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\bin\Release\FloatConfigurator.xml
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.vbprojAssemblyReference.cache
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.frmFloatConfig.resources
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.Resources.resources
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.IP_Port_Control.resources
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.vbproj.GenerateResource.cache
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.vbproj.CoreCompileInputs.cache
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.exe
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.xml
+\\nas\WIP\Development\Live\ABTB\UBR\Software\PC\NewConfigurator\obj\Release\FloatConfigurator.pdb
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\bin\Release\Data\Floats.csv
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\bin\Release\FloatConfigurator.exe.config
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\bin\Release\FloatConfigurator.exe
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\bin\Release\FloatConfigurator.pdb
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\bin\Release\FloatConfigurator.xml
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.vbprojAssemblyReference.cache
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.frmFloatConfig.resources
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.Resources.resources
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.IP_Port_Control.resources
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.vbproj.GenerateResource.cache
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.vbproj.CoreCompileInputs.cache
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.exe
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.xml
+C:\Users\Peter\Desktop\UBR Version Live\NewConfigurator\obj\Release\FloatConfigurator.pdb
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\AVRDUDE\avrdude.exe
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\AVRDUDE\libusb0.dll
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\Data\Floats.csv
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\AVRDUDE\avrdude.conf
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\Firmware\VTS.hex
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\FloatConfigurator.exe.config
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\FloatConfigurator.exe
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\FloatConfigurator.pdb
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\bin\Release\FloatConfigurator.xml
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.frmFloatConfig.resources
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.Resources.resources
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.IP_Port_Control.resources
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.vbproj.GenerateResource.cache
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.vbproj.CoreCompileInputs.cache
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.exe
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.xml
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.pdb
+C:\Users\Peter\Desktop\UBR Version Live\VTS_Configurator\obj\Release\FloatConfigurator.vbproj.AssemblyReference.cache
