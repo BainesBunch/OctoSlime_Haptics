@@ -27,7 +27,7 @@
 #include <vector>
 
 #include "DeviceConfig.h"
-#include "logging/Logger.h"
+// #include "logging/Logger.h"
 
 namespace SlimeVR {
     namespace Configuration {
@@ -55,7 +55,7 @@ namespace SlimeVR {
             DeviceConfig m_Config{};
             std::vector<CalibrationConfig> m_Calibrations;
 
-            Logging::Logger m_Logger = Logging::Logger("Configuration");
+            // Logging::Logger m_Logger = Logging::Logger("Configuration");
 
             static CalibrationConfig m_EmptyCalibration;
         };

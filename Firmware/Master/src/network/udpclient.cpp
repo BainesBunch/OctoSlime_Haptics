@@ -659,9 +659,9 @@ void ServerConnection::Slimeconnect()
     }
 }
 
-uint32_t ServerConnection::getUnixTime(){
+unsigned long ServerConnection::getUnixTime(){
     timeClient.update();
-    return (uint32_t) timeClient.getEpochTime();
+    return timeClient.getEpochTime();
 }
 
 void ServerConnection::resetConnection()

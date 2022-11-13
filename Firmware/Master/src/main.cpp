@@ -21,24 +21,25 @@
     THE SOFTWARE.
 */
 
-#include "Wire.h"
-#include "sensors/sensorfactory.h"
-#include "configuration.h"
-#include "network/network.h"
-#include "globals.h"
-#include "credentials.h"
-#include <i2cscan.h>
-#include <i2Cdev.h>
-#include "batterymonitor.h"
-#include "UI\UI.h"
+#include "EEPROM_I2C/EEPROM_I2C.h"
 #include "PC_Settings/PC_Settings.h"
+#include "UI\UI.h"
+#include "Wire.h"
+#include "batterymonitor.h"
+#include "configuration.h"
+#include "credentials.h"
+#include "globals.h"
+#include "network/network.h"
+#include "sensors/sensorfactory.h"
 #include <MCP23017.h>
+#include <i2Cdev.h>
+#include <i2cscan.h>
 
 #define INT_PIN1 D6
 #define INT_PIN2 D5
 #define INT_RESET D7
 
-SensorFactory sensors{};
+SensorFactory sensors {};
 int sensorToCalibrate = -1;
 volatile bool INT_Triggered_Bank_A = false;
 volatile bool INT_Triggered_Bank_B = false;
@@ -79,9 +80,9 @@ void setup()
 {
 
     Serial.begin(serialBaudRate);
-    //    Serial.println();
-    //    Serial.println();
-    //    Serial.println();
+    Serial.println();
+    Serial.println();
+    Serial.println();
 
     Serial.println(F("System Startup"));
 
@@ -99,6 +100,19 @@ void setup()
 
     pinMode(D4, OUTPUT);
     digitalWrite(D4, HIGH);
+    
+    //for EEPROM debugging
+    // bool once = false;
+    // while (true) { // for eeprom testing
+    //     if (!once) {
+    //         Wire.beginTransmission(0x70); // TCA9548A address is 0x70
+    //         Wire.write(1 << 0); // send byte to select bus
+    //         Serial.printf("select IMU: %d\n", Wire.endTransmission());
+    //         EEPROM_I2C::test();
+    //         once = true;
+    //     }
+    //     ESP.wdtFeed();
+    // }
 
     // Serial.println(F("Startup UI"));
 
@@ -113,11 +127,9 @@ void setup()
     BootSeconds = millis() + 3000;
 
     ConfigMode = false;
-    while (BootSeconds > millis() || ConfigMode)
-    {
+    while (BootSeconds > millis() || ConfigMode) {
 
-        if (PC_Settings::CheckForPCCommands())
-        {
+        if (PC_Settings::CheckForPCCommands()) {
             if (!ConfigMode)
                 UI::DrawConfig();
             ConfigMode = true;
@@ -132,7 +144,7 @@ void setup()
     myMCP.Init();
     myMCP.setPortMode(0b00000000, A);
     myMCP.setPortMode(0b00000000, B);
-    myMCP.setInterruptPinPol(LOW);                 // set INTA and INTB active-high
+    myMCP.setInterruptPinPol(LOW); // set INTA and INTB active-high
     myMCP.setInterruptOnChangePort(0b11111111, A); // set all B pins as interrrupt Pins
     myMCP.setInterruptOnChangePort(0b11111111, B); // set all B pins as interrrupt Pins
 
@@ -149,12 +161,10 @@ void setup()
 
     // if any IMU went into callibration then we need to re-draw the main screen
 
-    if (sensors.CalibrationEvent())
-    {
+    if (sensors.CalibrationEvent()) {
         UI::MainUIFrame();
 
-        for (uint8_t IMU_ID = 0; IMU_ID < 15; IMU_ID++)
-        {
+        for (uint8_t IMU_ID = 0; IMU_ID < 15; IMU_ID++) {
             UI::SetIMUStatus(IMU_ID, sensors.GetSensorOnline(IMU_ID));
             ESP.wdtFeed();
         }
@@ -166,8 +176,8 @@ void setup()
 
     attachInterrupt(digitalPinToInterrupt(INT_PIN1), IntBank_A, FALLING); // Set up a falling interrupt
     attachInterrupt(digitalPinToInterrupt(INT_PIN2), IntBank_B, FALLING); // Set up a falling interrupt
-    myMCP.getIntCap(B);                                                   // ensures that existing interrupts are cleared
-    myMCP.getIntCap(A);                                                   // ensures that existing interrupts are cleared
+    myMCP.getIntCap(B); // ensures that existing interrupts are cleared
+    myMCP.getIntCap(A); // ensures that existing interrupts are cleared
 
     ServerConnection::resetConnection();
 
@@ -208,8 +218,7 @@ void loop()
     //     Serial.println(INT_Bank);
     // }
 
-    if (millis() - last_rssi_sample >= 2000)
-    {
+    if (millis() - last_rssi_sample >= 2000) {
         last_rssi_sample = millis();
         uint8_t signalStrength = WiFi.RSSI();
         // Serial.println("Send signal strength");

@@ -38,44 +38,44 @@ namespace SlimeVR {
 
             bool status = LittleFS.begin();
             if (!status) {
-                this->m_Logger.warn("Could not mount LittleFS, formatting");
+                // this->m_Logger.warn("Could not mount LittleFS, formatting");
 
                 status = LittleFS.format();
                 if (!status) {
-                    this->m_Logger.warn("Could not format LittleFS, aborting");
+                    // this->m_Logger.warn("Could not format LittleFS, aborting");
                     return;
                 }
 
                 status = LittleFS.begin();
                 if (!status) {
-                    this->m_Logger.error("Could not mount LittleFS, aborting");
+                    // this->m_Logger.error("Could not mount LittleFS, aborting");
                     return;
                 }
             }
 
             if (LittleFS.exists("/config.bin")) {
-                m_Logger.trace("Found configuration file");
+                // m_Logger.trace("Found configuration file");
 
                 File file = LittleFS.open("/config.bin", "r");
 
                 file.read((uint8_t*)&m_Config.version, sizeof(int32_t));
 
                 if (m_Config.version < CURRENT_CONFIGURATION_VERSION) {
-                    m_Logger.debug("Configuration is outdated: v%d < v%d", m_Config.version, CURRENT_CONFIGURATION_VERSION);
+                    // m_Logger.debug("Configuration is outdated: v%d < v%d", m_Config.version, CURRENT_CONFIGURATION_VERSION);
 
                     if (!runMigrations(m_Config.version)) {
-                        m_Logger.error("Failed to migrate configuration from v%d to v%d", m_Config.version, CURRENT_CONFIGURATION_VERSION);
+                        // m_Logger.error("Failed to migrate configuration from v%d to v%d", m_Config.version, CURRENT_CONFIGURATION_VERSION);
                         return;
                     }
                 } else {
-                    m_Logger.info("Found up-to-date configuration v%d", m_Config.version);
+                    // m_Logger.info("Found up-to-date configuration v%d", m_Config.version);
                 }
 
                 file.seek(0);
                 file.read((uint8_t*)&m_Config, sizeof(DeviceConfig));
                 file.close();
             } else {
-                m_Logger.info("No configuration file found, creating new one");
+                // m_Logger.info("No configuration file found, creating new one");
                 m_Config.version = CURRENT_CONFIGURATION_VERSION;
                 save();
             }
@@ -84,7 +84,7 @@ namespace SlimeVR {
 
             m_Loaded = true;
 
-            m_Logger.info("Loaded configuration");
+            // m_Logger.info("Loaded configuration");
 
 #ifdef DEBUG_CONFIGURATION
             print();
@@ -101,7 +101,7 @@ namespace SlimeVR {
                 char path[17];
                 sprintf(path, "/calibrations/%d", i);
 
-                m_Logger.trace("Saving calibration data for %d", i);
+                // m_Logger.trace("Saving calibration data for %d", i);
 
                 File file = LittleFS.open(path, "w");
                 file.write((uint8_t*)&config, sizeof(CalibrationConfig));
@@ -114,7 +114,7 @@ namespace SlimeVR {
                 file.close();
             }
 
-            m_Logger.debug("Saved configuration");
+            // m_Logger.debug("Saved configuration");
         }
 
         void Configuration::reset() {
@@ -124,7 +124,7 @@ namespace SlimeVR {
             m_Config.version = 1;
             save();
 
-            m_Logger.debug("Reset configuration");
+            // m_Logger.debug("Reset configuration");
         }
 
         int32_t Configuration::getVersion() const {
@@ -158,10 +158,10 @@ namespace SlimeVR {
             {
                 File calibrations = LittleFS.open("/calibrations");
                 if (!calibrations) {
-                    m_Logger.warn("No calibration data found, creating new directory...");
+                    // m_Logger.warn("No calibration data found, creating new directory...");
 
                     if (!LittleFS.mkdir("/calibrations")) {
-                        m_Logger.error("Failed to create directory: /calibrations");
+                        // m_Logger.error("Failed to create directory: /calibrations");
                         return;
                     }
 
@@ -171,35 +171,35 @@ namespace SlimeVR {
                 if (!calibrations.isDirectory()) {
                     calibrations.close();
 
-                    m_Logger.warn("Found file instead of directory: /calibrations");
+                    // m_Logger.warn("Found file instead of directory: /calibrations");
 
                     if (!LittleFS.remove("/calibrations")) {
-                        m_Logger.error("Failed to remove directory: /calibrations");
+                        // m_Logger.error("Failed to remove directory: /calibrations");
                         return;
                     }
 
                     if (!LittleFS.mkdir("/calibrations")) {
-                        m_Logger.error("Failed to create directory: /calibrations");
+                        // m_Logger.error("Failed to create directory: /calibrations");
                         return;
                     }
 
                     calibrations = LittleFS.open("/calibrations");
                 }
 
-                m_Logger.debug("Found calibration data directory");
+                // m_Logger.debug("Found calibration data directory");
 
                 while (File f = calibrations.openNextFile()) {
                     if (f.isDirectory()) {
                         continue;
                     }
                     uint8_t sensorId = strtoul(f.name(), nullptr, 10);
-                    m_Logger.trace("Found calibration data file: %s", f.name());
+                    // m_Logger.trace("Found calibration data file: %s", f.name());
 
                     CalibrationConfig calibrationConfig;
                     f.read((uint8_t*)&calibrationConfig, sizeof(CalibrationConfig));
                     f.close();
 
-                    m_Logger.debug("Found sensor calibration for %s at index %d", calibrationConfigTypeToString(calibrationConfig.type), sensorId);
+                    // m_Logger.debug("Found sensor calibration for %s at index %d", calibrationConfigTypeToString(calibrationConfig.type), sensorId);
 
                     setCalibration(sensorId, calibrationConfig);
                 }
@@ -209,10 +209,10 @@ namespace SlimeVR {
 #else
             {
                 if (!LittleFS.exists("/calibrations")) {
-                    m_Logger.warn("No calibration data found, creating new directory...");
+                    // m_Logger.warn("No calibration data found, creating new directory...");
 
                     if (!LittleFS.mkdir("/calibrations")) {
-                        m_Logger.error("Failed to create directory: /calibrations");
+                        // m_Logger.error("Failed to create directory: /calibrations");
                         return;
                     }
 
@@ -231,7 +231,7 @@ namespace SlimeVR {
                     f.read((uint8_t*)&calibrationConfig, sizeof(CalibrationConfig));
 
                     uint8_t sensorId = strtoul(calibrations.fileName().c_str(), nullptr, 10);
-                    m_Logger.debug("Found sensor calibration for %s at index %d", calibrationConfigTypeToString(calibrationConfig.type), sensorId);
+                    // m_Logger.debug("Found sensor calibration for %s at index %d", calibrationConfigTypeToString(calibrationConfig.type), sensorId);
 
                     setCalibration(sensorId, calibrationConfig);
                 }
@@ -244,60 +244,60 @@ namespace SlimeVR {
         }
 
         void Configuration::print() {
-            m_Logger.info("Configuration:");
-            m_Logger.info("  Version: %d", m_Config.version);
-            m_Logger.info("  %d Calibrations:", m_Calibrations.size());
+            // m_Logger.info("Configuration:");
+            // m_Logger.info("  Version: %d", m_Config.version);
+            // m_Logger.info("  %d Calibrations:", m_Calibrations.size());
 
             for (size_t i = 0; i < m_Calibrations.size(); i++) {
                 const CalibrationConfig& c = m_Calibrations[i];
-                m_Logger.info("    - [%3d] %s", i, calibrationConfigTypeToString(c.type));
+                // m_Logger.info("    - [%3d] %s", i, calibrationConfigTypeToString(c.type));
 
                 switch (c.type) {
                 case CalibrationConfigType::NONE:
                     break;
 
                 case CalibrationConfigType::BMI160:
-                    m_Logger.info("            A_B        : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.bmi160.A_B));
+                    // m_Logger.info("            A_B        : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.bmi160.A_B));
 
-                    m_Logger.info("            A_Ainv     :");
+                    // m_Logger.info("            A_Ainv     :");
                     for (uint8_t i = 0; i < 3; i++) {
-                        m_Logger.info("                         %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.bmi160.A_Ainv[i]));
+                        // m_Logger.info("                         %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.bmi160.A_Ainv[i]));
                     }
 
-                    m_Logger.info("            G_off      : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.bmi160.G_off));
-                    m_Logger.info("            Temperature: %f", c.data.bmi160.temperature);
+                    // m_Logger.info("            G_off      : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.bmi160.G_off));
+                    // m_Logger.info("            Temperature: %f", c.data.bmi160.temperature);
 
                     break;
 
                 case CalibrationConfigType::ICM20948:
-                    m_Logger.info("            G: %d, %d, %d", UNPACK_VECTOR_ARRAY(c.data.icm20948.G));
-                    m_Logger.info("            A: %d, %d, %d", UNPACK_VECTOR_ARRAY(c.data.icm20948.A));
-                    m_Logger.info("            C: %d, %d, %d", UNPACK_VECTOR_ARRAY(c.data.icm20948.C));
+                    // m_Logger.info("            G: %d, %d, %d", UNPACK_VECTOR_ARRAY(c.data.icm20948.G));
+                    // m_Logger.info("            A: %d, %d, %d", UNPACK_VECTOR_ARRAY(c.data.icm20948.A));
+                    // m_Logger.info("            C: %d, %d, %d", UNPACK_VECTOR_ARRAY(c.data.icm20948.C));
 
                     break;
 
                 case CalibrationConfigType::MPU9250:
-                    m_Logger.info("            A_B   : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.A_B));
+                    // m_Logger.info("            A_B   : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.A_B));
 
-                    m_Logger.info("            A_Ainv:");
+                    // m_Logger.info("            A_Ainv:");
                     for (uint8_t i = 0; i < 3; i++) {
-                        m_Logger.info("                    %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.A_Ainv[i]));
+                        // m_Logger.info("                    %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.A_Ainv[i]));
                     }
 
-                    m_Logger.info("            M_B   : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.M_B));
+                    // m_Logger.info("            M_B   : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.M_B));
 
-                    m_Logger.info("            M_Ainv:");
+                    // m_Logger.info("            M_Ainv:");
                     for (uint8_t i = 0; i < 3; i++) {
-                        m_Logger.info("                    %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.M_Ainv[i]));
+                        // m_Logger.info("                    %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.M_Ainv[i]));
                     }
 
-                    m_Logger.info("            G_off  : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.G_off));
+                    // m_Logger.info("            G_off  : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu9250.G_off));
 
                     break;
 
                 case CalibrationConfigType::MPU6050:
-                    m_Logger.info("            A_B  : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu6050.A_B));
-                    m_Logger.info("            G_off: %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu6050.G_off));
+                    // m_Logger.info("            A_B  : %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu6050.A_B));
+                    // m_Logger.info("            G_off: %f, %f, %f", UNPACK_VECTOR_ARRAY(c.data.mpu6050.G_off));
 
                     break;
                 }
