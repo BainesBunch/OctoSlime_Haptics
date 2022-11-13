@@ -29,7 +29,7 @@ void writeCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfi
 void readCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfig* calibration);
 void clearCalibration(int devAddr);
 unsigned long getDate(int devAddr);
-boolean checkForCalibration(int devAddr);
+int checkForCalibration(int devAddr);
 void test();
 void ack_pooling(int devAddr);
 }

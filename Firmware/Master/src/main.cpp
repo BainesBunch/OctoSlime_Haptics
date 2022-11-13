@@ -137,6 +137,12 @@ void setup()
     }
 
     UI::MainUIFrame();
+
+
+    Network::setUp();   // needs to be before the motion setup for epoch time 
+    WiFiNetwork::upkeep();
+
+
     UI::SetMessage(6);
 
     Haptics::Discovery();
@@ -150,6 +156,7 @@ void setup()
 
     pinMode(INT_PIN1, INPUT_PULLUP);
     pinMode(INT_PIN2, INPUT_PULLUP);
+    
 
     delay(500);
 
@@ -170,7 +177,6 @@ void setup()
         }
     }
 
-    Network::setUp();
     battery.Setup();
     loopTime = micros();
 

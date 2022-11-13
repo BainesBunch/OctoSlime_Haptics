@@ -2,6 +2,7 @@
 #include "Arduino.h"
 #include "Wire.h"
 #include "network/network.h"
+#include <string.h>
 
 namespace EEPROM_I2C {
 
@@ -183,11 +184,6 @@ void readCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfig
 {
     Serial.println();
 
-    // Reading UNIX time of calibration
-    byte buff[4];
-    read(devAddr, calDateAddress, buff, 4);
-    calibration->data.mpu9250.date = *(unsigned long*)&buff;
-    Serial.printf("Date: %d \n", calibration->data.mpu9250.date);
     float read;
 
     // Offset read
@@ -220,13 +216,24 @@ void clearCalibration(int devAddr)
     }
 }
 
-boolean checkForCalibration(int devAddr)
+/*
+    returns 0 if calibration is present and recent
+    returns 1 if calibration is present but outdated
+    returns 2 if no calibration is present
+*/
+
+int checkForCalibration(int devAddr)
 {
     byte buff[10];
     read(devAddr, signatureAddress, buff, 10);
-    buff[9] = '\0';
-    Serial.printf("\n%s - %d - %s\n", buff, buff[9] == ((byte*)signatureValue)[9], signatureValue);
-    return buff == (byte*)signatureValue;
+    Serial.printf("\n%lu - - %lu - - %lu\n", (getDate(devAddr)), (ServerConnection::getUnixTime()), (ServerConnection::getUnixTime() - getDate(devAddr)));
+    if(strcmp((char*) buff, signatureValue) == 0){
+        if(ServerConnection::getUnixTime() - getDate(devAddr) < 2419200){
+            return 0;
+        }
+        return 1;
+    }
+    return 2;
 }
 
 unsigned long getDate(int devAddr)
@@ -275,7 +282,7 @@ void test()
     Serial.println();
     byte buff[10];
     read(devAddr, signatureAddress, buff, 10);
-    Serial.printf("%s\n", buff);
+    Serial.printf("\n%s - %d - %s\n", buff, strcmp((char*) buff, signatureValue) == 0, signatureValue);
     memset(time, 0, 4);
     read(devAddr, calDateAddress, time, 4);
     Serial.printf("%lu\n", *(unsigned long*)&time);

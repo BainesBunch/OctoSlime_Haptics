@@ -64,9 +64,7 @@ namespace Octo_SlimeVR
 
             // raw offsets, determined from gyro at rest
             float G_off[3];
-
-            // UNIX time of creation
-            uint32_t date;
+            
         };
 
         struct ICM20948CalibrationConfig

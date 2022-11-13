@@ -62,7 +62,9 @@ void MPU9250Sensor::setupSensor(uint8_t sensorId)
     this->configured = false;
     this->eepromAddr = sensorId < 8 ? eepromBankAddressA : eepromBankAddressB;
 
-    if (!EEPROM_I2C::checkForCalibration(this->eepromAddr)) {
+    int calCheck = EEPROM_I2C::checkForCalibration(this->eepromAddr);
+    Serial.printf("\nCalibration check: %d\n", calCheck);
+    if (calCheck != 0) {
         UI::DrawCalibrationAdvice(sensorId);
         // EEPROM_I2C::clearCalibration(this->eepromAddr);
     }
@@ -93,18 +95,18 @@ boolean MPU9250Sensor::motionSetup()
     // TODO: Move calibration invoke after calibrate button on slimeVR server available
     imu.getAcceleration(&ax, &ay, &az);
     float g_az = (float)az / TYPICAL_ACCEL_SENSITIVITY; // For 2G sensitivity
-    g_az = -1.f; // for calibration debugging
+    // g_az = -1.f; // for calibration debugging
     if (g_az < -0.75f) {
         UI::DrawCalibrationScreen(sensorId);
         for (uint8_t CountDown = 10; CountDown > 0; CountDown--) {
             UI::DrawCalibrationContdown(CountDown);
-            delay(100);
+            delay(1000);
             ESP.wdtFeed();
         }
 
         imu.getAcceleration(&ax, &ay, &az);
         g_az = (float)az / TYPICAL_ACCEL_SENSITIVITY;
-        g_az = 1.f; // for calibration debugging
+        // g_az = 1.f; // for calibration debugging
         if (g_az > 0.75f) {
             RetVal = true;
             // m_Logger.debug("Starting calibration...");
@@ -318,7 +320,7 @@ void MPU9250Sensor::startCalibration(int calibrationType)
     // ledManager.on();
 #if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
     // with DMP, we just need mag data
-    constexpr int calibrationSamples = 10; // KEEP THIS AT 100 AS IS KNOWN TO CAUSE OOM ERRORS
+    constexpr int calibrationSamples = 100; // KEEP THIS AT 100 AS IS KNOWN TO CAUSE OOM ERRORS
     constexpr int calibrationBatches = 5; // 5 to get 500 samples
     UI::DrawCalibrationInstructions();
 
