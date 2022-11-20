@@ -43,6 +43,7 @@ public:
     void motionLoop() override final;
     void startCalibration(int calibrationType) override final;
     void getMPUScaled();
+    void calibrationSetup();
 
 private:
     MPU9250 imu{};

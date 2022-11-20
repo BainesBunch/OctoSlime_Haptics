@@ -216,6 +216,19 @@ void SensorFactory::motionSetup()
             }
         }
     }
+
+    // setting up calibrations for MPU6050+QMC5883L
+
+    for(uint8_t BankCount = 0; BankCount < 2; BankCount++){
+        for(uint8_t SensorCount = 0; SensorCount < IMUCount; SensorCount++){
+            ESP.wdtFeed();
+            uint8_t IMUID = SensorCount + (BankCount * IMUCount);
+            if(IMUs[IMUID]->Connected && IMUs[IMUID]->getSensorType() == IMU_MPU9250){
+                ((MPU9250Sensor*)IMUs[IMUID])->calibrationSetup();
+            }
+        }
+    }
+
 }
 
 void SensorFactory::motionLoop()

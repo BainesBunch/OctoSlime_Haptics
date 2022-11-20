@@ -140,18 +140,19 @@ void writeCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfi
     write(devAddr, signatureAddress, (byte*)signatureValue, 10);
 
     // Writing UNIX time of calibration
-    byte time[4];
+    // byte time[4];
     unsigned long utime = ServerConnection::getUnixTime();
-    memcpy(time, (byte*)(&utime), 4);
-    write(devAddr, calDateAddress, time, 4);
-    memset(time, 0, 4);
-    read(devAddr, calDateAddress, time, 4);
-    Serial.printf("read time : %lu\n", *(unsigned long*)&time);
+    // memcpy(time, (byte*)(&utime), 4);
+    // write(devAddr, calDateAddress, time, 4);
+    // memset(time, 0, 4);
+    // read(devAddr, calDateAddress, time, 4);
+    // Serial.printf("read time : %lu\n", *(unsigned long*)&time);
+    write(devAddr, calDateAddress, (byte*)(&utime), 4);
 
     // Offset write
     for (int i = 0; i < 3; i++) {
         // Float has 4 bytes so address needs to increase by 4 for each float
-        Serial.printf("writing offset float %d at %#2x: ", i, magOffsAddress + (i*4));
+        Serial.printf("writing offset float %d at %#2x: ", i, magOffsAddress + (i * 4));
         writeFloat(devAddr, magOffsAddress + (i * 4), calibration.data.mpu9250.M_B[i]);
     }
 
@@ -165,19 +166,19 @@ void writeCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfi
             it = it + 1;
         }
     }
-    byte test[0x3e];
-    read(devAddr, 0x00, test, 0x3e);
-    Serial.printf("Read eeprom: ");
-    for (int i = 0; i < 0x3e; i++) {
-        if (i == magOffsAddress) {
-            Serial.printf(" \nCALIBRATION DATA :::: -");
-        }
-        if (i - magOffsAddress >= 0 && (i - magOffsAddress) % 4 == 0) {
-            Serial.printf(" \nnext float %#2x: ", i);
-        }
-        Serial.printf("%#2x - ", test[i]);
-    }
-    Serial.println();
+    // byte test[0x3e];
+    // read(devAddr, 0x00, test, 0x3e);
+    // Serial.printf("Read eeprom: ");
+    // for (int i = 0; i < 0x3e; i++) {
+    //     if (i == magOffsAddress) {
+    //         Serial.printf(" \nCALIBRATION DATA :::: -");
+    //     }
+    //     if (i - magOffsAddress >= 0 && (i - magOffsAddress) % 4 == 0) {
+    //         Serial.printf(" \nnext float %#2x: ", i);
+    //     }
+    //     Serial.printf("%#2x - ", test[i]);
+    // }
+    // Serial.println();
 }
 
 void readCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfig* calibration)
@@ -227,8 +228,8 @@ int checkForCalibration(int devAddr)
     byte buff[10];
     read(devAddr, signatureAddress, buff, 10);
     Serial.printf("\n%lu - - %lu - - %lu\n", (getDate(devAddr)), (ServerConnection::getUnixTime()), (ServerConnection::getUnixTime() - getDate(devAddr)));
-    if(strcmp((char*) buff, signatureValue) == 0){
-        if(ServerConnection::getUnixTime() - getDate(devAddr) < 2419200){
+    if (strcmp((char*)buff, signatureValue) == 0) {
+        if (ServerConnection::getUnixTime() - getDate(devAddr) < 2419200) {
             return 0;
         }
         return 1;
@@ -245,52 +246,51 @@ unsigned long getDate(int devAddr)
 
 void test()
 {
-    int devAddr = eepromBankAddressA;
+    //     int devAddr = eepromBankAddressA;
 
-    clearCalibration(devAddr);
+    //     clearCalibration(devAddr);
 
-    // delay(5000);
-    Serial.println("writing signature");
-    write(devAddr, signatureAddress, (byte*)signatureValue, 10);
+    //     // delay(5000);
+    //     Serial.println("writing signature");
+    //     write(devAddr, signatureAddress, (byte*)signatureValue, 10);
 
-    byte time[4];
-    unsigned long utime = 7456812;
-    memcpy(time, (byte*)(&utime), 4);
-    write(devAddr, calDateAddress, time, 4);
+    //     byte time[4];
+    //     unsigned long utime = 7456812;
+    //     memcpy(time, (byte*)(&utime), 4);
+    //     write(devAddr, calDateAddress, time, 4);
 
-    // // Serial.println("got time");
-    // Serial.printf("Write time : %#04x - %#04x - %#04x - %#04x \n", time[0], time[1], time[2], time[3]);
-    // memset(time, 0, 4);
-    // read(devAddr, calDateAddress, time, 4);
-    // Serial.printf("read time : %d\n", *(unsigned long*)&time);
+    //     // // Serial.println("got time");
+    //     // Serial.printf("Write time : %#04x - %#04x - %#04x - %#04x \n", time[0], time[1], time[2], time[3]);
+    //     // memset(time, 0, 4);
+    //     // read(devAddr, calDateAddress, time, 4);
+    //     // Serial.printf("read time : %d\n", *(unsigned long*)&time);
 
-    float f = 4152.49257;
-    writeFloat(devAddr, magOffsAddress, f);
+    //     float f = 4152.49257;
+    //     writeFloat(devAddr, magOffsAddress, f);
 
-    byte test[32];
-    read(devAddr, 0x00, test, 32);
-    Serial.printf("Read eeprom: ");
-    for (int i = 0; i < 32; i++) {
-        if (i == calDateAddress) {
-            Serial.printf("- Cal date address - ");
-        }
-        Serial.printf("%#2x - ", test[i]);
-        if (i == magOffsAddress - 1) {
-            Serial.printf("cal date end - - ");
-        }
-    }
-    Serial.println();
-    byte buff[10];
-    read(devAddr, signatureAddress, buff, 10);
-    Serial.printf("\n%s - %d - %s\n", buff, strcmp((char*) buff, signatureValue) == 0, signatureValue);
-    memset(time, 0, 4);
-    read(devAddr, calDateAddress, time, 4);
-    Serial.printf("%lu\n", *(unsigned long*)&time);
+    //     byte test[32];
+    //     read(devAddr, 0x00, test, 32);
+    //     Serial.printf("Read eeprom: ");
+    //     for (int i = 0; i < 32; i++) {
+    //         if (i == calDateAddress) {
+    //             Serial.printf("- Cal date address - ");
+    //         }
+    //         Serial.printf("%#2x - ", test[i]);
+    //         if (i == magOffsAddress - 1) {
+    //             Serial.printf("cal date end - - ");
+    //         }
+    //     }
+    //     Serial.println();
+    //     byte buff[10];
+    //     read(devAddr, signatureAddress, buff, 10);
+    //     Serial.printf("\n%s - %d - %s\n", buff, strcmp((char*) buff, signatureValue) == 0, signatureValue);
+    //     memset(time, 0, 4);
+    //     read(devAddr, calDateAddress, time, 4);
+    //     Serial.printf("%lu\n", *(unsigned long*)&time);
 
-    float readf = readFloat(devAddr, magOffsAddress);
-    printf("%f\n", readf);
+    //     float readf = readFloat(devAddr, magOffsAddress);
+    //     printf("%f\n", readf);
 
-    // Serial.println("done");
+    //     // Serial.println("done");
 }
-
 }
