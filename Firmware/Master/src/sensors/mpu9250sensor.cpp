@@ -61,13 +61,6 @@ void MPU9250Sensor::setupSensor(uint8_t sensorId)
     this->working = false;
     this->configured = false;
     this->eepromAddr = sensorId < 8 ? eepromBankAddressA : eepromBankAddressB;
-
-    int calCheck = EEPROM_I2C::checkForCalibration(this->eepromAddr);
-    Serial.printf("\nCalibration check: %d\n", calCheck);
-    if (calCheck != 0) {
-        UI::DrawCalibrationAdvice(sensorId);
-        // EEPROM_I2C::clearCalibration(this->eepromAddr);
-    }
 }
 
 boolean MPU9250Sensor::motionSetup()
@@ -82,11 +75,19 @@ boolean MPU9250Sensor::motionSetup()
 
     // m_Logger.info("Connected to MPU9250 (reported device ID 0x%02x) at address 0x%02x on MUX Channel %02x", imu.getDeviceID(), addr, sensorId % 8);
 
-    uint8_t magId = imu.getMagnetometerDeviceID();
-    if (magId != 0xFF) {
+    if (imu.getMagnetometerDeviceID() != 0xFF) {
         // m_Logger.fatal("Can't connect to QMC5883L (reported ID 0x%02x) at address 0x%02x", magId, 0x0D);
     } else {
         // m_Logger.info("Connected to QMC5883L (reported ID 0x%02x) at address 0x%02x", magId, 0x0D);
+    }
+
+    {
+        short calCheck = EEPROM_I2C::checkForCalibration(this->eepromAddr);
+        Serial.printf("\nCalibration check: %d\n", calCheck);
+        if (calCheck != 0) {
+            UI::DrawCalibrationAdvice(sensorId);
+            // EEPROM_I2C::clearCalibration(this->eepromAddr);
+        }
     }
 
     int16_t ax, ay, az;
@@ -118,38 +119,6 @@ boolean MPU9250Sensor::motionSetup()
             delay(1000);
         }
     }
-
-#if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
-    devStatus = imu.dmpInitialize();
-    if (devStatus == 0) {
-        // ledManager.pattern(50, 50, 5);
-
-        // turn on the DMP, now that it's ready
-        // m_Logger.debug("Enabling DMP...");
-        imu.setDMPEnabled(true);
-
-        // TODO: Add interrupt support
-        // mpuIntStatus = imu.getIntStatus();
-
-        // set our DMP Ready flag so the main loop() function knows it's okay to use it
-        // m_Logger.debug("DMP ready! Waiting for first interrupt...");
-        dmpReady = true;
-
-        // get expected DMP packet size for later comparison
-        packetSize = imu.dmpGetFIFOPacketSize();
-        working = true;
-    } else {
-        // ERROR!
-        // 1 = initial memory load failed
-        // 2 = DMP configuration updates failed
-        // (if it's going to break, usually the code will be 1)
-        // m_Logger.error("DMP Initialization failed (code %d)", devStatus);
-    }
-    configured = true;
-#else
-    working = true;
-    configured = true;
-#endif
     return RetVal;
 }
 
@@ -178,6 +147,46 @@ void MPU9250Sensor::calibrationSetup()
             break;
         }
     }
+
+    Serial.println("[INFO] Magnetometer calibration matrix:\n{");
+
+    for (short i = 0; i < 3; i++) {
+        Serial.printf(" %f, %f, %f, %f\n", m_Calibration.M_B[i], m_Calibration.M_Ainv[0][i], m_Calibration.M_Ainv[1][i], m_Calibration.M_Ainv[2][i]);
+    }
+    Serial.println("}");
+
+#if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
+    devStatus = imu.dmpInitialize();
+    if (devStatus == 0) {
+        // ledManager.pattern(50, 50, 5);
+
+        // turn on the DMP, now that it's ready
+        // m_Logger.debug("Enabling DMP...");
+        imu.setDMPEnabled(true);
+
+        // TODO: Add interrupt support
+        // mpuIntStatus = imu.getIntStatus();
+
+        // set our DMP Ready flag so the main loop() function knows it's okay to use it
+        // m_Logger.debug("DMP ready! Waiting for first interrupt...");
+        dmpReady = true;
+
+        // get expected DMP packet size for later comparison
+        packetSize = imu.dmpGetFIFOPacketSize();
+        working = true;
+    } else {
+        // ERROR!
+        // 1 = initial memory load failed
+        // 2 = DMP configuration updates failed
+        // (if it's going to break, usually the code will be 1)
+        // m_Logger.error("DMP Initialization failed (code %d)", devStatus);
+        Serial.printf("DMP init failed, %d", devStatus);
+    }
+    configured = true;
+#else
+    working = true;
+    configured = true;
+#endif
 }
 
 void MPU9250Sensor::motionLoop()
@@ -321,68 +330,86 @@ void MPU9250Sensor::startCalibration(int calibrationType)
 #if not(defined(_MAHONY_H_) || defined(_MADGWICK_H_))
     // with DMP, we just need mag data
 
-    constexpr uint8_t calibrationSamples = 50; // KEEP THIS AT 100 AS IT IS KNOWN TO CAUSE OOM ERRORS
-    constexpr uint8_t calibrationBatches = 10; // 5 to get 500 samples
+    // constexpr uint8_t calibrationSamples = 50; // KEEP THIS AT 100 AS IT IS KNOWN TO CAUSE OOM ERRORS
+    // constexpr uint8_t calibrationBatches = 10; // 5 to get 500 samples
 
     UI::DrawCalibrationInstructions();
     Serial.println();
+
+    MagnetoCalibration* magneto = new MagnetoCalibration();
+    for (int i = 0; i < 500; i++) {
+        UI::DrawCalibrationProgress(500, i);
+        int16_t mx, my, mz;
+        imu.getMagnetometer(&mx, &my, &mz);
+        magneto->sample(mx, my, mz);
+        float rawMagFloat[3] = { (float)mx, (float)my, (float)mz };
+        Network::sendRawCalibrationData(rawMagFloat, CALIBRATION_TYPE_EXTERNAL_MAG, 0);
+        Serial.print(".");
+        delay(50);
+    }
+
+    Serial.println("\t Sampling done");
+
+    float M_BAinv[4][3];
+    magneto->current_calibration(M_BAinv);
+    delete magneto;
 
     // Blink calibrating led before user should rotate the sensor
     // m_Logger.info("Gently rotate the device while it's gathering magnetometer data");
     // ledManager.pattern(15, 300, 3000 / 310);
 
-    float* calibrationDataMag = (float*)malloc(calibrationSamples * 3 * sizeof(float));
-    float M_BAinv[4][3];
-    int16_t mx, my, mz;
-    uint8_t i = 0;
-    for (uint8_t batch = 0; batch < calibrationBatches; batch++) {
+    // float* calibrationDataMag = (float*)malloc(calibrationSamples * 3 * sizeof(float));
+    // float M_BAinv[4][3];
+    // int16_t mx, my, mz;
+    // uint8_t i = 0;
+    // for (uint8_t batch = 0; batch < calibrationBatches; batch++) {
 
-        Serial.printf("new batch #%d\n", batch);
+    //     Serial.printf("new batch #%d\n", batch);
 
-        for (i = 0; i < calibrationSamples; i++) {
-            UI::DrawCalibrationProgress(calibrationSamples * calibrationBatches, i + (batch * calibrationSamples));
-            // ledManager.on();
-            imu.getMagnetometer(&mx, &my, &mz);
-            Serial.printf("%d ", i);
-            calibrationDataMag[i * 3 + 0] = my; //
-            calibrationDataMag[i * 3 + 1] = -mx; //      CHANGE THESE DEPENDING ON HOW YOUR QMC IS INSTALLED RELATIVE TO YOUR MPU6050
-            calibrationDataMag[i * 3 + 2] = mz; //
-            Network::sendRawCalibrationData(calibrationDataMag, CALIBRATION_TYPE_EXTERNAL_MAG, 0);
-            // ledManager.off();
-            ESP.wdtFeed();
-            delay(5);
-        }
-        Serial.printf("batch %d done\n", batch);
+    //     for (i = 0; i < calibrationSamples; i++) {
+    //         UI::DrawCalibrationProgress(calibrationSamples * calibrationBatches, i + (batch * calibrationSamples));
+    //         // ledManager.on();
+    //         imu.getMagnetometer(&mx, &my, &mz);
+    //         Serial.printf("%d ", i);
+    //         calibrationDataMag[i * 3 + 0] = my; //
+    //         calibrationDataMag[i * 3 + 1] = -mx; //      CHANGE THESE DEPENDING ON HOW YOUR QMC IS INSTALLED RELATIVE TO YOUR MPU6050
+    //         calibrationDataMag[i * 3 + 2] = mz; //
+    //         Network::sendRawCalibrationData(calibrationDataMag, CALIBRATION_TYPE_EXTERNAL_MAG, 0);
+    //         // ledManager.off();
+    //         ESP.wdtFeed();
+    //         delay(5);
+    //     }
+    //     Serial.printf("batch %d done\n", batch);
 
-        // m_Logger.debug("Calculating calibration data, batch %d...", batch + 1);
+    //     // m_Logger.debug("Calculating calibration data, batch %d...", batch + 1);
 
-        CalculateCalibration(calibrationDataMag, calibrationSamples, M_BAinv);
-        // free(calibrationDataMag);
-        memset(M_BAinv, 0, 4*3);
+    //     CalculateCalibration(calibrationDataMag, calibrationSamples, M_BAinv);
+    //     // free(calibrationDataMag);
+    //     memset(M_BAinv, 0, 4 * 3);
 
-        Serial.println("copying values");
+    //     Serial.println("copying values");
 
-        // m_Logger.debug("[INFO] Magnetometer calibration matrix batch %d:", batch + 1);
-        // m_Logger.debug("{");
-        if (batch == 0) {
-            for (i = 0; i < 3; i++) {
-                m_Calibration.M_B[i] = M_BAinv[0][i];
-                m_Calibration.M_Ainv[0][i] = M_BAinv[1][i];
-                m_Calibration.M_Ainv[1][i] = M_BAinv[2][i];
-                m_Calibration.M_Ainv[2][i] = M_BAinv[3][i];
-                // m_Logger.debug("  %f, %f, %f, %f", M_BAinv[0][i], M_BAinv[1][i], M_BAinv[2][i], M_BAinv[3][i]);
-            }
-        } else {
-            for (i = 0; i < 3; i++) {
-                m_Calibration.M_B[i] = (m_Calibration.M_B[i] + M_BAinv[0][i]) / (!isnan(m_Calibration.M_B[i]) ? 2 : 1);
-                m_Calibration.M_Ainv[0][i] = (m_Calibration.M_Ainv[0][i] + M_BAinv[1][i]) / (!isnan(m_Calibration.M_Ainv[0][i]) ? 2 : 1);
-                m_Calibration.M_Ainv[1][i] = (m_Calibration.M_Ainv[1][i] + M_BAinv[2][i]) / (!isnan(m_Calibration.M_Ainv[1][i]) ? 2 : 1);
-                m_Calibration.M_Ainv[2][i] = (m_Calibration.M_Ainv[2][i] + M_BAinv[3][i]) / (!isnan(m_Calibration.M_Ainv[2][i]) ? 2 : 1);
-                // m_Logger.debug("  %f, %f, %f, %f", M_BAinv[0][i], M_BAinv[1][i], M_BAinv[2][i], M_BAinv[3][i]);
-            }
-        }
-        // m_Logger.debug("}");
-    }
+    //     // m_Logger.debug("[INFO] Magnetometer calibration matrix batch %d:", batch + 1);
+    //     // m_Logger.debug("{");
+    //     if (batch == 0) {
+    //         for (i = 0; i < 3; i++) {
+    //             m_Calibration.M_B[i] = M_BAinv[0][i];
+    //             m_Calibration.M_Ainv[0][i] = M_BAinv[1][i];
+    //             m_Calibration.M_Ainv[1][i] = M_BAinv[2][i];
+    //             m_Calibration.M_Ainv[2][i] = M_BAinv[3][i];
+    //             // m_Logger.debug("  %f, %f, %f, %f", M_BAinv[0][i], M_BAinv[1][i], M_BAinv[2][i], M_BAinv[3][i]);
+    //         }
+    //     } else {
+    //         for (i = 0; i < 3; i++) {
+    //             m_Calibration.M_B[i] = (m_Calibration.M_B[i] + M_BAinv[0][i]) / (!isnan(m_Calibration.M_B[i]) ? 2 : 1);
+    //             m_Calibration.M_Ainv[0][i] = (m_Calibration.M_Ainv[0][i] + M_BAinv[1][i]) / (!isnan(m_Calibration.M_Ainv[0][i]) ? 2 : 1);
+    //             m_Calibration.M_Ainv[1][i] = (m_Calibration.M_Ainv[1][i] + M_BAinv[2][i]) / (!isnan(m_Calibration.M_Ainv[1][i]) ? 2 : 1);
+    //             m_Calibration.M_Ainv[2][i] = (m_Calibration.M_Ainv[2][i] + M_BAinv[3][i]) / (!isnan(m_Calibration.M_Ainv[2][i]) ? 2 : 1);
+    //             // m_Logger.debug("  %f, %f, %f, %f", M_BAinv[0][i], M_BAinv[1][i], M_BAinv[2][i], M_BAinv[3][i]);
+    //         }
+    //     }
+    //     // m_Logger.debug("}");
+    // }
     UI::DrawCalibrationScreen(sensorId);
     UI::DrawCalibrationComplete();
 
@@ -473,6 +500,16 @@ void MPU9250Sensor::startCalibration(int calibrationType)
 
     // m_Logger.debug("Saving the calibration data");
 
+    Serial.println("[INFO] Magnetometer calibration matrix:\n{");
+
+    for (short i = 0; i < 3; i++) {
+        m_Calibration.M_B[i] = M_BAinv[0][i];
+        m_Calibration.M_Ainv[0][i] = M_BAinv[1][i];
+        m_Calibration.M_Ainv[1][i] = M_BAinv[2][i];
+        m_Calibration.M_Ainv[2][i] = M_BAinv[3][i];
+        Serial.printf(" %f, %f, %f, %f\n", M_BAinv[0][i], M_BAinv[1][i], M_BAinv[2][i], M_BAinv[3][i]);
+    }
+    Serial.println("}");
     {
         // SlimeVR::Configuration::CalibrationConfig config = configuration.getCalibration(sensorId);
         // config.type = SlimeVR::Configuration::CalibrationConfigType::NONE;

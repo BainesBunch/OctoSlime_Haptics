@@ -123,7 +123,7 @@ int writeFloat(int devAddr, unsigned int writeAddress, float data)
     byte writebuf[4];
     memcpy(writebuf, (byte*)(&data), 4);
     write(devAddr, writeAddress, writebuf, 4);
-    Serial.printf("%#4x - %#4x - %#4x - %#4x\t::\t%f\n", writebuf[0], writebuf[1], writebuf[2], writebuf[3], data);
+    // Serial.printf("%#4x - %#4x - %#4x - %#4x\t::\t%f\n", writebuf[0], writebuf[1], writebuf[2], writebuf[3], data);
     return 0;
 }
 
@@ -131,6 +131,7 @@ float readFloat(int devAddr, unsigned int readAddress)
 {
     byte buffer[4];
     read(devAddr, readAddress, buffer, 4);
+    // Serial.printf("%#4x - %#4x - %#4x - %#4x\n", buffer[0], buffer[1], buffer[2], buffer[3]);
     return *(float*)&buffer;
 }
 
@@ -152,7 +153,7 @@ void writeCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfi
     // Offset write
     for (int i = 0; i < 3; i++) {
         // Float has 4 bytes so address needs to increase by 4 for each float
-        Serial.printf("writing offset float %d at %#2x: ", i, magOffsAddress + (i * 4));
+        // Serial.printf("writing offset float %d at %#2x: ", i, magOffsAddress + (i * 4));
         writeFloat(devAddr, magOffsAddress + (i * 4), calibration.data.mpu9250.M_B[i]);
     }
 
@@ -161,7 +162,7 @@ void writeCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfi
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             // Float has 4 bytes so address needs to increase by 4 for each float
-            Serial.printf("writing calibration matrix float %d at %#2x: ", it, magCorrAddress + (it * 4));
+            // Serial.printf("writing calibration matrix float %d at %#2x: ", it, magCorrAddress + (it * 4));
             writeFloat(devAddr, magCorrAddress + (it * 4), calibration.data.mpu9250.M_Ainv[i][j]);
             it = it + 1;
         }
@@ -183,30 +184,32 @@ void writeCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfi
 
 void readCalibration(int devAddr, Octo_SlimeVR::Configuration::CalibrationConfig* calibration)
 {
-    Serial.println();
+    // Serial.println();
 
     float read;
 
     // Offset read
     for (int i = 0; i < 3; i++) {
+        // writeFloat(devAddr, magOffsAddress + (i * 4), (float)(i+10));
         read = readFloat(devAddr, magOffsAddress + (i * 4));
         calibration->data.mpu9250.M_B[i] = read;
-        Serial.printf("Read offset %d : %f\n", i, read);
+        // Serial.printf("Read offset %d : %f\n", i, read);
         read = 0;
     }
 
     // Calibration matrix read
-    int it = 0;
+    char it = 0;
     for (int i = 0; i < 3; i++) {
-        Serial.print("Read calibration matrix: ");
+        // Serial.println();
+        // Serial.print("Read calibration matrix: ");
         for (int j = 0; j < 3; j++) {
+            // writeFloat(devAddr, magCorrAddress + (it * 4), (float)(i + 1) * (j + 1));
             read = readFloat(devAddr, magCorrAddress + (it * 4));
             calibration->data.mpu9250.M_Ainv[i][j] = read;
-            Serial.printf("%d : %f - ", it, read);
+            // Serial.printf("%d : %f - ", it, read);
             read = 0;
             it += 1;
         }
-        Serial.println();
     }
 }
 

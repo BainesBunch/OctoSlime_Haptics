@@ -168,14 +168,14 @@ void setup()
 
     // if any IMU went into callibration then we need to re-draw the main screen
 
-    if (sensors.CalibrationEvent()) {
+    // if (sensors.CalibrationEvent()) {
         UI::MainUIFrame();
 
         for (uint8_t IMU_ID = 0; IMU_ID < 15; IMU_ID++) {
             UI::SetIMUStatus(IMU_ID, sensors.GetSensorOnline(IMU_ID));
             ESP.wdtFeed();
         }
-    }
+    // }
 
     battery.Setup();
     loopTime = micros();

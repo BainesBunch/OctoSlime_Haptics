@@ -160,6 +160,7 @@ void SensorFactory::init()
             {
                 IMUs[IMUID]->setupSensor(SensorCount + (BankCount * IMUCount));
                 Serial.println(" Complete");
+                Serial.println();
             }
             else
             {
@@ -223,6 +224,7 @@ void SensorFactory::motionSetup()
         for(uint8_t SensorCount = 0; SensorCount < IMUCount; SensorCount++){
             ESP.wdtFeed();
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
+            SetIMU(SensorCount);
             if(IMUs[IMUID]->Connected && IMUs[IMUID]->getSensorType() == IMU_MPU9250){
                 ((MPU9250Sensor*)IMUs[IMUID])->calibrationSetup();
             }

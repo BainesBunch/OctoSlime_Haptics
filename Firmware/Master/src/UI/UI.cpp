@@ -269,6 +269,7 @@ namespace UI
 
     void DrawCalibrationAdvice(uint8 imuID)
     {
+        ESP.wdtFeed();
         oled.clear();
         oled.setScale(1);
         oled.setCursorXY(7, 16);
