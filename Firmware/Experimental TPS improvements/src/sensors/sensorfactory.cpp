@@ -239,13 +239,15 @@ void SensorFactory::motionLoop()
             ESP.wdtFeed();
             this->SetIMU(SensorCount);
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
-            if (IMUs[IMUID]->Connected && IMUs[IMUID]->isWorking()) {
-                IMUs[IMUID]->motionLoop();
-                if (IMUs[IMUID]->newData) {
-                    IMUs[IMUID]->sendData();
+            if (IMUs[IMUID]->Connected) {
+                if (IMUs[IMUID]->isWorking()) {
+                    IMUs[IMUID]->motionLoop();
+                    if (IMUs[IMUID]->newData) {
+                        IMUs[IMUID]->sendData();
+                    }
+                } else {
+                    Serial.printf("Sensor ID %d Offline", IMUID);
                 }
-            } else {
-                Serial.printf("Sensor ID %d Offline", IMUID);
             }
         }
     }
