@@ -95,14 +95,6 @@ void SensorFactory::create()
                     this->IMUs[SensorCount + (BankCount * IMUCount)] = new MPU9250Sensor(DeviceParams.DeviceAddress);
                     this->IMUs[SensorCount + (BankCount * IMUCount)]->Connected = true;
                     Serial.println("Found MPU6050 + QMC5883L");
-
-                    // if (configuration.getCalibration(SensorCount + (BankCount + IMUCount)).type != SlimeVR::Configuration::CalibrationConfigType::MPU9250) {
-                    //     UI::DrawCalibrationAdvice(SensorCount + (BankCount + IMUCount));
-                    // }
-
-                    // if(EEPROM_I2C::checkForCalibration((SensorCount + (BankCount * IMUCount)) < IMUCount ? eepromBankAddressA : eepromBankAddressB)){
-                    // UI::DrawCalibrationAdvice(SensorCount + (BankCount * IMUCount));
-                    // }
                 }
                 break;
             case ICM_20948_t:
@@ -145,7 +137,6 @@ void SensorFactory::init()
             if (IMUs[IMUID]->Connected) {
                 IMUs[IMUID]->setupSensor(SensorCount + (BankCount * IMUCount));
                 Serial.println(" Complete");
-                Serial.println();
             } else {
                 Serial.println(" No Device");
             }
@@ -200,6 +191,7 @@ void SensorFactory::motionSetup()
         for (uint8_t SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
             ESP.wdtFeed();
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
+            Serial.printf("Sensor ID: %d - - Sensor Type: %d\n", IMUs[IMUID]->getSensorId(), IMUs[IMUID]->getSensorType());
             SetIMU(SensorCount);
             if (IMUs[IMUID]->Connected && IMUs[IMUID]->getSensorType() == IMU_MPU9250) {
                 ((MPU9250Sensor*)IMUs[IMUID])->calibrationSetup();
@@ -239,13 +231,15 @@ void SensorFactory::motionLoop()
             ESP.wdtFeed();
             this->SetIMU(SensorCount);
             uint8_t IMUID = SensorCount + (BankCount * IMUCount);
-            if (IMUs[IMUID]->Connected && IMUs[IMUID]->isWorking()) {
-                IMUs[IMUID]->motionLoop();
-                if (IMUs[IMUID]->newData) {
-                    IMUs[IMUID]->sendData();
+            if (IMUs[IMUID]->Connected) {
+                if (IMUs[IMUID]->isWorking()) {
+                    IMUs[IMUID]->motionLoop();
+                    if (IMUs[IMUID]->newData) {
+                        IMUs[IMUID]->sendData();
+                    }
+                } else {
+                    Serial.printf("Sensor ID %d Offline", IMUID);
                 }
-            } else {
-                Serial.printf("Sensor ID %d Offline", IMUID);
             }
         }
     }
@@ -302,4 +296,16 @@ uint8_t SensorFactory::getMagnetometerDeviceID(uint8_t addr) // check lib\mpu925
     I2Cdev::writeBit(addr, MPU9250_RA_INT_PIN_CFG, MPU9250_INTCFG_I2C_BYPASS_EN_BIT, false);
     delay(100);
     return buffer[0];
+}
+
+Sensor* SensorFactory::getFirstSensor()
+{
+    for (int BankCount = 0; BankCount < 2; BankCount++) {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+            if(IMUs[SensorCount + (BankCount * IMUCount)]->Connected && IMUs[SensorCount + (BankCount * IMUCount)]->getSensorType() != 0){
+                return IMUs[SensorCount + (BankCount * IMUCount)];
+            }
+        }
+    }
+    return nullptr;
 }

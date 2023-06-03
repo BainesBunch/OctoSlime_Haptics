@@ -314,3 +314,15 @@ uint8_t SensorFactory::getMagnetometerDeviceID(uint8_t addr) // check lib\mpu925
     delay(100);
     return buffer[0];
 }
+
+Sensor* SensorFactory::getFirstSensor()
+{
+    for (int BankCount = 0; BankCount < 2; BankCount++) {
+        for (int SensorCount = 0; SensorCount < IMUCount; SensorCount++) {
+            if(IMUs[SensorCount + (BankCount * IMUCount)]->Connected && IMUs[SensorCount + (BankCount * IMUCount)]->getSensorType() != 0){
+                return IMUs[SensorCount + (BankCount * IMUCount)];
+            }
+        }
+    }
+    return nullptr;
+}

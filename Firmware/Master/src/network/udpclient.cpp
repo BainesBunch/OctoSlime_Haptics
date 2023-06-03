@@ -24,6 +24,8 @@
 #include "udpclient.h"
 #include "packets.h"
 #include <NTPClient.h>
+#include "sensors/sensorfactory.h"
+extern SensorFactory sensors;
 
 #define TIMEOUT 3000UL
 
@@ -345,7 +347,7 @@ void Network::sendSensorInfo(Sensor *sensor)
     {
         DataTransfer::sendPacketType(PACKET_SENSOR_INFO);
         DataTransfer::sendPacketNumber();
-        DataTransfer::sendByte(sensor->getSensorId() + 1);
+        DataTransfer::sendByte(sensor->getSensorId());
         DataTransfer::sendByte(sensor->getSensorState());
         DataTransfer::sendByte(sensor->getSensorType());
         DataTransfer::endPacket();
@@ -463,11 +465,11 @@ void Network::sendHandshake()
     {
         DataTransfer::sendPacketType(PACKET_HANDSHAKE);
         DataTransfer::sendLong(0); // Packet number is always 0 for handshake
-        DataTransfer::sendInt(0);
+        DataTransfer::sendInt(0);  // board type
         // This is kept for backwards compatibility,
         // but the latest SlimeVR server will not initialize trackers
         // with firmware build > 8 until it recieves sensor info packet
-        DataTransfer::sendInt(0);
+        DataTransfer::sendInt(sensors.getFirstSensor()->getSensorType());   // IMU type
         DataTransfer::sendInt(HARDWARE_MCU);
         DataTransfer::sendInt(0);
         DataTransfer::sendInt(0);

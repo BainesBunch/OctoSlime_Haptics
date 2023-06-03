@@ -232,10 +232,10 @@ int checkForCalibration(int devAddr)
     read(devAddr, signatureAddress, buff, 10);
     Serial.printf("\n%lu - - %lu - - %lu\n", (getDate(devAddr)), (ServerConnection::getUnixTime()), (ServerConnection::getUnixTime() - getDate(devAddr)));
     if (strcmp((char*)buff, signatureValue) == 0) {
-        if (ServerConnection::getUnixTime() - getDate(devAddr) < 2419200) {
+        // if (ServerConnection::getUnixTime() - getDate(devAddr) < 2419200) {
             return 0;
-        }
-        return 1;
+        // }
+        // return 1;
     }
     return 2;
 }

@@ -26,12 +26,11 @@
 #include "globals.h"
 #include "sensor.h"
 
-class SensorFactory
-{
+class SensorFactory {
 
 private:
     uint8_t getMagnetometerDeviceID(uint8_t addr);
-    
+
 public:
     SensorFactory();
     ~SensorFactory();
@@ -44,9 +43,10 @@ public:
     void SetIMU(uint8_t bus);
     void IMU_Int_Triggered(uint8_t IMU_ID);
     boolean GetSensorOnline(uint8_t IMU_ID);
-    Sensor *IMUs[16];
+    Sensor* IMUs[16];
     boolean CalibrationEvent();
     void clearCalibrations();
+    Sensor* getFirstSensor();
 };
 
 #endif // SLIMEVR_SENSORFACTORY_H_

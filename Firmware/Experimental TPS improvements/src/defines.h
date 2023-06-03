@@ -33,7 +33,7 @@
 #define ICM_20948_t  0x40
 #define BNO_080_t  0x14
 
-#define QMC5883L 1          // set to 0 if you have QMCs installed but dont want to use them
+#define QMC5883L 0          // set to 0 if you have QMCs installed but dont want to use them
 
 #define IMUCount 8
 

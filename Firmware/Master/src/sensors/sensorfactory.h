@@ -47,6 +47,7 @@ public:
     Sensor *IMUs[16];
     boolean CalibrationEvent();
     void clearCalibrations();
+    Sensor* getFirstSensor();
 };
 
 #endif // SLIMEVR_SENSORFACTORY_H_

@@ -96,7 +96,7 @@ boolean MPU9250Sensor::motionSetup()
     // TODO: Move calibration invoke after calibrate button on slimeVR server available
     imu.getAcceleration(&ax, &ay, &az);
     float g_az = (float)az / TYPICAL_ACCEL_SENSITIVITY; // For 2G sensitivity
-    // g_az = -1.f; // for calibration debugging
+    g_az = 1.f; // for calibration debugging
     if (g_az < -0.75f) {
         UI::DrawCalibrationScreen(sensorId);
         for (uint8_t CountDown = 10; CountDown > 0; CountDown--) {
