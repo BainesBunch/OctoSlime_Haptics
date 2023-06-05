@@ -380,7 +380,7 @@ uint8_t MPU6050::dmpInitialize() { // Lets get it over with fast Write everythin
     dmpPacketSize += 6;//DMP_FEATURE_SEND_RAW_ACCEL
     dmpPacketSize += 6;//DMP_FEATURE_SEND_RAW_GYRO
 */
-	dmpPacketSize = 28;
+	dmpPacketSize = 16;
 	return 0;
 }
 
