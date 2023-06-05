@@ -2753,7 +2753,7 @@ int8_t MPU6050::GetCurrentFIFOPacket(uint8_t *data, uint8_t length) { // overflo
     uint16_t fifoCounter = getFIFOCount();
     if (fifoCounter < length) { // If FIFO counter is smaller than packet size - there's nothing to read yet
         return 0;
-    } else if (fifoCounter > 28) { // If FIFO counter exceeds our buffer size - read the first packet to keep it smooth and reset FIFO
+    } else if (fifoCounter > 16) { // If FIFO counter exceeds our buffer size - read the first packet to keep it smooth and reset FIFO
         getFIFOBytes(data, length);
         resetFIFO();
         return 2;
